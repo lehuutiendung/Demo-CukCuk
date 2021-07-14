@@ -7,18 +7,15 @@
 }
 
 .store__select{
-    margin: 12px 0 12px 24px;
+    display: flex;
+    align-items: center;
+    margin: 12px 0 12px 48px;
+    width: 100%;
 }
-
-.store__select select{
-    padding-right: 10px;
-    border: none;
-    outline: none;
-    font-family: GoogleSanS-Regular;
-    font-size: 13px;
-    padding-left: 16px;
+.store__select .fa-angle-down{
+    margin-left: 12px;
+    margin-right: 12px;
 }
-
 .infor-user{
     width: calc(100% - 167px);
     display: flex;

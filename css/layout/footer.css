@@ -1,9 +1,10 @@
 .footer{
     display: flex;
-    margin-left: 24px;
+    margin-left: 34px;
     margin-right: 16px;
     align-items: center;
     justify-items: center;
+    height: 56px;
 }
 
 .footer .total__employees{
@@ -11,7 +12,13 @@
 }
 
 .footer .number__pages{
-    display: flex
+    display: flex;
+    position: absolute;
+    left: 50%;
+}
+
+.footer .number__pages img{
+    margin-right: 10px;
 }
 
 .footer .number__pages .button__dot{
@@ -20,12 +27,17 @@
     height: 34px;
     width: 34px;
     text-align: center;
-    margin-right: 5px;
+    margin-right:8px;
     border: 1px solid #bbbbbb;
 }
 
-.footer .number__pages .button__dot:hover{
+.footer .number__pages .focus{
     background-color: #019160;
+    color: #ffffff;
+}
+
+.footer .number__pages .button__dot:hover{
+    background-color: #ffffff;
 }
 
 .footer .number__pages .button__dot p{
