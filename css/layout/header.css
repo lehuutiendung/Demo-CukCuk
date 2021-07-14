@@ -1,0 +1,42 @@
+.header{
+    width: 100%;
+    height: 48px;
+    border-bottom: 2px solid #E5E5E5;
+    background: #FFFFFF;
+    display: flex;
+}
+
+.store__select{
+    margin: 12px 0 12px 24px;
+}
+
+.store__select select{
+    padding-right: 10px;
+    border: none;
+    outline: none;
+    font-family: GoogleSanS-Regular;
+    font-size: 13px;
+    padding-left: 16px;
+}
+
+.infor-user{
+    width: calc(100% - 167px);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.infor-user img{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 16px;
+}
+
+.infor-user a{
+    margin-right: 16px;
+    text-decoration: none;
+    color: #000000;
+    font-family: GoogleSanS-Regular;
+    font-size: 13px;
+}

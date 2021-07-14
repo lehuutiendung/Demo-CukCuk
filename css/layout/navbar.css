@@ -1,0 +1,61 @@
+/* Title of left-bar */
+.navbar{
+    border-right: 2px solid #E5E5E5;
+    width: 226px;
+    height: 100vh;
+    background: #FFFFFF;
+}
+.right-bar{
+    width: calc(100% - 226px);
+    height: 100vh;
+}
+.title{
+    display: flex;
+    width: inherit;
+    height: 48px;
+}
+
+.title__toggle{
+    margin: 12px 10px 12px 16px;
+    width: 24px;
+    height: 24px;
+}
+
+.title__logo{
+    margin: 10px 0 10px 0px;
+
+}
+
+/* Item menu left */
+.menu-left{
+    display: flex;
+    width: inherit;
+    height: 44px;
+    font-size: 13px; 
+}
+.menu-left__icon{
+    width: 52px;
+    height: 44px;
+}
+
+.menu-left__icon img{
+    margin: 12px 10px 12px 16px;
+    width: 20px;
+    height: 20x;
+}
+
+.menu-left__text{
+    font-family: GoogleSanS-Medium;
+    font-size: 13px;
+    color: #454545;
+}
+
+.menu-left:focus{
+    background-color: #019160;
+    color: #FFFFFF;
+}
+
+.menu-left:hover{
+    background-color: #e5e5e5;
+    color: #000000;
+}
