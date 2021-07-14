@@ -119,6 +119,7 @@
     width: 100%;
     border-collapse: separate;
     border-spacing: 0px;
+    table-layout: fixed;
 }
 
 .content-table table tr{
@@ -131,6 +132,15 @@
     border-bottom: 1px solid #bbbbbbbb; 
 }
 
+.content-table table th{
+    padding-left: 10px;
+}
+
 .content-table table tr:nth-child(even){
     background-color: #E9EBEE;
+}
+
+.content-table table .salary{
+    text-align: right;
+    padding-right: 20px;
 }
