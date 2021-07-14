@@ -1,0 +1,80 @@
+.wrap-box-modal{
+    background-color: rgba(0,0,0, 0.5);
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: block;
+}
+.box-info{
+    background-color: #ffffff;
+    border: 1px solid #bbbbbb;
+    position: absolute;
+    width: 1000px;
+    height: 900px;
+    top: 50%;
+    left: 50%;
+    margin-top: -450px;
+    margin-left: -500px;
+    border-radius: 4px;
+    z-index: 1;
+}
+
+.title__employees{
+    margin: 24px;
+}
+
+.title__employees p{
+    font-size: 20px;
+    font-family: GoogleSans-Bold;
+    color: #454545 ;
+}
+
+.container__modal {
+    display: flex;
+}
+.avatar__container{
+    width: 300px;
+    height: 780px;
+    background-color: #e4e1e1;
+    align-items: center;
+}
+
+.container__modal .avatar__container .choose__avatar{
+    width: 150px;
+    height: 150px;
+    background-color: red;
+    background-image: url(/content/img/default-avatar.jpg);
+    background-size: 150px;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    border: 1px solid #bbbbbb;
+}
+
+.choose__avatar input{
+    width: 150px;
+    height: 150px;
+    opacity: 0;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.avatar__container p{
+    width: 150px;
+    text-align: center;
+}
+
+.text__field p{
+    margin: 0;
+}
+
+.row1__title {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row1__title p{
+    margin: 0;
+    width: 300px;
+}
