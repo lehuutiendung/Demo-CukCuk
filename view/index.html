@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/layout/navbar.css">
+    <link rel="stylesheet" href="/css/layout/header.css">
+    <link rel="stylesheet" href="/css/layout/body.css">
+    <link rel="stylesheet" href="/css/layout/footer.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrap">
+        <div class="navbar">
+            <div class="title">
+                <img class="title__toggle" src="/content/img/toggle.png" alt="">
+                <img class="title__logo" src="/content/img/cukcuk-logo.png" alt="">
+            </div>
+            <div class="menu-left">
+                <div class="menu-left__icon">
+                    <img src="/content/icon/dashboard.png" alt="">
+                </div>
+                <p class="menu-left__text">Tổng quan</p>
+            </div>
+            <div class="menu-left">
+                <div class="menu-left__icon">
+                    <img src="/content/icon/report.png" alt="">
+                </div>
+                <p class="menu-left__text">Báo cáo</p>
+            </div>
+            <div class="menu-left">
+                <div class="menu-left__icon">
+                    <img src="/content/icon/dashboard.png" alt="">
+                </div>
+                <p class="menu-left__text">Mua hàng</p>
+            </div>
+            <div class="menu-left">
+                <div class="menu-left__icon">
+                    <img src="/content/icon/dic-employee.png" alt="">
+                </div>
+                <p class="menu-left__text">Danh mục nhân viên</p>
+            </div>
+            <div class="menu-left">
+                <div class="menu-left__icon">
+                    <img src="/content/icon/dic-employee.png" alt="">
+                </div>
+                <p class="menu-left__text">Danh mục nhân viên</p>
+            </div>
+            <div class="menu-left">
+                <div class="menu-left__icon">
+                    <img src="/content/icon/setting.png" alt="">
+                </div>
+                <p class="menu-left__text">Thiết lập hệ thống</p>
+            </div>
+
+        </div>
+        <div class="right-bar">
+            <div class="header">
+                <div class="store__select">
+                    <select>
+                        <option value="">Nhà hàng Biển Đông</option>
+                        <option value="">Nhà hàng Cầu Giấy</option>
+                        <option value="">Nhà hàng Láng Hạ</option>
+                    </select>
+                </div>
+                <div class="infor-user">
+                    <img src="/content/icon/avatar-default.png" alt="">
+                    <a href="">Lê Hữu Tiến Dũng</a>
+                    <img src="/content/icon/option.png" alt="">
+                </div>
+            </div>
+            <div class="container">
+                <div class="container__title">
+                    <p>Danh sách nhân viên</p>
+                    <div class="container__title__button">
+                        <img src="/content/icon/add.png" alt="">
+                        <p id="button">Thêm nhân viên</p>
+                    </div>
+                </div>
+                <div class="container__tools">
+                    <input class="input-search" type="text" value="" placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
+                    <div class="box-dropdown room-dropdown">
+                        <p class="content-dropdown">Tất cả phòng ban</p>
+                        <i class="fas fa-angle-down"></i>
+                    </div>
+                    <div class="box-dropdown room-dropdown">
+                        <p class="content-dropdown">Tất cả vị trí</p>
+                        <i class="fas fa-angle-down"></i>
+                    </div>
+                    <div class="refresh-button">
+                        <!-- <img src="/content/icon/refresh.png" alt=""> -->
+                    </div>
+                </div>
+                <div class="content-table">
+                    <table>
+                        <tr>
+                            <th>Mã nhân viên</th>
+                            <th>Họ và tên</th>
+                            <th>Giới tính</th>
+                            <th>Ngày sinh</th>
+                            <th>Điện thoại</th>
+                            <th>Email</th>
+                            <th>Chức vụ</th>
+                            <th>Phòng ban</th>
+                            <th>Mức lương cơ bản</th>
+                            <th>Tình trạng công việc</th>
+                          </tr>
+                          <tr>
+                            <th>NV-532408</th>
+                            <th>Hồ Văn Long</th>
+                            <th>Nam</th>
+                            <th>01/02/2000</th>
+                            <th>0332623437</th>
+                            <th>holong@gmail.com</th>
+                            <th>Thu ngân</th>
+                            <th>Phòng Công nghệ</th>
+                            <th>10.000.000</th>
+                            <th>Đang thử việc</th>
+                          </tr>
+                          <tr>
+                            <th>NV-532408</th>
+                            <th>Hồ Văn Long</th>
+                            <th>Nam</th>
+                            <th>01/02/2000</th>
+                            <th>0332623437</th>
+                            <th>holong@gmail.com</th>
+                            <th>Thu ngân</th>
+                            <th>Phòng Công nghệ</th>
+                            <th>10.000.000</th>
+                            <th>Đang thử việc</th>
+                          </tr>
+                          <tr>
+                            <th>NV-532408</th>
+                            <th>Hồ Văn Long</th>
+                            <th>Nam</th>
+                            <th>01/02/2000</th>
+                            <th>0332623437</th>
+                            <th>holong@gmail.com</th>
+                            <th>Thu ngân</th>
+                            <th>Phòng Công nghệ</th>
+                            <th>10.000.000</th>
+                            <th>Đang thử việc</th>
+                          </tr>
+                          <tr>
+                            <th>NV-532408</th>
+                            <th>Hồ Văn Long</th>
+                            <th>Nam</th>
+                            <th>01/02/2000</th>
+                            <th>0332623437</th>
+                            <th>holong@gmail.com</th>
+                            <th>Thu ngân</th>
+                            <th>Phòng Công nghệ</th>
+                            <th>10.000.000</th>
+                            <th>Đang thử việc</th>
+                          </tr>
+                          <tr>
+                            <th>NV-532408</th>
+                            <th>Hồ Văn Long</th>
+                            <th>Nam</th>
+                            <th>01/02/2000</th>
+                            <th>0332623437</th>
+                            <th>holong@gmail.com</th>
+                            <th>Thu ngân</th>
+                            <th>Phòng Công nghệ</th>
+                            <th>10.000.000</th>
+                            <th>Đang thử việc</th>
+                          </tr>
+                          <tr>
+                            <th>NV-532408</th>
+                            <th>Hồ Văn Long</th>
+                            <th>Nam</th>
+                            <th>01/02/2000</th>
+                            <th>0332623437</th>
+                            <th>holong@gmail.com</th>
+                            <th>Thu ngân</th>
+                            <th>Phòng Công nghệ</th>
+                            <th>10.000.000</th>
+                            <th>Đang thử việc</th>
+                          </tr>
+                          <tr>
+                            <th>NV-532408</th>
+                            <th>Hồ Văn Long</th>
+                            <th>Nam</th>
+                            <th>01/02/2000</th>
+                            <th>0332623437</th>
+                            <th>holong@gmail.com</th>
+                            <th>Thu ngân</th>
+                            <th>Phòng Công nghệ</th>
+                            <th>10.000.000</th>
+                            <th>Đang thử việc</th>
+                          </tr>
+                          <tr>
+                            <th>NV-532408</th>
+                            <th>Hồ Văn Long</th>
+                            <th>Nam</th>
+                            <th>01/02/2000</th>
+                            <th>0332623437</th>
+                            <th>holong@gmail.com</th>
+                            <th>Thu ngân</th>
+                            <th>Phòng Công nghệ</th>
+                            <th>10.000.000</th>
+                            <th>Đang thử việc</th>
+                          </tr>
+                          <tr>
+                            <th>NV-532408</th>
+                            <th>Hồ Văn Long</th>
+                            <th>Nam</th>
+                            <th>01/02/2000</th>
+                            <th>0332623437</th>
+                            <th>holong@gmail.com</th>
+                            <th>Thu ngân</th>
+                            <th>Phòng Công nghệ</th>
+                            <th>10.000.000</th>
+                            <th>Đang thử việc</th>
+                          </tr>
+                          <tr>
+                            <th>NV-532408</th>
+                            <th>Hồ Văn Long</th>
+                            <th>Nam</th>
+                            <th>01/02/2000</th>
+                            <th>0332623437</th>
+                            <th>holong@gmail.com</th>
+                            <th>Thu ngân</th>
+                            <th>Phòng Công nghệ</th>
+                            <th>10.000.000</th>
+                            <th>Đang thử việc</th>
+                          </tr>
+                          <tr>
+                            <th>NV-532408</th>
+                            <th>Hồ Văn Long</th>
+                            <th>Nam</th>
+                            <th>01/02/2000</th>
+                            <th>0332623437</th>
+                            <th>holong@gmail.com</th>
+                            <th>Thu ngân</th>
+                            <th>Phòng Công nghệ</th>
+                            <th>10.000.000</th>
+                            <th>Đang thử việc</th>
+                          </tr>
+                          <tr>
+                            <th>NV-532408</th>
+                            <th>Hồ Văn Long</th>
+                            <th>Nam</th>
+                            <th>01/02/2000</th>
+                            <th>0332623437</th>
+                            <th>holong@gmail.com</th>
+                            <th>Thu ngân</th>
+                            <th>Phòng Công nghệ</th>
+                            <th>10.000.000</th>
+                            <th>Đang thử việc</th>
+                          </tr>
+                          <tr>
+                            <th>NV-532408</th>
+                            <th>Hồ Văn Long</th>
+                            <th>Nam</th>
+                            <th>01/02/2000</th>
+                            <th>0332623437</th>
+                            <th>holong@gmail.com</th>
+                            <th>Thu ngân</th>
+                            <th>Phòng Công nghệ</th>
+                            <th>10.000.000</th>
+                            <th>Đang thử việc</th>
+                          </tr>
+                          <tr>
+                            <th>NV-532408</th>
+                            <th>Hồ Văn Long</th>
+                            <th>Nam</th>
+                            <th>01/02/2000</th>
+                            <th>0332623437</th>
+                            <th>holong@gmail.com</th>
+                            <th>Thu ngân</th>
+                            <th>Phòng Công nghệ</th>
+                            <th>10.000.000</th>
+                            <th>Đang thử việc</th>
+                          </tr>
+                          <tr>
+                            <th>NV-532408</th>
+                            <th>Hồ Văn Long</th>
+                            <th>Nam</th>
+                            <th>01/02/2000</th>
+                            <th>0332623437</th>
+                            <th>holong@gmail.com</th>
+                            <th>Thu ngân</th>
+                            <th>Phòng Công nghệ</th>
+                            <th>10.000.000</th>
+                            <th>Đang thử việc</th>
+                          </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="total__employees">
+                    <p>Hiển thị 1-10/1000 nhân viên</p>
+                </div>
+                <div class="number__pages">
+                    <img src="/content/icon/btn-firstpage.svg" alt="">
+                    <img src="/content/icon/btn-prev-page.svg" alt="">
+                    <div class="button__dot"><p>1</p></div>
+                    <div class="button__dot"><p>2</p></div>
+                    <div class="button__dot"><p>3</p></div>
+                    <div class="button__dot"><p>4</p></div>
+                    <img src="/content/icon/btn-next-page.svg" alt="">
+                    <img src="/content/icon/btn-lastpage.svg" alt="">
+                </div>
+                <div class="note"><p>10 nhân viên/trang</p></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

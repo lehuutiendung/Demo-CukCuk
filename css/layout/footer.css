@@ -1,0 +1,39 @@
+.footer{
+    display: flex;
+    margin-left: 24px;
+    margin-right: 16px;
+    align-items: center;
+    justify-items: center;
+}
+
+.footer .total__employees{
+ 
+}
+
+.footer .number__pages{
+    display: flex
+}
+
+.footer .number__pages .button__dot{
+    border-radius: 50%;
+    background-color: #E9EBEE;
+    height: 34px;
+    width: 34px;
+    text-align: center;
+    margin-right: 5px;
+    border: 1px solid #bbbbbb;
+}
+
+.footer .number__pages .button__dot:hover{
+    background-color: #019160;
+}
+
+.footer .number__pages .button__dot p{
+    margin: 0;
+    line-height: 34px;
+}
+
+.footer .note{
+   position: absolute;
+   right: 16px;
+}
