@@ -12,11 +12,11 @@
     background-color: #ffffff;
     border: 1px solid #bbbbbb;
     position: absolute;
-    width: 900px;
-    height: 700px;
+    width: 804px;
+    height: 790px;
     top: 50%;
     left: 50%;
-    margin-top: -350px;
+    margin-top: -395px;
     margin-left: -450px;
     border-radius: 4px;
     z-index: 1;
@@ -25,7 +25,7 @@
 .title__employee {
     width: inherit;
     height: 68px;
-    background-color: #bbbbbb;
+    /* background-color: #F65454; */
     display: flex;
 }
 
@@ -45,33 +45,35 @@
 
 .wrap-body{
     width: inherit;
-    height: calc(700px - 68px);
-    background-color: aqua;
+    height: calc(800px - 68px -40px);
+    /* background-color: aqua; */
     display: flex;
 }
 
 .wrap-body .left-menu{
     width: 23%;
     height: inherit;
-    background-color: red;
+    /* background-color: red; */
 }
 
 .wrap-body .left-menu .wrap-info{
     width: 100%;
-    height: 150px;
-    background-color: yellow;
+    height: 122px;
+    /* background-color: yellow; */
     display: flex;
     justify-content: center;
 }
 
 .wrap-info .avatar__info{
-    width: 150px;
-    height: 150px;
-    background-color: blue;
+    width: 120px;
+    height: 120px;
+    /* background-color: blue; */
     background-image: url(/content/img/default-avatar.jpg);
-    background-size: 150px;
     background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
     border-radius: 50%;
+    border: 1px solid #bbbbbb;
 
 }
 
@@ -80,10 +82,15 @@
     height: 150px;
     border-radius: 50%;  
     margin: 0 auto;
+    opacity: 0;
 }
 
 .left-menu{
     text-align: center;
+}
+
+.left-menu p{
+    margin: 0;
 }
 
 .right-menu{
@@ -92,12 +99,14 @@
 
 .right-menu .title-a{
     margin: 0;
+    margin-bottom: 4px;
 }
 
 .hr-custom{
     width: 74px;
     height: 4px;
     background-color: #019160;
+    margin-bottom: 4px;
 }
 
 .title-row{
@@ -107,7 +116,7 @@
 
 .title-row p{
     flex-wrap: wrap;
-    width: 300px;
+    width: 312px;
     margin: 0;
     margin-bottom: 4px;
 }
@@ -116,8 +125,8 @@
     color: #F65454;
 }
 
-.title-row .col-2{
-    margin-left: 10px;
+.title-row .col-1{
+    margin-right: 10px;
 }
 
 .input-row{
@@ -135,27 +144,72 @@
     color: #000000;
     font-family: GoogleSans-Regular;
     outline: none;
+    padding-left: 16px;
 }
 
 .input-row input:focus{
     border: 1px solid #019160;
 }
 
-.col-2{
-    margin-left: 10px;
+.col-1{
+    margin-right: 10px;
 }
 
 .calendar{
-    width: 296px;
+    width: 310px;
     height: 42px;
     border: 1px solid #bbbbbb;
     background-color: #ffffff;
     border-radius: 5px;
     align-items: center;
+    margin-right: 10px;
 }
 
 .calendar .fa-calendar{
     float: right;
     line-height: 40px;
-    margin-right: 10px;
+    margin-right: 20px;
+}
+
+.calendar .fa-angle-down{
+    float: right;
+    line-height: 40px;
+    margin-right: 12px;
+}
+
+/* Css for footer modal */
+.footer-modal{
+    width: 100%;
+    height: 62px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: #E9EBEE;
+}
+
+.footer-modal .button-modal{
+    border-radius: 4px;
+    height: 40px;
+    font-family: GoogleSans-Regular;
+    display: flex;
+    align-items: center;
+}
+
+.save{
+    background-color: #019160;    
+    margin-right: 20px;
+}
+
+.save .fa-save{
+    margin-left: 16px;
+    margin-right: 8px;
+}
+
+.save p{
+    margin-right: 16px;
+}
+
+.cancel{
+    width: 70px;
+    justify-content: center;
 }
