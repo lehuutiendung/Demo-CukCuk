@@ -54,7 +54,7 @@
   color: #bbbbbb;
   font-family: GoogleSans-Italic;
   outline: none;
-  background-image: url(/content/icon/search.png);
+  background-image: url(/UI/content/icon/search.png);
   background-size: 16px;
   background-repeat: no-repeat;
   background-position: center;
@@ -96,7 +96,7 @@
   height: 40px;
   border: 1px solid #bbbbbb;
   border-radius: 4px;
-  background-image: url(/content/icon/refresh.png);
+  background-image: url(/UI/content/icon/refresh.png);
   background-repeat: no-repeat;
   background-position: center;
   position: absolute;
