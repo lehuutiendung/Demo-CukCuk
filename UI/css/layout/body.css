@@ -26,6 +26,10 @@
   align-items: center;
 }
 
+.container .container__title__button:hover{
+  cursor: pointer;
+}
+
 .container__title__button img {
   width: 24px;
   height: 24px;
@@ -154,6 +158,10 @@
   height: 48px;
 }
 
+.content-table table tr:hover{
+  background-color: #bbbbbb;
+}
+
 .content-table table tr th {
   font-family: GoogleSans-Medium;
   font-weight: normal;
@@ -166,6 +174,10 @@
 
 .content-table table tr:nth-child(even) {
   background-color: #e9ebee;
+}
+
+.content-table table tr:nth-child(even):hover{
+  background-color: #bbbbbb;
 }
 
 .content-table table .salary {
