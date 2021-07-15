@@ -29,8 +29,8 @@
     justify-content: space-between;
 }
 
-.exit{
-    
+.exit #exit-modal{
+    margin: 12px 12px;
 }
 
 .title__employee .fa-times{
@@ -201,6 +201,7 @@ input[type="date"]{
     font-family: GoogleSans-Regular;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .save{
@@ -221,4 +222,8 @@ input[type="date"]{
     width: 70px;
     justify-content: center;
     margin-right: 16px;
+}
+
+.cancel:hover{
+    background-color: #bbbbbb;
 }
