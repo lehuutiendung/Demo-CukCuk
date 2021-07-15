@@ -1,15 +1,19 @@
 .wrap-box-modal{
     background-color: rgba(0,0,0, 0.5);
-    position: fixed;
     top: 0;
     right: 0;
     left: 0;
     bottom: 0;
-    display: block;
+    display: none;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    overflow-y: scroll;
+    z-index: 0;
 }
 
 .box-info{
-    background-color: #ffffff;
+    /* background-color: #ffffff;
     border: 1px solid #bbbbbb;
     position: absolute;
     width: 804px;
@@ -17,23 +21,32 @@
     top: 50%;
     left: 50%;
     margin-top: -395px;
-    margin-left: -450px;
+    margin-left: -420px;
     border-radius: 4px;
-    z-index: 1;
+    z-index: 1; */
+    width: 804px;
+    height: 790px;
+    background-color: #ffffff;
+    border: 1px solid #bbbbbb;
+    z-index: 99;
 }
 
 .title__employee {
     width: inherit;
     height: 68px;
     /* background-color: #F65454; */
+    /* display: flex; */
     display: flex;
+    justify-content: space-between;
+}
+
+.exit{
+    
 }
 
 .title__employee .fa-times{
     font-size: 20px;
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    float: right;
 }
 
 .title__employee p{
@@ -45,7 +58,8 @@
 
 .wrap-body{
     width: inherit;
-    height: calc(800px - 68px -40px);
+    /* height: calc(804px - 80px -62px); */
+    height: 685px;
     /* background-color: aqua; */
     display: flex;
 }
@@ -53,7 +67,7 @@
 .wrap-body .left-menu{
     width: 23%;
     height: inherit;
-    /* background-color: red; */
+    /* background-color: blueviolet; */
 }
 
 .wrap-body .left-menu .wrap-info{
@@ -165,6 +179,12 @@
     margin-right: 10px;
 }
 
+input[type="date"]{
+    padding-right: 20px;
+    width: 274px;
+    height: 42px;
+}
+
 .calendar .fa-calendar{
     float: right;
     line-height: 40px;
@@ -180,7 +200,7 @@
 /* Css for footer modal */
 .footer-modal{
     width: 100%;
-    height: 62px;
+    height: 37px;
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -189,7 +209,7 @@
 
 .footer-modal .button-modal{
     border-radius: 4px;
-    height: 40px;
+    height: inherit;
     font-family: GoogleSans-Regular;
     display: flex;
     align-items: center;

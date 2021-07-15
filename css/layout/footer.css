@@ -7,19 +7,27 @@
     height: 56px;
 }
 
-.footer .total__employees{
- 
-}
-
 .footer .number__pages{
     display: flex;
     position: absolute;
     left: 50%;
+    align-items: center;
 }
 
 .footer .number__pages img{
     margin-right: 10px;
 }
+
+/* .footer .number__pages .button__hide{
+    align-items:center;
+    text-align: center;
+}
+.footer .number__pages .button__hide:hover{
+    border-radius: 50%;
+    background-color: #E9EBEE;
+    height: 34px;
+    width: 34px;
+} */
 
 .footer .number__pages .button__dot{
     border-radius: 50%;
@@ -33,7 +41,7 @@
 
 .footer .number__pages .focus{
     background-color: #019160;
-    color: #ffffff;
+    color: #000000;
 }
 
 .footer .number__pages .button__dot:hover{
