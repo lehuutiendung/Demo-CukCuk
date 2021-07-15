@@ -47,7 +47,6 @@
 
 .wrap-body{
     width: inherit;
-    /* height: calc(804px - 80px -62px); */
     height: 685px;
     /* background-color: aqua; */
     display: flex;
@@ -71,7 +70,7 @@
     width: 120px;
     height: 120px;
     /* background-color: blue; */
-    background-image: url(/content/img/default-avatar.jpg);
+    background-image: url(/UI/content/img/default-avatar.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
