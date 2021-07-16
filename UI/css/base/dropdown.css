@@ -61,7 +61,17 @@
 .dropdown-data div.dropdown-data-item .tick-item{
     width: 16px;
     height: 16px;
-    background-color: red;
     margin-left: 10px;
     margin-right: 10px;
+    text-align: center;
+}
+
+.tick-item .fa-check{
+    display: none;
+    line-height: 16px;
+    color: #ffffff;
+}
+
+.active{
+    background-color: #019160;
 }

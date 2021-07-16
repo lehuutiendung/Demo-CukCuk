@@ -12,22 +12,25 @@
     position: absolute;
     left: 50%;
     align-items: center;
+    justify-content: space-between;
 }
 
-.footer .number__pages img{
-    margin-right: 10px;
-}
-
-/* .footer .number__pages .button__hide{
+.footer .number__pages .button__hide{
     align-items:center;
     text-align: center;
-}
-.footer .number__pages .button__hide:hover{
-    border-radius: 50%;
-    background-color: #E9EBEE;
     height: 34px;
     width: 34px;
-} */
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+    /* border: 1px solid #bbbbbb;   */
+}
+
+.footer .number__pages .button__hide:hover{
+    border-radius: 25%;
+    background-color: #E9EBEE;
+    border: 1px solid #bbbbbb;  
+}
 
 .footer .number__pages .button__dot{
     border-radius: 50%;

@@ -159,6 +159,20 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 312px;
+    border: 1px solid #bbbbbb;
+    border-radius: 4px;
+}
+
+.wrap-salary .wrap-salary-text{
+    width: 240px;
+    text-align: right;
+    border: none;
+
+}
+
+.wrap-salary .wrap-salary-text:focus{
+    border: none;
 }
 
 .salary-box span{

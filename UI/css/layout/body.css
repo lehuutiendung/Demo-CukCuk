@@ -155,7 +155,7 @@
   height: 48px;
 }
 
-.content-table table tr:hover{
+.content-table table tbody tr:hover{
   background-color: #bbbbbb;
 }
 
@@ -173,7 +173,7 @@
   background-color: #e9ebee;
 }
 
-.content-table table tr:nth-child(even):hover{
+.content-table table tbody tr:nth-child(even):hover{
   background-color: #bbbbbb;
 }
 
