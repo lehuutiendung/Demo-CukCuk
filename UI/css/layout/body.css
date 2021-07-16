@@ -73,25 +73,7 @@
   font-family: GoogleSans-Regular;
 }
 
-.container__tools .box-dropdown {
-  display: flex;
-  float: left;
-  height: 40px;
-  width: 180px;
-  border: 1px solid #bbbbbb;
-  border-radius: 4px;
-  align-items: center;
-}
-.container__tools .box-dropdown .content-dropdown {
-  margin-left: 16px;
-}
-
-.container__tools .box-dropdown .fa-angle-down:last-of-type {
-  margin-left: auto;
-  margin-right: 12px;
-}
-
-.container__tools .room-dropdown {
+.container__tools .wrap-dropdown {
   margin-left: 10px;
 }
 
@@ -107,17 +89,6 @@
   right: 16px;
 }
 
-/* CSS for tables */
-.container .content-table {
-  margin-left: 24px;
-  margin-right: 16px;
-  margin-top: 10px;
-  text-align: left;
-  font-family: GoogleSans-Medium;
-  overflow: scroll;
-  height: calc(100vh - 240px);
-}
-
 /* Css for scroll */
 /* Track */
 ::-webkit-scrollbar{
@@ -125,12 +96,10 @@
   height: 8px;
 }
 
-::-webkit-scrollbar-track {
-  /* background: #f1f1f1; */
-}
 ::-webkit-resizer {
     display: none;
   }
+
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #bbbbbb;
@@ -140,6 +109,26 @@
 ::-webkit-scrollbar-thumb {
     border-radius: 10px;
     background: #888;
+}
+
+::-webkit-scrollbar-track {
+  /* background: transparent; */
+}
+
+::-webkit-scrollbar-track-piece:start{
+  /* background: transparent; */
+  margin-top: 48px;
+}
+
+/* CSS for tables */
+.container .content-table {
+  margin-left: 24px;
+  margin-right: 16px;
+  margin-top: 10px;
+  text-align: left;
+  font-family: GoogleSans-Medium;
+  overflow: scroll;
+  height: calc(100vh - 240px);
 }
 
 .content-table table {
@@ -152,6 +141,14 @@
   position: sticky;
   top: 0;
   background-color: #ffffff;
+}
+
+.content-table tbody th{
+  white-space: nowrap;
+}
+
+.content-table th.center{
+  text-align: center;
 }
 
 .content-table table tr {

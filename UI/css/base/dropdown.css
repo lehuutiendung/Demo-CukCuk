@@ -22,7 +22,9 @@
     text-align: center;
     margin-right: 12px;
 }
-
+.dropdown .dropdown-img .fas{
+    display: contents;
+}
 .dropdown .dropdown-img .fa-angle-down{
     width: 16px;
     height: 16px;
@@ -38,8 +40,10 @@
     background-color: #ffffff;
     -moz-box-shadow: 0px 3px 3px rgb(219, 219, 219);
     -webkit-box-shadow: 0px 3px 3px rgb(219, 219, 219);
-    box-shadow: 0px 3px 3px rgb(219, 219, 219);
+    box-shadow: 0px 1px 8px 0px rgb(219, 219, 219);
     display: none;
+    position: absolute;
+    z-index: 99;
 }
 
 .dropdown-data div.dropdown-data-item{

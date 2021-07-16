@@ -135,6 +135,8 @@
     display: flex;
     width: 100%;
     margin-bottom: 14px;
+    position: relative;
+    align-items: center;
 }
 
 .input-row input{
@@ -151,6 +153,18 @@
 
 .input-row input:focus{
     border: 1px solid #019160;
+}
+
+.wrap-salary{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.salary-box span{
+    position: absolute;
+    right: 34px;
+    font-family: GoogleSans-Italic;
 }
 
 .col-1{
