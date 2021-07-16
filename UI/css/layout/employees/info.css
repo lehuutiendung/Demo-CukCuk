@@ -135,6 +135,8 @@
     display: flex;
     width: 100%;
     margin-bottom: 14px;
+    position: relative;
+    align-items: center;
 }
 
 .input-row input{
@@ -151,6 +153,32 @@
 
 .input-row input:focus{
     border: 1px solid #019160;
+}
+
+.wrap-salary{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 312px;
+    border: 1px solid #bbbbbb;
+    border-radius: 4px;
+}
+
+.wrap-salary .wrap-salary-text{
+    width: 240px;
+    text-align: right;
+    border: none;
+
+}
+
+.wrap-salary .wrap-salary-text:focus{
+    border: none;
+}
+
+.salary-box span{
+    position: absolute;
+    right: 34px;
+    font-family: GoogleSans-Italic;
 }
 
 .col-1{

@@ -64,9 +64,17 @@
     </div>
     <div class="right-bar">
       <div class="header">
-        <div class="store__select">
+        <div class="store__select" data-dropdown="0">
           <p>Nhà hàng Biển Đông</p>
           <i class="fas fa-angle-down"></i>
+        </div>
+        <div class="store-select-data" data-dropdown-value="0">
+          <div class="store-data-item">
+              <span>Nhà hàng Cầu Giấy</span>            
+          </div>
+          <div class="store-data-item">
+              <span>Nhà hàng Hà Đông</span>            
+          </div>
         </div>
         <div class="infor-user">
           <img src="/UI/content/icon/avatar-default.png" alt="">
@@ -84,31 +92,67 @@
         </div>
         <div class="container__tools">
           <input class="input-search" type="text" value="" placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
-          <div class="box-dropdown room-dropdown">
+          
+          <!-- Component Dropdown -->
+          <div class="wrap-dropdown" data-dropdown="1">
+            <div class="dropdown">
+              <div class="dropdown-title">
+                <p data-dropdown-item="1">Tất cả phòng ban</p>
+              </div>
+              <span class="dropdown-img">
+                <i class="fas fa-angle-down"></i>
+              </span>
+            </div>
+            <div class="dropdown-data" data-dropdown-value="1">
+              <div class="dropdown-data-item" data-dropdown-item="1">
+                <div class="tick-item">
+                    <i class="fas fa-check hoverCheck" data-dropdown-item="1"></i>
+                </div>
+                <span data-dropdown-item="1">Nhân sự</span>
+              </div>
+              <div class="dropdown-data-item" data-dropdown-item="2">
+                <div class="tick-item">
+                    <i class="fas fa-check" data-dropdown-item="2"></i>
+                </div>
+                <span data-dropdown-item="2">Kỹ thuật</span>
+              </div>
+              <div class="dropdown-data-item" data-dropdown-item="3">
+                <div class="tick-item">
+                    <i class="fas fa-check" data-dropdown-item="3"></i>
+                </div>
+                <span data-dropdown-item="3">Tất cả phòng ban</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="wrap-dropdown" data-dropdown="2">
+            <div class="dropdown">
+                <div class="dropdown-title">
+                    <p>Tất cả vị trí</p>
+                </div>
+                <span class="dropdown-img">
+                    <i class="fas fa-angle-down"></i>
+                </span>
+            </div>
+            <div class="dropdown-data" data-dropdown-value="2">
+                <div class="dropdown-data-item">
+                    <div class="tick-item"></div>
+                    <span>Fresher</span>
+                </div>
+                <div class="dropdown-data-item">
+                    <div class="tick-item"></div>
+                    <span>Intern</span>
+                </div>
+            </div>
+        </div>
+
+          <!-- <div class="box-dropdown room-dropdown">
             <p class="content-dropdown">Tất cả phòng ban</p>
             <i class="fas fa-angle-down"></i>
           </div>
           <div class="box-dropdown room-dropdown">
             <p class="content-dropdown">Tất cả vị trí</p>
             <i class="fas fa-angle-down"></i>
-          </div>
-
-          <!-- Component Dropdown -->
-          <!-- <div class="dropdown">
-              <div class="dropdown-title">
-                  <p>Tất cả phòng ban</p>
-              </div>
-              <span class="dropdown-img">
-                  <i class="fas fa-angle-down"></i>
-              </span>
-          </div>
-          <div class="dropdown">
-              <div class="dropdown-title">
-                  <p>Tất cả vị trí</p>
-              </div>
-              <span class="dropdown-img">
-                  <i class="fas fa-angle-down"></i>
-              </span>
           </div> -->
 
           <div class="refresh-button">
@@ -121,7 +165,7 @@
                 <th>Mã nhân viên</th>
                 <th>Họ và tên</th>
                 <th>Giới tính</th>
-                <th>Ngày sinh</th>
+                <th class="center">Ngày sinh</th>
                 <th>Điện thoại</th>
                 <th>Email</th>
                 <th>Chức vụ</th>
@@ -136,7 +180,7 @@
                 <th>NV-532408</th>
                 <th>Hồ Văn Long</th>
                 <th>Nam</th>
-                <th>01/02/2000</th>
+                <th class="center">01/02/2000</th>
                 <th>0332623437</th>
                 <th>holong@gmail.com</th>
                 <th>Thu ngân</th>
@@ -148,7 +192,7 @@
                 <th>NV-532408</th>
                 <th>Hồ Văn Long</th>
                 <th>Nam</th>
-                <th>01/02/2000</th>
+                <th class="center">01/02/2000</th>
                 <th>0332623437</th>
                 <th>holong@gmail.com</th>
                 <th>Thu ngân</th>
@@ -160,7 +204,7 @@
                 <th>NV-532408</th>
                 <th>Hồ Văn Long</th>
                 <th>Nam</th>
-                <th>01/02/2000</th>
+                <th class="center">01/02/2000</th>
                 <th>0332623437</th>
                 <th>holong@gmail.com</th>
                 <th>Thu ngân</th>
@@ -172,7 +216,7 @@
                 <th>NV-532408</th>
                 <th>Hồ Văn Long</th>
                 <th>Nam</th>
-                <th>01/02/2000</th>
+                <th class="center">01/02/2000</th>
                 <th>0332623437</th>
                 <th>holong@gmail.com</th>
                 <th>Thu ngân</th>
@@ -184,7 +228,7 @@
                 <th>NV-532408</th>
                 <th>Hồ Văn Long</th>
                 <th>Nam</th>
-                <th>01/02/2000</th>
+                <th class="center">01/02/2000</th>
                 <th>0332623437</th>
                 <th>holong@gmail.com</th>
                 <th>Thu ngân</th>
@@ -196,7 +240,7 @@
                 <th>NV-532408</th>
                 <th>Hồ Văn Long</th>
                 <th>Nam</th>
-                <th>01/02/2000</th>
+                <th class="center">01/02/2000</th>
                 <th>0332623437</th>
                 <th>holong@gmail.com</th>
                 <th>Thu ngân</th>
@@ -208,7 +252,7 @@
                 <th>NV-532408</th>
                 <th>Hồ Văn Long</th>
                 <th>Nam</th>
-                <th>01/02/2000</th>
+                <th class="center">01/02/2000</th>
                 <th>0332623437</th>
                 <th>holong@gmail.com</th>
                 <th>Thu ngân</th>
@@ -220,7 +264,7 @@
                 <th>NV-532408</th>
                 <th>Hồ Văn Long</th>
                 <th>Nam</th>
-                <th>01/02/2000</th>
+                <th class="center">01/02/2000</th>
                 <th>0332623437</th>
                 <th>holong@gmail.com</th>
                 <th>Thu ngân</th>
@@ -232,7 +276,7 @@
                 <th>NV-532408</th>
                 <th>Hồ Văn Long</th>
                 <th>Nam</th>
-                <th>01/02/2000</th>
+                <th class="center">01/02/2000</th>
                 <th>0332623437</th>
                 <th>holong@gmail.com</th>
                 <th>Thu ngân</th>
@@ -244,7 +288,7 @@
                 <th>NV-532408</th>
                 <th>Hồ Văn Long</th>
                 <th>Nam</th>
-                <th>01/02/2000</th>
+                <th class="center">01/02/2000</th>
                 <th>0332623437</th>
                 <th>holong@gmail.com</th>
                 <th>Thu ngân</th>
@@ -256,7 +300,7 @@
                 <th>NV-532408</th>
                 <th>Hồ Văn Long</th>
                 <th>Nam</th>
-                <th>01/02/2000</th>
+                <th class="center">01/02/2000</th>
                 <th>0332623437</th>
                 <th>holong@gmail.com</th>
                 <th>Thu ngân</th>
@@ -268,7 +312,7 @@
                 <th>NV-532408</th>
                 <th>Hồ Văn Long</th>
                 <th>Nam</th>
-                <th>01/02/2000</th>
+                <th class="center">01/02/2000</th>
                 <th>0332623437</th>
                 <th>holong@gmail.com</th>
                 <th>Thu ngân</th>
@@ -280,7 +324,7 @@
                 <th>NV-532408</th>
                 <th>Hồ Văn Long</th>
                 <th>Nam</th>
-                <th>01/02/2000</th>
+                <th class="center">01/02/2000</th>
                 <th>0332623437</th>
                 <th>holong@gmail.com</th>
                 <th>Thu ngân</th>
@@ -292,7 +336,7 @@
                 <th>NV-532408</th>
                 <th>Hồ Văn Long</th>
                 <th>Nam</th>
-                <th>01/02/2000</th>
+                <th class="center">01/02/2000</th>
                 <th>0332623437</th>
                 <th>holong@gmail.com</th>
                 <th>Thu ngân</th>
@@ -304,7 +348,7 @@
                 <th>NV-532408</th>
                 <th>Hồ Văn Long</th>
                 <th>Nam</th>
-                <th>01/02/2000</th>
+                <th class="center">01/02/2000</th>
                 <th>0332623437</th>
                 <th>holong@gmail.com</th>
                 <th>Thu ngân</th>
@@ -321,7 +365,7 @@
           <p>Hiển thị 1-10/1000 nhân viên</p>
         </div>
         <div class="number__pages">
-          <div class="button__hide">
+          <div class="button__hide button__footer__start">
             <img src="/UI/content/icon/btn-firstpage.svg" alt="">
           </div>
           <div class="button__hide">
@@ -343,7 +387,7 @@
           <div class="button__hide">
             <img src="/UI/content/icon/btn-next-page.svg" alt="">
           </div>
-          <div class="button__hide">
+          <div class="button__hide button__footer__end">
             <img src="/UI/content/icon/btn-lastpage.svg" alt="">
           </div>
           
@@ -393,7 +437,7 @@
                   </div>
                   <div class="input-row">
                       <!-- <div class="calendar col-1"><i class="far fa-calendar"></i></div> -->
-                      <input class="calendar" type="date" value="">
+                      <input class="calendar" type="date" data-date-format="DD MMMM YYYY" value="">
                       <div class="calendar"><i class="fas fa-angle-down"></i></div>
                   </div>
                   <!-- Div CMTND, ngay cap -->
@@ -438,9 +482,13 @@
                       <p class="col-1">Mã số thuê cá nhân</p>
                       <p>Mức lương cơ bản</p>
                   </div>
-                  <div class="input-row">
+                  <div class="input-row salary-box">
                       <input class="col-1" type="text" value="235468923748923">
-                      <input type="text" value="000.000.000 (VNĐ)">
+                      <div class="wrap-salary">
+                          <input class="wrap-salary-text" type="text" value="10.000.000">
+                          <span>(VNĐ)</span>
+                      </div>
+      
                   </div>
                   <!-- Ngay gia nhap cong ty, tinh trang cong viec -->
                   <div class="title-row">
@@ -466,5 +514,7 @@
       </div>
   </div>
 </body>
-<script src="/UI/js/main.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/dropdown/dropdown.js"></script>
+<script src="../js/api/employees/query-employees.js"></script>
 </html>
