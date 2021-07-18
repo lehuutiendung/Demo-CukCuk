@@ -67,11 +67,14 @@
 }
 
 .tick-item .fa-check{
-    display: none;
     line-height: 16px;
     color: #ffffff;
 }
 
 .active{
+    background-color: #019160;
+}
+
+.dropdown-data div.active:hover{
     background-color: #019160;
 }
