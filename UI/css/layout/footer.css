@@ -1,10 +1,11 @@
 .footer{
     display: flex;
-    margin-left: 34px;
-    margin-right: 16px;
+    padding-left: 24px;
     align-items: center;
     justify-items: center;
     height: 56px;
+    flex-basis: auto;
+    background-color: #E9EBEE;
 }
 
 .footer .number__pages{
@@ -12,7 +13,8 @@
     position: absolute;
     left: 50%;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    flex-basis: fit-content;
 }
 
 .footer .number__pages .button__hide{
@@ -28,8 +30,9 @@
 
 .footer .number__pages .button__hide:hover{
     border-radius: 25%;
-    background-color: #E9EBEE;
+    background-color: #ffffff;
     border: 1px solid #bbbbbb;  
+    cursor: pointer;
 }
 
 .footer .number__pages .button__dot{
@@ -39,7 +42,6 @@
     width: 34px;
     text-align: center;
     margin-right:8px;
-    border: 1px solid #bbbbbb;
 }
 
 .footer .number__pages .focus{
@@ -49,6 +51,7 @@
 
 .footer .number__pages .button__dot:hover{
     background-color: #ffffff;
+    cursor: pointer;
 }
 
 .footer .number__pages .button__dot p{
@@ -59,4 +62,37 @@
 .footer .note{
    position: absolute;
    right: 16px;
+    align-items: center;
+    display: flex;
+    width: 150px;
+    background-color: #ffffff;
+    border-radius: 4px;
+
+}
+
+.footer .note .note-number-emmployees{
+    height: 34px;
+    width: inherit;
+    line-height: 34px;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.footer .note .note-number-emmployees p{
+    margin: 0;
+}
+
+.footer .note .up-down-number .fa-chevron-up{
+    position: absolute;
+    right: 8px;
+    bottom: 15px;
+}
+.footer .note .up-down-number .fa-chevron-down{
+    position: absolute;
+    right: 8px;
+    bottom: 7px;
+}
+
+.footer .note .up-down-number .fas:hover{
+    cursor: pointer;
 }

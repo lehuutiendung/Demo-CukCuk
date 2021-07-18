@@ -4,6 +4,7 @@
     border-bottom: 2px solid #E5E5E5;
     background: #FFFFFF;
     display: flex;
+    align-items: center;
 }
 
 .store__select{
@@ -11,6 +12,7 @@
     align-items: center;
     margin: 12px 0 12px 48px;
     width: 100%;
+    height: 40px;
 }
 .store__select .fa-angle-down{
     margin-left: 12px;
@@ -36,8 +38,8 @@
 
 .store-data-item{
     display: flex;
-    height: 30px;
-    line-height: 30px;
+    height: 40px;
+    line-height: 40px;
     padding-left: 10px;
 }
 

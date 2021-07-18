@@ -59,3 +59,13 @@
     background-color: #e5e5e5;
     color: #000000;
 }
+
+.menu-active{
+    background-color: var(--active-div-color);
+    color: var(--active-text-color);
+}
+
+:root{
+    --active-div-color: #019160;
+    --active-text-color: #ffffff;
+}
