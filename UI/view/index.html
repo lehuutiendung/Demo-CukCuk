@@ -307,7 +307,7 @@
                   </div>
                   <div class="input-row" autofocus>
                       <input class="col-1" type="text" id="firstField">
-                      <input type="text" value="Lê Hữu Tiến Dũng">
+                      <input type="text" value="Lê Hữu Tiến Dũng" id="fullName">
                   </div>
                   <!-- Div ngay sinh, gioi tinh -->
                   <div class="title-row">
@@ -317,7 +317,8 @@
                   <div class="input-row">
                       <!-- <div class="calendar col-1"><i class="far fa-calendar"></i></div> -->
                       <input class="calendar" type="date" data-date-format="DD MMMM YYYY" value="">
-                      <div class="calendar"><i class="fas fa-angle-down"></i></div>
+                      <div class="calendar" id="gender"><i class="fas fa-angle-down"></i></div>
+                      
                   </div>
                   <!-- Div CMTND, ngay cap -->
                   <div class="title-row">
@@ -353,8 +354,68 @@
                       <p>Phòng ban</p>
                   </div>
                   <div class="input-row">
-                      <div class="calendar"><i class="fas fa-angle-down"></i></div>
-                      <div class="calendar"><i class="fas fa-angle-down"></i></div>
+                      <!-- <div class="calendar"><i class="fas fa-angle-down"></i></div> -->
+                      <!-- <div class="calendar"><i class="fas fa-angle-down"></i></div> -->
+                      <div class="wrap-dropdown" data-dropdown="1">
+                        <div class="dropdown dropdown--modal">
+                          <div class="dropdown-title">
+                            <p data-dropdown-item="1">Chọn vị trí</p>
+                          </div>
+                          <span class="dropdown-img">
+                            <i class="fas fa-angle-down"></i>
+                          </span>
+                        </div>
+                        <div class="dropdown-data" data-dropdown-value="1">
+                          <div class="dropdown-data-item" data-dropdown-item="1">
+                            <div class="tick-item">
+                                <i class="fas fa-check" data-dropdown-item="1"></i>
+                            </div>
+                            <span data-dropdown-item="1">Giám đốc</span>
+                          </div>
+                          <div class="dropdown-data-item" data-dropdown-item="2">
+                            <div class="tick-item">
+                                <i class="fas fa-check" data-dropdown-item="2"></i>
+                            </div>
+                            <span data-dropdown-item="2">Fresher</span>
+                          </div>
+                          <div class="dropdown-data-item" data-dropdown-item="3">
+                            <div class="tick-item">
+                                <i class="fas fa-check" data-dropdown-item="3"></i>
+                            </div>
+                            <span data-dropdown-item="3">Intern</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="wrap-dropdown" data-dropdown="1">
+                        <div class="dropdown dropdown--modal">
+                          <div class="dropdown-title">
+                            <p data-dropdown-item="1">Tất cả phòng ban</p>
+                          </div>
+                          <span class="dropdown-img">
+                            <i class="fas fa-angle-down"></i>
+                          </span>
+                        </div>
+                        <div class="dropdown-data" data-dropdown-value="1">
+                          <div class="dropdown-data-item" data-dropdown-item="1">
+                            <div class="tick-item">
+                                <i class="fas fa-check" data-dropdown-item="1"></i>
+                            </div>
+                            <span data-dropdown-item="1">Nhân sự</span>
+                          </div>
+                          <div class="dropdown-data-item" data-dropdown-item="2">
+                            <div class="tick-item">
+                                <i class="fas fa-check" data-dropdown-item="2"></i>
+                            </div>
+                            <span data-dropdown-item="2">Kỹ thuật</span>
+                          </div>
+                          <div class="dropdown-data-item" data-dropdown-item="3">
+                            <div class="tick-item">
+                                <i class="fas fa-check" data-dropdown-item="3"></i>
+                            </div>
+                            <span data-dropdown-item="3">Tất cả phòng ban</span>
+                          </div>
+                        </div>
+                      </div>
                   </div>
                   <!-- Ma so thue ca nhan, muc luong co ban -->
                   <div class="title-row">
@@ -364,7 +425,7 @@
                   <div class="input-row salary-box">
                       <input class="col-1" type="text" value="235468923748923">
                       <div class="wrap-salary">
-                          <input class="wrap-salary-text" type="text" value="10.000.000">
+                          <input class="wrap-salary-text" type="text" value="">
                           <span>(VNĐ)</span>
                       </div>
       
@@ -377,7 +438,37 @@
                   <div class="input-row">
                       <!-- <div class="calendar col-1"><i class="far fa-calendar"></i></div> -->
                       <input class="calendar" type="date" value="">
-                      <div class="calendar"><i class="fas fa-angle-down"></i></div>
+                      <!-- <div class="calendar"><i class="fas fa-angle-down"></i></div> -->
+                      <div class="wrap-dropdown" data-dropdown="1">
+                        <div class="dropdown dropdown--modal">
+                          <div class="dropdown-title">
+                            <p data-dropdown-item="1">Chọn tình trạng</p>
+                          </div>
+                          <span class="dropdown-img">
+                            <i class="fas fa-angle-down"></i>
+                          </span>
+                        </div>
+                        <div class="dropdown-data" data-dropdown-value="1">
+                          <div class="dropdown-data-item" data-dropdown-item="1">
+                            <div class="tick-item">
+                                <i class="fas fa-check" data-dropdown-item="1"></i>
+                            </div>
+                            <span data-dropdown-item="1">Nhân viên</span>
+                          </div>
+                          <div class="dropdown-data-item" data-dropdown-item="2">
+                            <div class="tick-item">
+                                <i class="fas fa-check" data-dropdown-item="2"></i>
+                            </div>
+                            <span data-dropdown-item="2">Thực tập</span>
+                          </div>
+                          <div class="dropdown-data-item" data-dropdown-item="3">
+                            <div class="tick-item">
+                                <i class="fas fa-check" data-dropdown-item="3"></i>
+                            </div>
+                            <span data-dropdown-item="3">Khác</span>
+                          </div>
+                        </div>
+                      </div>
                   </div>
               </div>
           </div>
@@ -385,7 +476,7 @@
             <div class="button-modal cancel">
               <p>Hủy</p>              
             </div>
-            <div class="button-modal save">
+            <div class="button-modal save" id="btn-save">
               <i class="far fa-save"></i>
               <p>Lưu</p>
             </div>
@@ -399,5 +490,6 @@
 <script src="../js/dropdown/dropdown.js"></script>
 <script src="../js/combobox/combobox.js"></script>
 <script src="../js/modalbox/modal-box.js"></script>
-
+<script src="../js/format-salray.js"></script>
+<script src="../js/format-date.js"></script>
 </html>
