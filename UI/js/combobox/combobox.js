@@ -74,6 +74,11 @@ function bindingData(){
             currentItem = item.getAttribute('data-item');
             comboboxInput.value = comboboxDataList[currentItem];
             bindingData();
+            comboboxData.style.display = "none";
+            stateComboboxData = false;
+            comboboxIcon.style.transform = "rotate(0)";
+            comboboxWrap.style.border = "1px solid #bbbbbb";
+            comboboxIcon.style.transition = "all 0.3s ease";
         })
     })
 }
@@ -129,9 +134,13 @@ function SearchInComboBox(){
             currentItem = item.getAttribute('data-item');
             comboboxInput.value = comboboxDataList[currentItem];
             bindingData();
+            comboboxData.style.display = "none";
+            stateComboboxData = false;
+            comboboxIcon.style.transform = "rotate(0)";
+            comboboxWrap.style.border = "1px solid #bbbbbb";
+            comboboxIcon.style.transition = "all 0.3s ease";
         })
     })
 
-    
 }
 

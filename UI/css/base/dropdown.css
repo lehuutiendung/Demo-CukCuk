@@ -9,6 +9,13 @@
     justify-content: space-between;
 }
 
+.dropdown--modal{
+    width: 308px;
+    height: 40px;
+    border: 1px solid #bbbbbb;
+    margin-right: 10px;
+}
+
 .dropdown .dropdown-title{
     margin-left: 16px;
     float: left;
