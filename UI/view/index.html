@@ -85,46 +85,36 @@
           
           <!-- Component ComboBox -->
           <div>
-            <div class="wrap-combobox combobox-room">
-                <input type="text" class="combobox" placeholder="Chọn/Nhập phòng ban">
-                <div class="combobox-delete-text"><i class="far fa-times-circle"></i></div>
-                <div class="combobox-btn">
+            <div class="wrap-combobox combobox-room" data-id="1">
+                <input type="text" data-id="1" class="combobox" placeholder="Chọn/Nhập phòng ban">
+                <div class="combobox-delete-text"><i class="far fa-times-circle" data-id="1"></i></div>
+                <div class="combobox-btn" data-id="1">
                     <button>
-                        <div class="combobox-img">
+                        <div class="combobox-img" data-id="1">
                             <i class="fas fa-angle-down combobox-icon"></i>
                         </div>
                     </button>
                 </div>
             </div>
-            <ul class="combobox-data">
+            <ul class="combobox-data" data-id="1">
                 <!-- Binding data here! -->
             </ul>
         </div>
         <div>
-          <div class="wrap-combobox combobox-room">
-              <input type="text" class="combobox" placeholder="Chọn/Nhập vị trí">
-              <div class="combobox-btn">
+          <div class="wrap-combobox combobox-position" data-id="2">
+              <input type="text" data-id="2" class="combobox" placeholder="Chọn/Nhập vị trí">
+              <div class="combobox-delete-text"><i class="far fa-times-circle" data-id="2"></i></div>
+              <div class="combobox-btn" data-id="2">
                   <button>
-                      <div class="combobox-img">
+                      <div class="combobox-img" data-id="2">
                           <i class="fas fa-angle-down combobox-icon"></i>
                       </div>
                   </button>
               </div>
           </div>
-          <ul class="combobox-data">
-              <li class="combobox-data-item">
-                  <div class="tick-item"></div>
-                  <span>Tất cả vị trí</span>
-              </li>
-              <li class="combobox-data-item">
-                  <div class="tick-item"></div>
-                  <span>Fresher</span>
-              </li>
-              <li class="combobox-data-item">
-                  <div class="tick-item"></div>
-                  <span>Intern</span>
-              </li>
-            </ul>
+          <ul class="combobox-data" data-id="2">
+                <!-- Binding data here! -->
+          </ul>
       </div>
         
           <!-- COMPONENT DROPDOWN -->
@@ -306,8 +296,8 @@
                       <p>Họ và tên (<span>*</span>)</p>
                   </div>
                   <div class="input-row" autofocus>
-                      <input class="col-1" type="text" id="firstField">
-                      <input type="text" value="Lê Hữu Tiến Dũng" id="fullName">
+                      <input class="col-1" required type="text" id="firstField" value="" autocomplete="">
+                      <input type="text" required value="" id="fullName" autocomplete="on">
                   </div>
                   <!-- Div ngay sinh, gioi tinh -->
                   <div class="title-row">
@@ -316,9 +306,39 @@
                   </div>
                   <div class="input-row">
                       <!-- <div class="calendar col-1"><i class="far fa-calendar"></i></div> -->
-                      <input class="calendar" type="date" data-date-format="DD MMMM YYYY" value="">
-                      <div class="calendar" id="gender"><i class="fas fa-angle-down"></i></div>
-                      
+                      <input class="calendar DOB" type="date" date-date="" data-date-format="DD MMMM YYYY" value="">
+                      <!-- <div class="calendar" id="gender"><i class="fas fa-angle-down"></i></div> -->
+                      <div class="wrap-dropdown" data-dropdown="1">
+                        <div class="dropdown dropdown--modal">
+                          <div class="dropdown-title">
+                            <p data-dropdown-item="1">Chọn giới tính</p>
+                          </div>
+                          <span class="dropdown-img">
+                            <i class="fas fa-angle-down"></i>
+                          </span>
+                        </div>
+                        <input type="text" class="hidden-gender" value="" style="display:none">
+                        <div class="dropdown-data">
+                          <div class="dropdown-data-item">
+                            <div class="tick-item">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span >Nam</span>
+                          </div>
+                          <div class="dropdown-data-item">
+                            <div class="tick-item">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span>Nữ</span>
+                          </div>
+                          <div class="dropdown-data-item">
+                            <div class="tick-item">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <span>Khác</span>
+                          </div>
+                        </div>
+                      </div>
                   </div>
                   <!-- Div CMTND, ngay cap -->
                   <div class="title-row">
@@ -326,16 +346,16 @@
                       <p>Ngày cấp</p>
                   </div>
                   <div class="input-row">
-                      <input class="col-1" type="text" value="1234567890">
+                      <input class="col-1 identityNumber" required type="text" value="" autocomplete="on">
                       <!-- <div class="calendar"><i class="far fa-calendar"></i></div> -->
-                      <input class="calendar" type="date" value="">
+                      <input class="calendar identityDate" type="date" value="">
                   </div>
                   <!-- Noi cap -->
                   <div class="title-row">
                       <p class="col-1">Nơi cấp</p>
                   </div>
                   <div class="input-row">
-                      <input class="col-1" type="text" value="Tỉnh Thanh Hóa">
+                      <input class="col-1 identityPlace" type="text" value="" autocomplete="on">
                   </div>
                   <!-- Email, so dien thoai -->
                   <div class="title-row">
@@ -343,8 +363,8 @@
                       <p>Số điện thoại (<span>*</span>)</p>
                   </div>
                   <div class="input-row">
-                      <input class="col-1" type="text" value="1234567890">
-                      <input class="col-1" type="text" value="1234567890">
+                      <input class="col-1 email" required type="text" value="" autocomplete="on">
+                      <input class="col-1 phoneNumber" type="text" value="">
                   </div>
                   <p class="title-a">B. THÔNG TIN CÔNG VIỆC:</p>
                   <div class="hr-custom"></div>
@@ -356,63 +376,65 @@
                   <div class="input-row">
                       <!-- <div class="calendar"><i class="fas fa-angle-down"></i></div> -->
                       <!-- <div class="calendar"><i class="fas fa-angle-down"></i></div> -->
-                      <div class="wrap-dropdown" data-dropdown="1">
+                      <div class="wrap-dropdown">
                         <div class="dropdown dropdown--modal">
-                          <div class="dropdown-title">
-                            <p data-dropdown-item="1">Chọn vị trí</p>
+                          <div class="dropdown-title dropdown-title2">
+                            <p>Chọn vị trí</p>
                           </div>
                           <span class="dropdown-img">
                             <i class="fas fa-angle-down"></i>
                           </span>
                         </div>
-                        <div class="dropdown-data" data-dropdown-value="1">
-                          <div class="dropdown-data-item" data-dropdown-item="1">
+                        <input type="text" class="hidden-position" value="" style="display: none;">
+                        <div class="dropdown-data dropdown-data2">
+                          <div class="dropdown-data-item">
                             <div class="tick-item">
-                                <i class="fas fa-check" data-dropdown-item="1"></i>
+                                <i class="fas fa-check"></i>
                             </div>
-                            <span data-dropdown-item="1">Giám đốc</span>
+                            <span>Giám đốc</span>
                           </div>
-                          <div class="dropdown-data-item" data-dropdown-item="2">
+                          <div class="dropdown-data-item">
                             <div class="tick-item">
-                                <i class="fas fa-check" data-dropdown-item="2"></i>
+                                <i class="fas fa-check"></i>
                             </div>
-                            <span data-dropdown-item="2">Fresher</span>
+                            <span>Fresher</span>
                           </div>
-                          <div class="dropdown-data-item" data-dropdown-item="3">
+                          <div class="dropdown-data-item">
                             <div class="tick-item">
-                                <i class="fas fa-check" data-dropdown-item="3"></i>
+                                <i class="fas fa-check"></i>
                             </div>
-                            <span data-dropdown-item="3">Intern</span>
+                            <span>Intern</span>
                           </div>
                         </div>
                       </div>
-                      <div class="wrap-dropdown" data-dropdown="1">
+                      <div class="wrap-dropdown">
                         <div class="dropdown dropdown--modal">
-                          <div class="dropdown-title">
-                            <p data-dropdown-item="1">Tất cả phòng ban</p>
+                          <div class="dropdown-title dropdown-title2 dropdown-title3">
+                            <p>Chọn phòng ban</p>
                           </div>
                           <span class="dropdown-img">
                             <i class="fas fa-angle-down"></i>
                           </span>
                         </div>
-                        <div class="dropdown-data" data-dropdown-value="1">
-                          <div class="dropdown-data-item" data-dropdown-item="1">
+                        <input type="text" class="hidden-department" value="" style="display: none;">
+                        <div class="dropdown-data dropdown-data3">
+                          <div class="dropdown-data-item">
                             <div class="tick-item">
-                                <i class="fas fa-check" data-dropdown-item="1"></i>
+                                <i class="fas fa-check"></i>
                             </div>
-                            <span data-dropdown-item="1">Nhân sự</span>
+                            <span>Nhân sự</span>
                           </div>
-                          <div class="dropdown-data-item" data-dropdown-item="2">
+                          <div class="dropdown-data-item">
                             <div class="tick-item">
-                                <i class="fas fa-check" data-dropdown-item="2"></i>
+                                <i class="fas fa-check"></i>
                             </div>
-                            <span data-dropdown-item="2">Kỹ thuật</span>
+                            <span>Kỹ thuật</span>
                           </div>
-                          <div class="dropdown-data-item" data-dropdown-item="3">
+                          <div class="dropdown-data-item">
                             <div class="tick-item">
-                                <i class="fas fa-check" data-dropdown-item="3"></i>
+                                <i class="fas fa-check"></i>
                             </div>
-                            <span data-dropdown-item="3">Tất cả phòng ban</span>
+                            <span>Tất cả phòng ban</span>
                           </div>
                         </div>
                       </div>
@@ -423,7 +445,7 @@
                       <p>Mức lương cơ bản</p>
                   </div>
                   <div class="input-row salary-box">
-                      <input class="col-1" type="text" value="235468923748923">
+                      <input class="col-1 personalTaxCode" type="text" value="">
                       <div class="wrap-salary">
                           <input class="wrap-salary-text" type="text" value="">
                           <span>(VNĐ)</span>
@@ -437,35 +459,36 @@
                   </div>
                   <div class="input-row">
                       <!-- <div class="calendar col-1"><i class="far fa-calendar"></i></div> -->
-                      <input class="calendar" type="date" value="">
+                      <input class="calendar joinDate" type="date" value="">
                       <!-- <div class="calendar"><i class="fas fa-angle-down"></i></div> -->
-                      <div class="wrap-dropdown" data-dropdown="1">
+                      <div class="wrap-dropdown">
                         <div class="dropdown dropdown--modal">
-                          <div class="dropdown-title">
-                            <p data-dropdown-item="1">Chọn tình trạng</p>
+                          <div class="dropdown-title dropdown-title4">
+                            <p>Chọn tình trạng</p>
                           </div>
                           <span class="dropdown-img">
                             <i class="fas fa-angle-down"></i>
                           </span>
                         </div>
-                        <div class="dropdown-data" data-dropdown-value="1">
-                          <div class="dropdown-data-item" data-dropdown-item="1">
+                        <input type="text" class="hidden-status" value="" style="display: none;">
+                        <div class="dropdown-data dropdown-data4">
+                          <div class="dropdown-data-item">
                             <div class="tick-item">
-                                <i class="fas fa-check" data-dropdown-item="1"></i>
+                                <i class="fas fa-check"></i>
                             </div>
-                            <span data-dropdown-item="1">Nhân viên</span>
+                            <span>Nhân viên</span>
                           </div>
-                          <div class="dropdown-data-item" data-dropdown-item="2">
+                          <div class="dropdown-data-item">
                             <div class="tick-item">
-                                <i class="fas fa-check" data-dropdown-item="2"></i>
+                                <i class="fas fa-check"></i>
                             </div>
-                            <span data-dropdown-item="2">Thực tập</span>
+                            <span>Thực tập</span>
                           </div>
-                          <div class="dropdown-data-item" data-dropdown-item="3">
+                          <div class="dropdown-data-item">
                             <div class="tick-item">
-                                <i class="fas fa-check" data-dropdown-item="3"></i>
+                                <i class="fas fa-check"></i>
                             </div>
-                            <span data-dropdown-item="3">Khác</span>
+                            <span>Khác</span>
                           </div>
                         </div>
                       </div>
@@ -485,7 +508,9 @@
   </div>
 </body>
 <script src="../lib/jquery-3.6.0.min.js"></script>
-<script src="../js/api/employees/query-employees.js"></script>
+<script src="../../JS/api/employees/query-employees.js"></script>
+<script src="../../JS/api/department/query-department.js"></script>
+<script src="../../JS/api/position/query-position.js"></script>
 <script src="../js/main.js"></script>
 <script src="../js/dropdown/dropdown.js"></script>
 <script src="../js/combobox/combobox.js"></script>

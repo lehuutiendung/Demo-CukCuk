@@ -47,46 +47,18 @@ function loadData(){
                     <td>`+ item.GenderName +`</td>
                     <td class="center">`+ dateFormated +`</td>
                     <td>`+ item.PhoneNumber +`</td>
-                    <td class="hidden-long-text"><div class="table-email">`+ item.Email +`</div></td>
-                    <td>`+ item.QualificationName +`</td>
+                    <td class="hidden-long-text"><div class="table-email" title=>`+ item.Email +`</div></td>
+                    <td>`+ item.DepartmentName +`</td>
                     <td>`+ item.PositionName +`</td>
                     <td class="salary">`+ salaryFormated +`</td>
-                    <td>`+ item.Address +`</td>
+                    <td title=>`+ item.Address +`</td>
                 </tr>`);
             
             // Binding data
             $('table tbody').append(tr);
         })
     }).fail(function(res){
-
+        console.log(res);
     });
 }
 
-//CALL API ADD A EMPLOYEE TO DATABASE
-function addData() {    
-    $.ajax({
-        headers: {
-            'access-control-allow-origin': '*', 
-            'Accept': 'application/json; charset=utf-8', 
-        }, 
-        type: 'POST',
-        url: 'http://cukcuk.manhnv.net/v1/Employees',
-        data: JSON.stringify({
-            EmployeeCode: $('#firstField').val(),
-            FullName: $('#fullName').val(),
-            GenderName: 0,
-            DateOfBirth: '2021-07-19T02:55:09.681Z',
-            PhoneNumber: '0332623437',
-            Email: 'tiendungbigcat@gmail.com',
-            QualificationName: null,
-            PositionName: null,
-            Salary: 1,
-            Address: 'TK6, Lê Đình Châu',
-        }),
-        error: function(e) {
-            console.log(e);
-          },
-        dataType: "json",
-        contentType: "application/json"
-    });
-}
