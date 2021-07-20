@@ -256,3 +256,7 @@ input[type="date"]{
 .cancel:hover{
     background-color: #bbbbbb;
 }
+
+.redError{
+    border: 1px solid #F65454;
+}

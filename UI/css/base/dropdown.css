@@ -1,3 +1,8 @@
+.wrap-dropdown{
+    width: 310px;
+    margin-right: 10px;
+}
+
 .dropdown{
     height: 40px;
     width: 180px;
@@ -38,7 +43,7 @@
 }
 
 .dropdown-data {
-    width: 182px;
+    width: 310px;
     align-items: center;
     border-radius: 4px;
     padding-top: 4px;
@@ -55,7 +60,7 @@
 
 .dropdown-data div.dropdown-data-item{
     height: 40px;
-    width: 182px;
+    width: inherit;
     color: #000000;
     align-items: center;
     display: flex;
@@ -84,4 +89,8 @@
 
 .dropdown-data div.active:hover{
     background-color: #019160;
+}
+
+.show{
+    display: block;
 }

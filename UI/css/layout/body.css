@@ -135,7 +135,7 @@
   margin-right: 8px;
   margin-top: 10px;
   text-align: left;
-  font-family: GoogleSans-Medium;
+  /* font-family: GoogleSans-Medium; */
   overflow: scroll;
   height: calc(100vh - 220px);
 }
@@ -174,7 +174,7 @@
 }
 
 .content-table table tr th,td {
-  font-family: GoogleSans-Medium;
+  /* font-family: GoogleSans-Medium; */
   font-weight: normal;
   border-bottom: 1px solid #F1F1F1;
 }
