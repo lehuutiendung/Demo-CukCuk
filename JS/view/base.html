@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/base/dropdown.css">
+  <link rel="stylesheet" href="../css/base/combobox.css">
+  <title>Dropdown</title>
+</head>
+
+<body>
+  <div class="body" style="margin: 10px 10px">
+    <div style="display: flex;">
+      <div class="wrap-dropdown">
+        <div class="dropdown dropdown--modal">
+          <div class="dropdown-title">
+            <p>Chọn vị trí</p>
+          </div>
+          <span class="dropdown-img">
+            <i class="fas fa-angle-down"></i>
+          </span>
+        </div>
+        <div class="dropdown-data">
+        </div>
+      </div>
+      <div class="wrap-dropdown wrap-dropdown2">
+        <div class="dropdown dropdown--modal">
+          <div class="dropdown-title dropdown-title2">
+            <p>Chọn phòng ban</p>
+          </div>
+          <span class="dropdown-img">
+            <i class="fas fa-angle-down"></i>
+          </span>
+        </div>
+        <div class="dropdown-data dropdown-data2">
+          <div class="dropdown-data-item">
+            <div class="tick-item ">
+  
+            </div>
+            <span>Nhân sự</span>
+          </div>
+          <div class="dropdown-data-item">
+            <div class="tick-item">
+  
+            </div>
+            <span>Kỹ thuật</span>
+          </div>
+          <div class="dropdown-data-item">
+            <div class="tick-item">
+  
+            </div>
+            <span>Tất cả phòng ban</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <!-- Dropdown không icon -->
+  <!-- <label for="">Dropdown</label>
+        <div>
+            <div class="dropdown">
+                <div class="dropdown-title">
+                    <p>Tất cả phòng ban</p>
+                </div>
+                <span class="dropdown-img">
+                    <i class="fas fa-angle-down"></i>
+                </span>
+            </div>
+            <div class="dropdown-data">
+                <div class="dropdown-data-item">
+                    <div class="tick-item"></div>
+                    <span>Nhân sự</span>
+                </div>
+                <div class="dropdown-data-item">
+                    <div class="tick-item"></div>
+                    <span>Kỹ thuật</span>
+                </div>
+            </div>
+        </div>
+        <br><hr>
+
+        //COMPONENT DROPDOWN
+          <div class="wrap-dropdown" data-dropdown="1">
+            <div class="dropdown">
+              <div class="dropdown-title">
+                <p data-dropdown-item="1">Tất cả phòng ban</p>
+              </div>
+              <span class="dropdown-img">
+                <i class="fas fa-angle-down"></i>
+              </span>
+            </div>
+            <div class="dropdown-data" data-dropdown-value="1">
+              <div class="dropdown-data-item" data-dropdown-item="1">
+                <div class="tick-item">
+                    <i class="fas fa-check" data-dropdown-item="1"></i>
+                </div>
+                <span data-dropdown-item="1">Nhân sự</span>
+              </div>
+              <div class="dropdown-data-item" data-dropdown-item="2">
+                <div class="tick-item">
+                    <i class="fas fa-check" data-dropdown-item="2"></i>
+                </div>
+                <span data-dropdown-item="2">Kỹ thuật</span>
+              </div>
+              <div class="dropdown-data-item" data-dropdown-item="3">
+                <div class="tick-item">
+                    <i class="fas fa-check" data-dropdown-item="3"></i>
+                </div>
+                <span data-dropdown-item="3">Tất cả phòng ban</span>
+              </div>
+            </div>
+          </div> -->
+
+  <!-- <div class="wrap-dropdown" data-dropdown="2">
+            <div class="dropdown">
+              <div class="dropdown-title">
+                <p data-dropdown-item="1">Tất cả vị trí</p>
+              </div>
+              <span class="dropdown-img">
+                <i class="fas fa-angle-down"></i>
+              </span>
+            </div>
+            <div class="dropdown-data" data-dropdown-value="2">
+              <div class="dropdown-data-item" data-dropdown-item="1">
+                <div class="tick-item">
+                    <i class="fas fa-check" data-dropdown-item="1"></i>
+                </div>
+                <span data-dropdown-item="1">Fresher</span>
+              </div>
+              <div class="dropdown-data-item" data-dropdown-item="2">
+                <div class="tick-item">
+                    <i class="fas fa-check" data-dropdown-item="2"></i>
+                </div>
+                <span data-dropdown-item="2">Intern</span>
+              </div>
+              <div class="dropdown-data-item" data-dropdown-item="3">
+                <div class="tick-item">
+                    <i class="fas fa-check" data-dropdown-item="3"></i>
+                </div>
+                <span data-dropdown-item="3">Tất cả vị trí</span>
+              </div>
+            </div>
+          </div> -->
+
+  <hr><br>
+  <!-- Combobox -->
+  <label for="">Combo Box</label>
+  <div>
+    <div class="wrap-combobox">
+      <input type="text" class="combobox">
+      <div class="combobox-btn">
+        <button>
+          <div class="combobox-img">
+            <i class="fas fa-angle-down"></i>
+          </div>
+        </button>
+      </div>
+    </div>
+    <div class="combobox-data">
+      <div class="combobox-data-item">
+        <div class="tick-item"></div>
+        <span>Nhân sự</span>
+      </div>
+      <div class="combobox-data-item">
+        <div class="tick-item"></div>
+        <span>Kỹ thuật</span>
+      </div>
+    </div>
+  </div>
+
+
+  </div>
+</body>
+<script src="../js/dropdown/dropdown.js"></script>
+<!-- <script src="../js/combobox/combobox.js"></script> -->
+
+</html>

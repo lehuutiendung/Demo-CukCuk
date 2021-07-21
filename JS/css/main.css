@@ -1,0 +1,41 @@
+@import url(../css/layout/navbar.css);
+@import url(../css/layout/header.css);
+@import url(../css/layout/body.css);
+@import url(../css/layout/footer.css);
+@import url(../css/base/dropdown.css);
+@import url(../css/base/combobox.css);
+html, body{
+    margin: 0;
+    padding: 0;
+    font-family: GoogleSans-Regular;
+    font-size: 13px;
+    overflow: hidden;
+}
+
+@font-face {
+    font-family: GoogleSanS-Medium;
+    src: url(/UI/content/font/GoogleSans-Medium.otf);
+  }
+
+@font-face {
+    font-family: GoogleSanS-Regular;
+    src: url(/UI/content/font/GoogleSans-Regular.otf);
+  }
+
+  @font-face {
+    font-family: GoogleSanS-Bold;
+    src: url(/UI/content/font/GoogleSans-Bold.otf);
+  }
+
+@font-face {
+  font-family: GoogleSans-Italic;
+  src: url(/UI/content/font/GoogleSans-Italic.otf);
+}
+.wrap{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+
+

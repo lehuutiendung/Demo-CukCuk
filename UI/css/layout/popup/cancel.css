@@ -1,0 +1,174 @@
+/* Popup hủy form thông tin */
+.background-popup{
+    background-color: rgba(0,0,0, 0.5);
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: none;
+    position: fixed;
+    /* align-items: center; */
+    justify-content: center;
+    z-index: 12;
+}
+.popup{
+    display: block;
+    width: 480px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -240px;
+    margin-top: -150px;
+    border-radius: 4px;
+    z-index: 999;
+}
+
+.title-wrap{
+    display: flex;
+    justify-content: space-between;
+}
+
+.popup .title-popup{
+    font-size: 15px;
+    font-family: GoogleSans-Bold;
+    color: #000000;
+    margin: 24px 24px;
+}
+
+.popup .title-popup p{
+    margin: 0;
+}
+
+.exit-popup{
+    width: 30px;
+    height: 30px;
+    border-bottom-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.exit-popup .fa-times{
+    text-align: center;
+    line-height: 30px;
+    margin-left: 9px;
+}
+
+.exit-popup:hover{
+    background-color: #E5E5E5;
+    cursor: pointer;
+}
+
+.exit-popup #exit-popup{
+    font-size: 20px;
+}
+
+.content-wrap{
+    display: flex;
+    width: 100%;
+    margin-bottom: 24px;
+    align-items: center;
+}
+
+.content-wrap .warning{
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    background-color: #F4F4F4;
+    margin-left: 24px;
+}
+.warning .fa-exclamation-triangle{
+    font-size: 20px;
+    color: #FFC400;
+}
+
+.content-wrap .content-popup{
+    color: #000000;
+    margin-left: 10px;
+    margin-right: 24px;
+}
+
+.content-wrap .content-popup p{
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.content-wrap .content-popup span{
+    font-weight: bold;
+}
+
+.popup .button-popup{
+    display: flex;
+    width: 100%;
+    height: 60px;
+    align-items: center;
+    justify-content: flex-end;
+    background-color: #F4F4F4;
+}
+
+.button-popup .btn-popup{
+    width: 100px;
+    height: 40px;
+    border-radius: 4px;
+    margin-left: 15px;
+}
+
+.btn-popup p{
+    margin: 0;
+    text-align: center;
+    height: inherit;
+    line-height: 40px;
+}
+
+.btn-close{
+    margin-right: 24px;
+    background-color: #019160;
+    color: #ffffff;
+}
+
+.btn-continue:hover{
+    background-color: #E5E5E5;
+    cursor: pointer;
+}
+
+.btn-close:hover{
+    background-color: #01B075;
+    cursor: pointer;
+}
+
+/* Popup xóa bản ghi */
+.background-popup-delete{
+    background-color: rgba(0,0,0, 0.5);
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    display: none;
+    position: fixed;
+    /* align-items: center; */
+    justify-content: center;
+    z-index: 15;
+}
+
+.background-popup-delete .fa-exclamation-triangle{
+    color: #EA2B2B;
+}
+
+.background-popup-delete .btn-delete-popup{
+    background-color: #F65454;
+    margin-right: 24px;
+    color: #ffffff;
+}
+
+.btn-delete-popup:hover{
+    cursor: pointer;
+}
+
+.btn-close-popup:hover{
+    background-color: #E5E5E5;
+    cursor: pointer;
+}
