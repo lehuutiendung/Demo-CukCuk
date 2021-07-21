@@ -1,0 +1,96 @@
+.wrap-dropdown{
+    width: 310px;
+    margin-right: 10px;
+}
+
+.dropdown{
+    height: 40px;
+    width: 180px;
+    border: 1px solid #bbbbbb;
+    border-radius: 4px;
+    color: #000000;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dropdown--modal{
+    width: 308px;
+    height: 40px;
+    border: 1px solid #bbbbbb;
+    margin-right: 10px;
+}
+
+.dropdown .dropdown-title{
+    margin-left: 16px;
+    float: left;
+}
+
+.dropdown .dropdown-img{
+    background-color: #ffffff;
+    height: 40px;
+    border-radius: 4px;
+    line-height: 40px;
+    text-align: center;
+    margin-right: 12px;
+}
+.dropdown .dropdown-img .fas{
+    display: contents;
+}
+.dropdown .dropdown-img .fa-angle-down{
+    width: 16px;
+    height: 16px;
+}
+
+.dropdown-data {
+    width: 310px;
+    align-items: center;
+    border-radius: 4px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    margin-top: 1px;
+    background-color: #ffffff;
+    -moz-box-shadow: 0px 3px 3px rgb(219, 219, 219);
+    -webkit-box-shadow: 0px 3px 3px rgb(219, 219, 219);
+    box-shadow: 0px 1px 8px 0px rgb(219, 219, 219);
+    display: none;
+    position: absolute;
+    z-index: 99;
+}
+
+.dropdown-data div.dropdown-data-item{
+    height: 40px;
+    width: inherit;
+    color: #000000;
+    align-items: center;
+    display: flex;
+}
+
+.dropdown-data div.dropdown-data-item:hover{
+    background-color: #e9ebee;
+}
+
+.dropdown-data div.dropdown-data-item .tick-item{
+    width: 16px;
+    height: 16px;
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.tick-item .fa-check{
+    line-height: 16px;
+    color: #ffffff;
+}
+
+.active{
+    background-color: #019160;
+}
+
+.dropdown-data div.active:hover{
+    background-color: #019160;
+}
+
+.show{
+    display: block;
+}

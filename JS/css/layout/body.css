@@ -1,0 +1,221 @@
+.container {
+  width: 100%;
+  height: calc(100vh - 50px - 56px);
+  background: #E9EBEE;
+}
+
+.container__title {
+  display: flex;
+  font-family: GoogleSanS-Bold;
+  font-size: 20px;
+  align-items: center;
+}
+.container__title > p {
+  margin: 24px 0 24px 24px;
+}
+.container .container__title__button {
+  display: flex;
+  height: 40px;
+  position: absolute;
+  right: 16px;
+  border-radius: 4px;
+  font-family: GoogleSanS-Regular;
+  text-align: start;
+  border: 1px solid #bbbbbb;
+  background-color: #019160;
+  align-items: center;
+}
+
+.container .container__title__button:hover{
+  cursor: pointer;
+}
+
+.container__title__button img {
+  width: 24px;
+  height: 24px;
+  margin-left: 16px;
+  margin-right: 8px;
+}
+
+.container__title__button #button {
+  color: #ffffff;
+  font-size: 13px;
+  margin-right: 16px;
+}
+
+.container__tools {
+  display: flex;
+  height: 40px;
+}
+
+.container__tools .input-search {
+  margin-left: 24px;
+  height: 40px;
+  width: 280px;
+  border-radius: 4px;
+  border: none;
+  font-size: 12px;
+  color: #bbbbbb;
+  font-family: GoogleSans-Regular;
+  outline: none;
+  background-image: url(/UI/content/icon/search.png);
+  background-size: 16px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-position-x: 16px;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 40px;
+  float: left;
+}
+
+.container__tools .input-search:focus {
+  border: 1px solid #019160;
+  color: #000000;
+  font-family: GoogleSans-Regular;
+}
+
+.container__tools .wrap-dropdown {
+  margin-left: 10px;
+}
+
+.container__tools .refresh-button {
+  width: 46px;
+  height: 40px;
+  border: 1px solid #bbbbbb;
+  border-radius: 4px;
+  background-image: url(/UI/content/icon/refresh.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #ffffff;
+  position: absolute;
+  right: 16px;
+}
+
+.container__tools .refresh-button:hover{
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+/* Css for scroll */
+/* Track */
+::-webkit-scrollbar{
+  width: 8px;
+  height: 8px;
+  /* background-color: #000000; */
+}
+
+::-webkit-resizer {
+    display: none;
+  }
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #bbbbbb;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #888;
+}
+
+::-webkit-scrollbar-track {
+  /* background: transparent; */
+}
+
+::-webkit-scrollbar-track-piece:start{
+  /* background: transparent; */
+  margin-top: 48px;
+}
+
+/* CSS for tables */
+.container .content-table {
+  margin-left: 24px;
+  margin-right: 8px;
+  margin-top: 10px;
+  text-align: left;
+  /* font-family: GoogleSans-Medium; */
+  overflow: scroll;
+  height: calc(100vh - 220px);
+}
+
+.content-table table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0px;
+}
+
+.content-table thead {
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
+}
+
+.content-table thead th{
+  white-space: nowrap;
+}
+
+.content-table td{
+  white-space: nowrap;
+}
+
+.content-table .center{
+  text-align: center;
+}
+
+.content-table table tr {
+  height: 48px;
+  background-color: #ffffff;
+}
+
+.content-table table tbody tr:hover{
+  background-color: #e9ebee;
+}
+
+.content-table table tr th,td {
+  /* font-family: GoogleSans-Medium; */
+  font-weight: normal;
+  border-bottom: 1px solid #F1F1F1;
+}
+
+.content-table table th {
+  padding-left: 10px;
+}
+
+.content-table table tbody td{
+  padding-left: 10px;
+}
+
+.content-table table .table-checkbox{
+  padding-left: 16px;
+}
+
+/* .content-table table tr:nth-child(even) {
+  background-color: #e9ebee;
+}
+
+.content-table table tbody tr:nth-child(even):hover{
+  background-color: #bbbbbb;
+} */
+
+.content-table table .salary {
+  text-align: right;
+  padding-right: 20px;
+}
+
+.content-table table thead, tbody input{
+  width: 16px;
+  height: 16px;
+  align-items: center;
+  border-radius: 4px;
+  color: 1px solid #BBBBBB;
+  outline: none;
+  margin: 0;
+}
+
+.hidden-long-text .table-email{
+  width: 160px;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
