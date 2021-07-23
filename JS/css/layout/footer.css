@@ -60,8 +60,8 @@
 }
 
 .footer .note{
-   position: absolute;
-   right: 16px;
+    position: absolute;
+    right: 16px;
     align-items: center;
     display: flex;
     width: 150px;
@@ -76,6 +76,10 @@
     line-height: 34px;
     text-align: center;
     margin-right: 20px;
+}
+
+.footer .note:hover{
+    cursor: pointer;
 }
 
 .footer .note .note-number-emmployees p{
@@ -94,5 +98,27 @@
 }
 
 .footer .note .up-down-number .fas:hover{
+    cursor: pointer;
+}
+
+.paging-data{
+    position: absolute;
+    right: 16px;
+    bottom: 46px;
+    align-items: center;
+    width: 150px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0px 1px 8px 0px rgb(219, 219, 219);
+    display: none;
+}
+
+.paging-data .paging-item{
+    padding-left: 10px;
+    height: 34px;
+    line-height: 34px;
+}
+
+.paging-data .paging-item:hover{
     cursor: pointer;
 }

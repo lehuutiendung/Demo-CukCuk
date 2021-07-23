@@ -10,6 +10,7 @@
     justify-content: center;
     overflow-y: scroll;
     z-index: 0;
+    /* Ẩn overflow-y: scroll; */
 }
 
 .box-info{
@@ -21,6 +22,9 @@
     background-color: #ffffff;
     border: 1px solid #bbbbbb;
     z-index: 10;
+    /* height: 660px;
+    overflow: hidden;
+    overflow-y: scroll; */
 }
 
 .title__employee {
@@ -32,6 +36,10 @@
 
 .exit #exit-modal{
     margin: 12px 12px;
+}
+
+.exit #exit-modal:hover{
+    cursor: pointer;
 }
 
 .title__employee .fa-times{
@@ -153,7 +161,7 @@
     padding-left: 16px;
 }
 
-.input-row input:focus{
+.input-row .autofocus:focus{
     border: 1px solid #019160;
 }
 
@@ -195,6 +203,24 @@
     border-radius: 5px;
     align-items: center;
     margin-right: 10px;
+}
+
+input.calendar-format{
+    position: absolute;
+    width: 252px;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+}
+
+input.calendar-identity{
+    position: absolute;
+    right: 0;
+    margin-right: 65px;
+    width: 252px;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
 }
 
 input[type="date"]{

@@ -43,6 +43,40 @@
   margin-right: 16px;
 }
 
+.container__title .container__title__button--delete{
+    display: none;
+    position: absolute;
+    height: 40px;
+    right: 190px;
+    border-radius: 4px;
+    font-family: GoogleSanS-Regular;
+    text-align: start;
+    border: 1px solid #F65454;
+    background-color: #F65454;
+    align-items: center;
+}
+
+.container__title .container__title__button--delete:hover{
+  cursor: pointer;
+}
+
+.container__title .container__title__button--delete .fa-trash-alt{
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    line-height: 24px;
+    color: #ffffff;
+    margin-left: 16px;
+    margin-right: 8px;
+}
+
+.container__title .container__title__button--delete #multiple-delete{
+    margin: 0;
+    color: #ffffff;
+    font-size: 13px;
+    margin-right: 16px;
+}
+
 .container__tools {
   display: flex;
   height: 40px;
