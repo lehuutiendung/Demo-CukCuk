@@ -34,6 +34,10 @@
     margin: 12px 12px;
 }
 
+.exit #exit-modal:hover{
+    cursor: pointer;
+}
+
 .title__employee .fa-times{
     font-size: 20px;
     float: right;
@@ -153,7 +157,7 @@
     padding-left: 16px;
 }
 
-.input-row input:focus{
+.input-row .autofocus:focus{
     border: 1px solid #019160;
 }
 
@@ -195,6 +199,24 @@
     border-radius: 5px;
     align-items: center;
     margin-right: 10px;
+}
+
+input.calendar-format{
+    position: absolute;
+    width: 252px;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
+}
+
+input.calendar-identity{
+    position: absolute;
+    right: 0;
+    margin-right: 65px;
+    width: 252px;
+    border-right: none;
+    border-top: none;
+    border-bottom: none;
 }
 
 input[type="date"]{

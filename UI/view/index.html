@@ -76,6 +76,10 @@
       <div class="container">
         <div class="container__title">
           <p>Danh sách nhân viên</p>
+          <div class="container__title__button--delete">
+            <i class="fas fa-trash-alt"></i>
+            <p id="multiple-delete">Xóa nhân viên</p>
+          </div>
           <div class="container__title__button" id="myDiv">
             <img src="/UI/content/icon/add.png" alt="">
             <p id="button">Thêm nhân viên</p>
@@ -226,7 +230,7 @@
       </div>
       <div class="footer">
         <div class="total__employees">
-          <p style="color: #5D5C5C;">Hiển thị <span style="color: #000000; font-weight: bold;">1-10/1000</span> nhân viên</p>
+          <!-- <p style="color: #5D5C5C;">Hiển thị <span style="color: #000000; font-weight: bold;">1-10/1000</span> nhân viên</p> -->
         </div>
         <div class="number__pages">
           <div class="button__hide button__footer__start">
@@ -297,8 +301,8 @@
                       <p>Họ và tên (<span>*</span>)</p>
                   </div>
                   <div class="input-row">
-                      <input class="col-1" required type="text" id="firstField" value="" autocomplete="" autofocus>
-                      <input type="text" required value="" id="fullName" autocomplete="on">
+                      <input class="col-1 autofocus" required type="text" id="firstField" value="" autocomplete="" title="Trường bắt buộc phải nhập!">
+                      <input type="text autofocus" required value="" id="fullName" autocomplete="on" title="Trường bắt buộc phải nhập!">
                   </div>
                   <!-- Div ngay sinh, gioi tinh -->
                   <div class="title-row">
@@ -307,11 +311,12 @@
                   </div>
                   <div class="input-row">
                       <!-- <div class="calendar col-1"><i class="far fa-calendar"></i></div> -->
-                      <input class="calendar DOB" type="date" date-date="" data-date-format="DD MMMM YYYY" value="">
+                      <input class="calendar DOB" type="date" date-date="" data-date-format="DD MMMM YYYY" value="" title="Nhập đúng định dạng ngày/tháng/năm">
+                      <input class="calendar-format calendar-salary" type="text" placeholder="dd/mm/yyyy" title="Nhập đúng định dạng ngày/tháng/năm">
                       <!-- <div class="calendar" id="gender"><i class="fas fa-angle-down"></i></div> -->
                       <div class="wrap-dropdown" data-dropdown="1">
                         <div class="dropdown dropdown--modal">
-                          <div class="dropdown-title">
+                          <div class="dropdown-title gender" id="gender">
                             <p data-dropdown-item="1">Chọn giới tính</p>
                           </div>
                           <span class="dropdown-img">
@@ -347,16 +352,18 @@
                       <p>Ngày cấp</p>
                   </div>
                   <div class="input-row">
-                      <input class="col-1 identityNumber" required type="text" value="" autocomplete="on">
+                      <input class="col-1 identityNumber autofocus" required type="text" value="" autocomplete="on" title="Trường bắt buộc phải nhập!">
                       <!-- <div class="calendar"><i class="far fa-calendar"></i></div> -->
-                      <input class="calendar identityDate" type="date" value="">
+                      <input class="calendar identityDate" type="date" value="" title="Nhập đúng định dạng ngày/tháng/năm">
+                      <input class="calendar-identity" type="text" placeholder="dd/mm/yyyy" title="Nhập đúng định dạng ngày/tháng/năm">
+                      
                   </div>
                   <!-- Noi cap -->
                   <div class="title-row">
                       <p class="col-1">Nơi cấp</p>
                   </div>
                   <div class="input-row">
-                      <input class="col-1 identityPlace" type="text" value="" autocomplete="on">
+                      <input class="col-1 identityPlace autofocus" type="text" value="" autocomplete="on">
                   </div>
                   <!-- Email, so dien thoai -->
                   <div class="title-row">
@@ -364,8 +371,8 @@
                       <p>Số điện thoại (<span>*</span>)</p>
                   </div>
                   <div class="input-row">
-                      <input class="col-1 email" required type="text" value="" autocomplete="on">
-                      <input class="col-1 phoneNumber" required type="text" value="">
+                      <input class="col-1 email autofocus" required type="text" value="" autocomplete="on" title="Trường bắt buộc phải nhập!">
+                      <input class="col-1 phoneNumber autofocus" required type="text" value="" title="Trường bắt buộc phải nhập!">
                   </div>
                   <p class="title-a">B. THÔNG TIN CÔNG VIỆC:</p>
                   <div class="hr-custom"></div>
@@ -410,7 +417,7 @@
                       </div>
                       <div class="wrap-dropdown">
                         <div class="dropdown dropdown--modal">
-                          <div class="dropdown-title dropdown-title2 dropdown-title3">
+                          <div class="dropdown-title dropdown-title3">
                             <p>Chọn phòng ban</p>
                           </div>
                           <span class="dropdown-img">
@@ -446,7 +453,7 @@
                       <p>Mức lương cơ bản</p>
                   </div>
                   <div class="input-row salary-box">
-                      <input class="col-1 personalTaxCode" type="text" value="">
+                      <input class="col-1 personalTaxCode autofocus" type="text" value="">
                       <div class="wrap-salary">
                           <input class="wrap-salary-text" type="text" value="">
                           <span>(VNĐ)</span>
@@ -460,7 +467,8 @@
                   </div>
                   <div class="input-row">
                       <!-- <div class="calendar col-1"><i class="far fa-calendar"></i></div> -->
-                      <input class="calendar joinDate" type="date" value="">
+                      <input class="calendar joinDate" type="date" value="" title="Nhập đúng định dạng ngày/tháng/năm">
+                      <input class="calendar-format calendar-joinDate" type="text" placeholder="dd/mm/yyyy" title="Nhập đúng định dạng ngày/tháng/năm">
                       <!-- <div class="calendar"><i class="fas fa-angle-down"></i></div> -->
                       <div class="wrap-dropdown">
                         <div class="dropdown dropdown--modal">
@@ -571,16 +579,19 @@
   </div>
 </body>
 <script src="../lib/jquery-3.6.0.min.js"></script>
-<!-- <script src="../../JS/api/employees/query-employees.js"></script>
-<script src="../../JS/api/department/query-department.js"></script>
-<script src="../../JS/api/position/query-position.js"></script> -->
 <script src="../js/api/query-employees.js"></script>
 <script src="../js/api/query-department.js"></script>
 <script src="../js/api/query-position.js"></script>
+<script src="../js/api/delete-employees.js"></script>
+
+<script src="../js/format-salary.js"></script>
+<script src="../js/format-date.js"></script>
+
 <script src="../js/main.js"></script>
+
 <script src="../js/dropdown/dropdown.js"></script>
 <script src="../js/combobox/combobox.js"></script>
 <script src="../js/modalbox/modal-box.js"></script>
-<script src="../js/format-salray.js"></script>
-<script src="../js/format-date.js"></script>
+
+<script src="../js/modalbox/validate.js"></script>
 </html>

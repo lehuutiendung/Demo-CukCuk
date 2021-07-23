@@ -14,6 +14,8 @@ function loadDepartment(){
         async: false,
     }).done(function(res){
         var data = res;
+        localStorage.setItem('department', JSON.stringify(data));
+        // console.log(JSON.parse(localStorage.getItem('department')));
         $.each(data, function (index, item) { 
             listDataRoom.push(item.DepartmentName);
         });
