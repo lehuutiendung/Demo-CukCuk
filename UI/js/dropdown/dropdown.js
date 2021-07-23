@@ -5,7 +5,7 @@ var current;
 var dropDownDataList = [
     {id: 0, value:'Nữ'},
     {id: 1, value:'Nam'},
-    {id: 2, value:'Khác'}
+    {id: 2, value:'Không xác định'}
 ]
 
 // Dropdown Vi tri
@@ -58,8 +58,8 @@ var dropDownData4 = document.querySelector('.dropdown-data4');
 var dropDownValue4 = document.querySelector('.dropdown-title4');
 var current4; 
 var dropDownDataList4 = [
-    {id: 0, value: 'Nhân viên'},
-    {id: 1, value: 'Thực tập'},
+    {id: 0, value: 'Đang làm việc'},
+    {id: 1, value: 'Nghỉ phép'},
     {id: 2, value: 'Khác'}
 ]
 
@@ -90,7 +90,6 @@ function multipleDropDown(dropDownValue, dropDownDataList, dropDownData, current
                                     </div>
                                     <span>${dropDownDataList[i].value}</span>
                                 </div>`;
-                dropDownValue.setAttribute('curVal', `${dropDownDataList[i].id}`);
             }else{
                 dropDownHTML += `<div data-item=${i} class="dropdown-data-item">
                                             <div class="tick-item">
@@ -105,7 +104,7 @@ function multipleDropDown(dropDownValue, dropDownDataList, dropDownData, current
         dropDownItem.forEach(function(item){
             item.addEventListener('click', function(){
                 current = item.getAttribute('data-item');  
-                dropDownValue.innerText = dropDownDataList[current].value;  
+                dropDownValue.children[0].innerText = dropDownDataList[current].value;  
                 bindingDropdown();
             })
         })
