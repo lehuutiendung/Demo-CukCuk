@@ -236,23 +236,25 @@
           <div class="button__hide button__footer__start">
             <img src="/UI/content/icon/btn-firstpage.svg" alt="">
           </div>
-          <div class="button__hide">
+          <div class="button__hide button__footer__prev">
             <img src="/UI/content/icon/btn-prev-page.svg" alt="">
           </div>
-      
-          <div class="button__dot focus">
-            <p style="color: #ffffff;">1</p>
+          <div class="number__pages--bind"> 
+              <!-- <div class="button__dot focus">
+                <p style="color: #ffffff;">1</p>
+              </div>
+              <div class="button__dot">
+                <p>2</p>
+              </div>
+              <div class="button__dot">
+                <p>3</p>
+              </div>
+              <div class="button__dot">
+                <p>4</p>
+              </div> -->
           </div>
-          <div class="button__dot">
-            <p>2</p>
-          </div>
-          <div class="button__dot">
-            <p>3</p>
-          </div>
-          <div class="button__dot">
-            <p>4</p>
-          </div>
-          <div class="button__hide">
+          
+          <div class="button__hide button__footer__next">
             <img src="/UI/content/icon/btn-next-page.svg" alt="">
           </div>
           <div class="button__hide button__footer__end">
@@ -271,8 +273,10 @@
           </div>
         </div>
         <div class="paging-data">
-            <div class="paging-item"><span>50</span> nhân viên/trang</div>
-            <div class="paging-item"><span>20</span> nhân viên/trang</div>
+            <div class="paging-item" page-id="4"><span>Tất cả</span> nhân viên</div>
+            <div class="paging-item" page-id="3"><span>40</span> nhân viên/trang</div>
+            <div class="paging-item" page-id="2"><span>20</span> nhân viên/trang</div>
+            <div class="paging-item" page-id="1"><span>10</span> nhân viên/trang</div>
         </div>
       </div>
     </div>
@@ -524,7 +528,37 @@
       </div>
   </div>
 
-  <!-- Popup cảnh báo hủy form-->
+
+  <!-- Popup cảnh báo hủy form thêm mới-->
+  <div class="background-popup-add">
+    <div class="popup">
+      <div class="title-wrap">
+          <div class="title-popup">
+              <p>Hủy thao tác thêm mới</p>
+          </div>
+          <div class="exit-popup">
+              <i id="exit-popup" class="fas fa-times"></i>
+          </div>
+      </div>
+      <div class="content-wrap">
+          <div class="warning">
+              <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <div class="content-popup">
+              <p>Bạn có chắc muốn đóng <span>"Thêm mới nhân viên"</span> hay không?</p>
+          </div>
+      </div>
+      <div class="button-popup">
+          <div class="btn-popup btn-continue">
+              <p>Tiếp tục nhập</p>
+          </div>
+          <div class="btn-popup btn-close">
+              <p>Đóng</p>              
+          </div>
+      </div>
+    </div>
+  </div>
+  <!-- Popup cảnh báo hủy form chỉnh sửa-->
   <div class="background-popup">
       <div class="popup">
         <div class="title-wrap">
@@ -540,7 +574,7 @@
                 <i class="fas fa-exclamation-triangle"></i>
             </div>
             <div class="content-popup">
-                <p>Bạn có chắc muốn đóng form nhập <span>"Thêm mới nhân viên"</span> hay không?</p>
+                <!-- <p>Bạn có chắc muốn đóng <span>"Thêm mới nhân viên"</span> hay không?</p> -->
             </div>
         </div>
         <div class="button-popup">
@@ -569,7 +603,7 @@
                   <i class="fas fa-exclamation-triangle"></i>
               </div>
               <div class="content-popup">
-                  <p>Bạn có chắc muốn <span>"Xóa bản ghi"</span> này hay không?</p>
+                  <!-- <p>Bạn có chắc muốn <span>"Xóa bản ghi"</span> này hay không?</p> -->
               </div>
           </div>
           <div class="button-popup">
@@ -583,14 +617,18 @@
   </div>
 </body>
 <script src="../lib/jquery-3.6.0.min.js"></script>
+
+<script src="../js/format-salary.js"></script>
+<script src="../js/format-date.js"></script>
+
+<!-- script phân trang -->
+
 <script src="../js/api/query-employees.js"></script>
 <script src="../js/api/query-department.js"></script>
 <script src="../js/api/query-position.js"></script>
 <script src="../js/api/delete-employees.js"></script>
 
-<script src="../js/format-salary.js"></script>
-<script src="../js/format-date.js"></script>
-
+<script src="../js/paging.js"></script>
 <script src="../js/main.js"></script>
 
 <script src="../js/modalbox/validate.js"></script>

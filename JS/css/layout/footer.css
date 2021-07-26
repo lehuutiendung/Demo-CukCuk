@@ -4,7 +4,6 @@
     align-items: center;
     justify-items: center;
     height: 56px;
-    flex-basis: auto;
     background-color: #E9EBEE;
 }
 
@@ -13,8 +12,8 @@
     position: absolute;
     left: 50%;
     align-items: center;
-    /* justify-content: space-between; */
-    flex-basis: fit-content;
+    justify-content: center;
+    transform: translate(-30%);
 }
 
 .footer .number__pages .button__hide{
@@ -25,7 +24,7 @@
     display: flex;
     justify-content: center;
     margin-right: 10px;
-    /* border: 1px solid #bbbbbb;   */
+    
 }
 
 .footer .number__pages .button__hide:hover{
@@ -42,9 +41,11 @@
     width: 34px;
     text-align: center;
     margin-right:8px;
+    border: 1px solid #bbbbbb;
 }
 
 .footer .number__pages .focus{
+    border: none;
     background-color: #019160;
     color: #000000;
 }
@@ -55,6 +56,8 @@
 }
 
 .footer .number__pages .button__dot p{
+    width: inherit;
+    height: inherit;
     margin: 0;
     line-height: 34px;
 }
@@ -121,4 +124,8 @@
 
 .paging-data .paging-item:hover{
     cursor: pointer;
+}
+
+.number__pages--bind{
+    display: flex;
 }
