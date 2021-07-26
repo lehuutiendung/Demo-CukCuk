@@ -50,7 +50,8 @@ function convertSalary(){
 
 // Validate lại Form khi nhấn "Lưu"
 function validateSave(){
-    console.log($('input[required]'));
+
+    var countRequired = 0;
     $.each($('input[required]'), function (index, item) {
          if($(item).val() == ''){
             $(item).focus();
@@ -58,7 +59,11 @@ function validateSave(){
             $(item).attr('placeholder', "Bạn chưa nhập thông tin này!");
             return false;
          }
+         if($(item).val() != ''){
+            countRequired++;
+         }
     });
+    if(countRequired == 5) return true;
 }
  validateEmail();
 function validateEmail() {
@@ -69,6 +74,8 @@ function validateEmail() {
             console.log($('.email'));
             $('input.email').css('border', '1px solid #FF4747');
             console.log("Sai dinh dang email");
+        }else{
+            $('input.email').css('border', '1px solid #bbbbbb');
         }
     });
   }

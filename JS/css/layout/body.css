@@ -200,11 +200,21 @@
 
 .content-table table tr {
   height: 48px;
+  /* background-color: #ffffff; */
+}
+
+.content-table table tr.table-checkbox--default{
   background-color: #ffffff;
+}
+
+.content-table table tbody{
+  background-color: #e9ebee;
+  
 }
 
 .content-table table tbody tr:hover{
   background-color: #e9ebee;
+  cursor: pointer;
 }
 
 .content-table table tr th,td {
@@ -252,4 +262,20 @@
   width: 160px;
   overflow-x: hidden;
   text-overflow: ellipsis;
+}
+
+table thead tr th:nth-child(5){
+  text-align: center;
+}
+
+.gender .table-gender{
+  text-align: center;
+  width: 62px;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+
+/* table checkbox active */
+.table-checkbox--active{
+  background-color: #E3F3EE;
 }

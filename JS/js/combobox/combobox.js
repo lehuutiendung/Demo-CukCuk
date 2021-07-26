@@ -230,6 +230,7 @@ function bindingData(){
             comboboxInput.value = comboboxDataList[currentItem];
             bindingData();
             hideCombobox();
+            filterCombobox();
         })
     })
 }
@@ -284,6 +285,7 @@ function SearchInComboBox(){
             comboboxInput.value = comboboxDataList[currentItem];
             bindingData();
             hideCombobox();
+            filterCombobox();
         })
     })
 }
@@ -368,6 +370,7 @@ function bindingData2(){
             comboboxInput2.value = comboboxDataList2[currentItem2];
             bindingData2();
             hideCombobox2();
+            filterCombobox();
         })
     })
 }
@@ -422,6 +425,7 @@ function SearchInComboBox2(){
             comboboxInput2.value = comboboxDataList2[currentItem2];
             bindingData2();
             hideCombobox2();
+            filterCombobox();
         })
     })
 }

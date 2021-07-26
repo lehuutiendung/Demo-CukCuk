@@ -3,7 +3,7 @@ var inputPosition = document.querySelector('.hidden-position');
 var inputDepartment = document.querySelector('.hidden-department');
 var inputStatus = document.querySelector('.hidden-status');
 var inputEmployeeCode = document.querySelector('#firstField');
-
+var inputFullName = document.querySelector('#fullName');
 /**
  * @description Biến lấy employeeId để query khi thao tác PUT Request
  */ 
@@ -11,15 +11,13 @@ var employeeId = null;
 
 var gender = null, position = null, department = null, workStatus = null;
 
-// formMode = 0 (Sửa), formMode = 1 (Thêm mới)
-var formMode = 1;
-
 /**
  * @description Xử lý sự kiện khi click Lưu -> Thêm nhân viên mới
  * @author DUNGLHT
  */ 
 $('#btn-save').on('click', function () {
     if(validateSave()){
+        console.log($('.phoneNumber').val());
         gender = convertGender(dropDownValue);
         position = convertPosition(dropDownValue2);
         department = convertDepartment(dropDownValue3);
@@ -31,7 +29,7 @@ $('#btn-save').on('click', function () {
         if(formMode == 1){
             // Thêm thông tin nhân viên (formMode = 1)
             addData(gender, position, department, workStatus, hideAndRefresh);
-            console.log("Đã thêm một nhân viên mới", employeeId);
+            console.log("Đã thêm một nhân viên mới");
         }else{
             // Sửa thông tin nhân viên (formMode = 0)
             console.log(gender)
@@ -50,10 +48,26 @@ $('#btn-save').on('click', function () {
  * @author DUNGLHT
  */
 function hideAndRefresh(){
-    $('.wrap-box-modal').hide();
-    $('table tbody tr').hide();
-    loadData();
-    loadTotalNumberData();
+    if(pageId == 1 || pageId == 2 || pageId == 3){
+        loadDataPaging();
+        allEmployees = JSON.parse(localStorage.getItem('allEmployees'));
+        totalItems = localStorage.getItem('totalEmployees');
+        currentPage = 1;
+        $('.wrap-box-modal').hide();
+        $('table tbody tr').detach();
+        var objPage = paginate(totalItems, currentPage, pageSize, maxPages);
+        activePaginate(objPage);
+        $('.button__dot').remove();
+        changeNumberPage(objPage);
+        $('.button__dot').first().addClass('focus');
+        $('.total__employees--change').remove();
+        changeNumberEmployeeFooter(objPage);
+    }else{
+        $('.wrap-box-modal').hide();
+        $('table tbody tr').detach();
+        loadData();
+        loadTotalNumberData();
+    } 
 }
 
 /**
@@ -70,7 +84,7 @@ function hideAndRefresh(){
     //     return obj.EmployeeId == 'b013c013-eaf1-11eb-94eb-42010a8c0002';
     // })
     // console.log(result);
-
+    $('.container__title__button--delete').css('display', 'none');
     formMode = 0;
     $('.delete').show();
     $('.wrap-box-modal').show();
@@ -129,6 +143,14 @@ function hideAndRefresh(){
         }
         
     
+    }).done(function(res){
+        $('.background-popup-delete .content-popup p').remove();
+        var popUpDelete = $(`<p>Bạn có chắc muốn <span>"Xóa nhân viên [${res.EmployeeCode}]"</span> không?</p>`);
+        $('.background-popup-delete .content-popup').append(popUpDelete);
+
+        $('.background-popup .content-popup p').remove();
+        var popUpEdit = $(`<p>Bạn có chắc muốn đóng <span>"Chỉnh sửa nhân viên [${res.EmployeeCode}]"</span> không?</p>`);
+        $('.background-popup .content-popup').append(popUpEdit);
     }).fail(function (res) {
         console.log(res);
     });
@@ -199,9 +221,9 @@ function convertDepartment(dropDownValue){
  * @param {*} callback 
  * @author DUNGLHT
  */
-function addData(gender,position,department,workStatus, callback) {  
+function addData(gender, position, department, workStatus, callback) {  
     formMode = 1;  
-    console.log($('.DOB').val());
+    console.log($('.phoneNumber').val());
     $.ajax({
         headers: {
             'access-control-allow-origin': '*', 
@@ -248,6 +270,8 @@ function addData(gender,position,department,workStatus, callback) {
  */
 function editData(gender, position, department, workStatus, callback){
     formMode = 0;  
+    console.log($('.phoneNumber'));
+
     $.ajax({
         headers: {
             'access-control-allow-origin': '*', 
@@ -366,7 +390,6 @@ function getPositionName(PositionId){
 var inputRequired = document.querySelectorAll('.input-row input[required]');
 inputRequired.forEach(function(item){
     item.addEventListener('blur', function(){
-        console.log(item);
         let value = item.value;
         if(value == ''){
             item.style.border = "1px solid #F65454";
@@ -413,21 +436,48 @@ $('.btn-close-popup').on('click', function(){
 })
 
 /**
- * @description Xử lý sự kiện cho button Hủy modal-box
+ * @description Xử lý sự kiện cho Hủy modal-box (Thêm mới, Chỉnh sửa)
  * @since 21/07/2021
  * @author DUNGLHT
  */
 $('#btn-cancel').click(function(){
-    $('.background-popup').show();
+    if(formMode == 1){
+        $('.background-popup-add').show();
+    }else{
+        $('.background-popup').show();
+    }
 })
 
 /**
- * @description Xử lý sự kiện cho nút X modal-box
+ * @description Sự kiện "Đóng" Popup (Thêm mới)
+ * @since 21/07/2021
+ * @author DUNGLHT
+ */
+ $('.btn-close').click(function () {
+    $('.background-popup-add').hide();
+    $('.wrap-box-modal').hide();
+})
+
+/**
+ * @description Sự kiện "Tiếp tục nhập" Popup (Thêm mới)
+ * @since 21/07/2021
+ * @author DUNGLHT
+ */
+ $('.btn-continue').click(function () {
+    $('.background-popup-add').hide();
+})
+
+/**
+ * @description Xử lý sự kiện cho nút X modal-box (formMode = 0: Sửa _______ formMode = 1: Thêm)
  * @since 21/07/2021
  * @author DUNGLHT
  */
 $('#exit-modal').click(function(){
-    $('.background-popup').show();
+    if(formMode == 0){
+        $('.background-popup').show();
+    }else{
+        $('.background-popup-add').show();
+    }
 })
 
 /**
@@ -472,6 +522,14 @@ $('.exit-popup').click(function () {
     $('.background-popup').hide();
     $('.background-popup-delete').hide();
 })
+
+
+
+
+
+
+
+
 
 /**
  * @description Custom cho lịch; custom border cho lịch, dropdown, lương
