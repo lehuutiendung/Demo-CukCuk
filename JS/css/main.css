@@ -4,6 +4,8 @@
 @import url(../css/layout/footer.css);
 @import url(../css/base/dropdown.css);
 @import url(../css/base/combobox.css);
+@import url(../css/base/warning.css);
+@import url(../css/base/toast-messenger.css);
 html, body{
     margin: 0;
     padding: 0;

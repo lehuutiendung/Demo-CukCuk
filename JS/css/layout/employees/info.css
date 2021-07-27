@@ -4,7 +4,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    display: flex;
+    display: none;
     position: fixed;
     /* align-items: center; */
     justify-content: center;
@@ -18,13 +18,13 @@
     margin-top: 44px;
     margin-bottom: 20px;
     width: 804px;
-    height: 812px;
+    /* height: 812px; */
     background-color: #ffffff;
     border: 1px solid #bbbbbb;
     z-index: 10;
-    /* height: 660px;
+    height: 660px;
     overflow: hidden;
-    overflow-y: scroll; */
+    overflow-y: scroll;
 }
 
 .title__employee {
