@@ -68,14 +68,22 @@ function validateSave(){
  validateEmail();
 function validateEmail() {
     $('.email').blur(function () {
-        var patternEmail  = new RegExp('^[A-Za-z0-9]+[A-Za-z0-9]*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)$');
+        //Bắt đầu kí tự thường từ a-z
+        //Tiếp theo có thể xuất hiện các kí tự từ A-Z a-z, 0-9
+        //Các kí tự trước @ tạo thành chuỗi dài lớn hơn 5 kí tự và ít hơn 32 kí tự
+        //Domain dài 2 -> 5 kí tự
+        //Subdomain dài 2-> 4 kí tự
+        //Top-level domain dài 1-> 2 kí tự (có thể không có)
+        var patternEmail  = new RegExp('^[a-z][A-Za-z0-9_\.]*@[a-z0-9]{2,5}(\.[a-z0-9]{2,6}){1,2}$');
         var value = $(this).val();
         if(!patternEmail.test(value)){
             console.log($('.email'));
             $('input.email').css('border', '1px solid #FF4747');
+            $('.warning-email').css('display', 'block');
             console.log("Sai dinh dang email");
         }else{
             $('input.email').css('border', '1px solid #bbbbbb');
+            $('.warning').css('display', 'none');
         }
     });
   }

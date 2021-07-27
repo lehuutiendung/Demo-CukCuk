@@ -21,11 +21,7 @@ $('#btn-save').on('click', function () {
         gender = convertGender(dropDownValue);
         position = convertPosition(dropDownValue2);
         department = convertDepartment(dropDownValue3);
-        if(dropDownValue4.innerText == "Chọn tình trạng"){
-            workStatus = null;
-        }else{
-            workStatus = dropDownData4.querySelector('.dropdown-data-item.active').getAttribute("curval");
-        }
+        workStatus = convertStatusWork(dropDownValue4);
         if(formMode == 1){
             // Thêm thông tin nhân viên (formMode = 1)
             addData(gender, position, department, workStatus, hideAndRefresh);
@@ -87,7 +83,11 @@ function hideAndRefresh(){
     $('.container__title__button--delete').css('display', 'none');
     formMode = 0;
     $('.delete').show();
-    $('.wrap-box-modal').show();
+    // $('.wrap-box-modal').show();
+    $('.wrap-box-modal').css('display', 'flex');
+    $('.box-info').animate({
+        scrollTop: $(".box-info").offset().top - 30
+    }, 1000);
     $('#firstField').focus();
     
     employeeId = $(this).attr('employee-id');
@@ -131,7 +131,7 @@ function hideAndRefresh(){
         }   
 
         $('.personalTaxCode').val(res.PersonalTaxCode);
-        $('.wrap-salary-text').val(res.Salary);
+        $('.wrap-salary-text').val(formatSalary(res.Salary.toString()));
 
         $('.joinDate').val(formatDateJSONtoInput(res.JoinDate));     
         $('.calendar-joinDate').val(formatDate(res.JoinDate));
@@ -175,6 +175,24 @@ function convertGender(dropDownValue){
 }
 
 /**
+ * @description Function chuyển đổi tình trạng công việc text -> id
+ * @param {*} dropDownValue: Giá trị text trong dropdown Chọn tình trạng công việc
+ * @returns StatusWork Id
+ * @author DUNGLHT
+ */
+ function convertStatusWork(dropDownValue){
+    if(dropDownValue.innerText == "Chọn tình trạng"){
+        return null;
+    }
+    else if(dropDownValue.innerText == "Đang làm việc"){
+        return 0;
+    }else if(dropDownValue.innerText == "Nghỉ phép"){
+        return 1;
+    }
+    return 2;
+}
+
+/**
  * @description Function chuyển đổi vị trí text -> id
  * @param {*} dropDownValue Giá trị text trong dropdown Chọn vị trí
  * @returns PositionId
@@ -210,6 +228,7 @@ function convertDepartment(dropDownValue){
     console.log(rel)
     return rel;
 }
+
 
 
 /**
@@ -519,16 +538,10 @@ $('.btn-close').click(function () {
  * @author DUNGLHT
  */
 $('.exit-popup').click(function () {
+    $('.background-popup-add').hide();
     $('.background-popup').hide();
     $('.background-popup-delete').hide();
 })
-
-
-
-
-
-
-
 
 
 /**

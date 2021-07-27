@@ -19,4 +19,22 @@ function formatDate(date){
     }
 }
 
+//Function format string to date
+function formatDateString(stringDate){
+    var stringSplit = stringDate.split('/');
+    var rel = '';
+    for(i = stringSplit.length - 1 ; i >= 0; i--){
+        rel += stringSplit[i];
+        if(i != 0){
+            rel += '-';
+        }
+    }
+    rel = new Date (rel);
+    // rel = rel.toISOString();
+    rel = JSON.stringify(rel)
+    console.log(rel);
+    return rel;
+}
+// formatDateString("2000-03-11");
+// formatDateString("09/07/2000");
 // formatDate("2000-03-11T00:00:00");

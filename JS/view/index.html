@@ -84,6 +84,66 @@
             <img src="/UI/content/icon/add.png" alt="">
             <p id="button">Thêm nhân viên</p>
           </div>
+
+          <!-- Toast -->
+          <div class="box-toast">
+              <div class="toast">
+                  <div class="wrap-start-toast">
+                      <div class="toast-img toast-error">
+                          <i class="fas fa-exclamation-triangle"></i>
+                      </div>
+                      <div class="toast-content">
+                          <p>Lỗi</p>
+                          <p>Nội dung đi kèm tiêu đề</p>
+                      </div>
+                  </div>
+                  <div class="toast-close toast-close-error">
+                      <i class="fas fa-times"></i>
+                  </div>
+              </div>
+              <div class="toast">
+                  <div class="wrap-start-toast">
+                      <div class="toast-img toast-warning">
+                          <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                      </div>
+                      <div class="toast-content">
+                          <p>Cảnh báo</p>
+                          <p>Nội dung đi kèm tiêu đề</p>
+                      </div>
+                  </div>
+                  <div class="toast-close toast-close-warning">
+                      <i class="fas fa-times"></i>
+                  </div>
+              </div>
+              <div class="toast">
+                  <div class="wrap-start-toast">
+                      <div class="toast-img toast-done">
+                          <i class="fa fa-check" aria-hidden="true"></i>
+                      </div>
+                      <div class="toast-content">
+                          <p>Thành công</p>
+                          <p>Nội dung đi kèm tiêu đề</p>
+                      </div>
+                  </div>
+                  <div class="toast-close toast-close-done">
+                      <i class="fas fa-times"></i>
+                  </div>
+              </div>
+              <div class="toast">
+                  <div class="wrap-start-toast">
+                      <div class="toast-img toast-notice">
+                          <i class="fa fa-info" aria-hidden="true"></i>
+                      </div>
+                      <div class="toast-content">
+                          <p>Thông tin</p>
+                          <p>Nội dung đi kèm tiêu đề</p>
+                      </div>
+                  </div>
+                  <div class="toast-close toast-close-notice">
+                      <i class="fas fa-times"></i>
+                  </div>
+              </div>
+            </div>
         </div>
         <div class="container__tools">
           <input class="input-search" type="text" value="" placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
@@ -320,7 +380,7 @@
                   <div class="input-row">
                       <!-- <div class="calendar col-1"><i class="far fa-calendar"></i></div> -->
                       <input class="calendar DOB" type="date" date-date="" data-date-format="DD MMMM YYYY" value="" title="Nhập đúng định dạng ngày/tháng/năm">
-                      <input class="calendar-format calendar-salary" type="text" placeholder="dd/mm/yyyy" title="Nhập đúng định dạng ngày/tháng/năm">
+                      <input class="calendar-format calendar-salary" type="text" placeholder="_ _/_ _/_ _ _ _" title="Nhập đúng định dạng ngày/tháng/năm">
                       <!-- <div class="calendar" id="gender"><i class="fas fa-angle-down"></i></div> -->
                       <div class="wrap-dropdown" data-dropdown="1">
                         <div class="dropdown dropdown--modal">
@@ -363,7 +423,7 @@
                       <input class="col-1 identityNumber autofocus" required type="text" value="" autocomplete="on" title="Trường bắt buộc phải nhập!">
                       <!-- <div class="calendar"><i class="far fa-calendar"></i></div> -->
                       <input class="calendar identityDate" type="date" value="" title="Nhập đúng định dạng ngày/tháng/năm">
-                      <input class="calendar-identity" type="text" placeholder="dd/mm/yyyy" title="Nhập đúng định dạng ngày/tháng/năm">
+                      <input class="calendar-identity" type="text" placeholder="_ _/_ _/_ _ _ _" title="Nhập đúng định dạng ngày/tháng/năm">
                       
                   </div>
                   <!-- Noi cap -->
@@ -379,6 +439,13 @@
                       <p>Số điện thoại (<span>*</span>)</p>
                   </div>
                   <div class="input-row">
+                      <div class="warning-email">
+                          <div class="warning-rotate">      
+                          </div>
+                          <div class="warning-box">
+                              <p>Email sai định dạng tên miền</p>
+                          </div>
+                      </div>
                       <input class="col-1 email autofocus" required type="text" value="" autocomplete="on" title="Trường bắt buộc phải nhập!">
                       <input class="col-1 phoneNumber autofocus" required type="text" value="" title="Trường bắt buộc phải nhập!">
                   </div>
@@ -476,7 +543,7 @@
                   <div class="input-row">
                       <!-- <div class="calendar col-1"><i class="far fa-calendar"></i></div> -->
                       <input class="calendar joinDate" type="date" value="" title="Nhập đúng định dạng ngày/tháng/năm">
-                      <input class="calendar-format calendar-joinDate" type="text" placeholder="dd/mm/yyyy" title="Nhập đúng định dạng ngày/tháng/năm">
+                      <input class="calendar-format calendar-joinDate" type="text" placeholder="_ _/_ _/_ _ _ _" title="Nhập đúng định dạng ngày/tháng/năm">
                       <!-- <div class="calendar"><i class="fas fa-angle-down"></i></div> -->
                       <div class="wrap-dropdown">
                         <div class="dropdown dropdown--modal">

@@ -11,8 +11,13 @@ $('.wrap-box-modal').hide();
 $('#myDiv').on('click', function(){
     formMode = 1;
     $('.delete').hide();
-    $('.wrap-box-modal').show();
+    // $('.wrap-box-modal').show();
+    $('.wrap-box-modal').css('display', 'flex');
+    $('.box-info').animate({
+        scrollTop: $(".box-info").offset().top - 30
+    }, 1000);
     //Clear data khi click vào lại button thêm mới nhân viên
+    $('.warning-email').css('display', 'none');
     $('.input-row > input').val('');
     $('.wrap-salary-text').val('');
     document.querySelector('.dropdown-title > p').innerText = "Chọn giới tính";
@@ -107,18 +112,22 @@ $(document).ready(function(){
  * @since 23/07/2021
  */ 
 var queueDelete = [];
+var queueEmployeeCode = [];
 $('table').on('click', 'tbody tr', function(){
     $(this).find('input[type=checkbox]').prop("checked", !$(this).find('input[type=checkbox]').prop("checked"));
     $(this).toggleClass('table-checkbox--active');
     $(this).toggleClass('table-checkbox--default');
     $('.container__title__button--delete').css('display', 'flex');
     let employeeId = $(this).attr('delete-id');
+    let employeeCodeDelete = $(this).attr('delete-employcode');
     let indexItem = queueDelete.indexOf(employeeId);
     if(indexItem == -1){
         queueDelete.push(employeeId);
+        queueEmployeeCode.push(employeeCodeDelete);
     }else{
         //Tại vị trí indexItem, thực hiện remove 1 phần tử
         queueDelete.splice(indexItem, 1);
+        queueEmployeeCode.splice(indexItem,1);
         if(queueDelete.length == 0){
             $('.container__title__button--delete').css('display', 'none');
         }
@@ -154,8 +163,6 @@ function refreshDeleteMulti(){
         loadDataPaging();
         allEmployees = JSON.parse(localStorage.getItem('allEmployees'));
         totalItems = localStorage.getItem('totalEmployees');
-        console.log(allEmployees);
-        console.log(totalItems);
         currentPage = 1;
         $('table tbody tr').detach();
         var objPage = paginate(totalItems, currentPage, pageSize, maxPages);

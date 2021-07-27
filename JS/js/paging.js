@@ -251,7 +251,7 @@ function activePaginate(objPage){
         if(allEmployees[i].Address == null){
             allEmployees[i].Address = '';
         }
-        var tr = $(`<tr employee-id="${allEmployees[i].EmployeeId}" delete-id="${allEmployees[i].EmployeeId}" class="table-checkbox--default">
+        var tr = $(`<tr employee-id="${allEmployees[i].EmployeeId}" delete-id="${allEmployees[i].EmployeeId}" delete-employcode="${allEmployees[i].EmployeeCode}" class="table-checkbox--default">
                     <td class="table-checkbox"><input class="checkbox" type="checkbox" delete-id="${allEmployees[i].EmployeeId}"></td>
                     <td>`+ 1 +`</td>
                     <td class="employeeCode">`+ allEmployees[i].EmployeeCode +`</td>

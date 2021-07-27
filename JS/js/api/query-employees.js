@@ -67,7 +67,7 @@ function loadData(){
                 item.Address = '';
             }
             
-            var tr = $(`<tr employee-id="${item.EmployeeId}" delete-id="${item.EmployeeId}" class="table-checkbox--default">
+            var tr = $(`<tr employee-id="${item.EmployeeId}" delete-id="${item.EmployeeId}" delete-employcode="${item.EmployeeCode}" class="table-checkbox--default">
                     <td class="table-checkbox"><input class="checkbox" type="checkbox" delete-id="${item.EmployeeId}"></td>
                     <td>`+ 1 +`</td>
                     <td class="employeeCode">`+ item.EmployeeCode +`</td>

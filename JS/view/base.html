@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="../css/main.css">
   <link rel="stylesheet" href="../css/base/dropdown.css">
   <link rel="stylesheet" href="../css/base/combobox.css">
+  <link rel="stylesheet" href="../css/base/warning.css">
+  <link rel="stylesheet" href="../css/base/toast-messenger.css">
   <title>Dropdown</title>
 </head>
 
@@ -174,10 +176,78 @@
         <span>Kỹ thuật</span>
       </div>
     </div>
-  </div>
+    
+    <hr><br>
 
-
-  </div>
+    <!-- Warning Email -->
+    <!-- <div class="warning">
+        <div class="warning-rotate">      
+        </div>
+        <div class="warning-box">
+            <p>Email sai định dạng tên miền</p>
+        </div>
+    </div> -->
+    
+    <!-- Toast Messenger -->
+    <div class="box-toast">
+        <div class="toast" id="toast-error">
+            <div class="wrap-start-toast">
+                <div class="toast-img toast-error">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="toast-content">
+                    <p>Lỗi</p>
+                    <p>Nội dung đi kèm tiêu đề</p>
+                </div>
+            </div>
+            <div class="toast-close toast-close-error">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div class="toast" id="toast-warning">
+            <div class="wrap-start-toast">
+                <div class="toast-img toast-warning">
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                </div>
+                <div class="toast-content">
+                    <p>Cảnh báo</p>
+                    <p>Nội dung đi kèm tiêu đề</p>
+                </div>
+            </div>
+            <div class="toast-close toast-close-warning">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div class="toast" id="toast-done">
+            <div class="wrap-start-toast">
+                <div class="toast-img toast-done">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </div>
+                <div class="toast-content">
+                    <p>Thành công</p>
+                    <p>Nội dung đi kèm tiêu đề</p>
+                </div>
+            </div>
+            <div class="toast-close toast-close-done">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+        <div class="toast" id="toast-notice">
+            <div class="wrap-start-toast">
+                <div class="toast-img toast-notice">
+                    <i class="fa fa-info" aria-hidden="true"></i>
+                </div>
+                <div class="toast-content">
+                    <p>Thông tin</p>
+                    <p>Nội dung đi kèm tiêu đề</p>
+                </div>
+            </div>
+            <div class="toast-close toast-close-notice">
+                <i class="fas fa-times"></i>
+            </div>
+        </div>
+    </div>
+    
 </body>
 <script src="../js/dropdown/dropdown.js"></script>
 <!-- <script src="../js/combobox/combobox.js"></script> -->
