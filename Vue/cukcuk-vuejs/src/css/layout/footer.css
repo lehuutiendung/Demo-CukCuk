@@ -1,0 +1,131 @@
+.footer{
+    display: flex;
+    padding-left: 24px;
+    align-items: center;
+    justify-items: center;
+    height: 56px;
+    background-color: #E9EBEE;
+}
+
+.footer .number__pages{
+    display: flex;
+    position: absolute;
+    left: 50%;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-30%);
+}
+
+.footer .number__pages .button__hide{
+    align-items:center;
+    text-align: center;
+    height: 34px;
+    width: 34px;
+    display: flex;
+    justify-content: center;
+    margin-right: 10px;
+    
+}
+
+.footer .number__pages .button__hide:hover{
+    border-radius: 25%;
+    background-color: #ffffff;
+    border: 1px solid #bbbbbb;  
+    cursor: pointer;
+}
+
+.footer .number__pages .button__dot{
+    border-radius: 50%;
+    background-color: #E9EBEE;
+    height: 34px;
+    width: 34px;
+    text-align: center;
+    margin-right:8px;
+    border: 1px solid #bbbbbb;
+}
+
+.footer .number__pages .focus{
+    border: none;
+    background-color: #019160;
+    color: #000000;
+}
+
+.footer .number__pages .button__dot:hover{
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.footer .number__pages .button__dot p{
+    width: inherit;
+    height: inherit;
+    margin: 0;
+    line-height: 34px;
+}
+
+.footer .note{
+    position: absolute;
+    right: 16px;
+    align-items: center;
+    display: flex;
+    width: 150px;
+    background-color: #ffffff;
+    border-radius: 4px;
+
+}
+
+.footer .note .note-number-emmployees{
+    height: 34px;
+    width: inherit;
+    line-height: 34px;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.footer .note:hover{
+    cursor: pointer;
+}
+
+.footer .note .note-number-emmployees p{
+    margin: 0;
+}
+
+.footer .note .up-down-number .fa-chevron-up{
+    position: absolute;
+    right: 8px;
+    bottom: 15px;
+}
+.footer .note .up-down-number .fa-chevron-down{
+    position: absolute;
+    right: 8px;
+    bottom: 7px;
+}
+
+.footer .note .up-down-number .fas:hover{
+    cursor: pointer;
+}
+
+.paging-data{
+    position: absolute;
+    right: 16px;
+    bottom: 46px;
+    align-items: center;
+    width: 150px;
+    background-color: #ffffff;
+    border-radius: 4px;
+    box-shadow: 0px 1px 8px 0px rgb(219, 219, 219);
+    display: none;
+}
+
+.paging-data .paging-item{
+    padding-left: 10px;
+    height: 34px;
+    line-height: 34px;
+}
+
+.paging-data .paging-item:hover{
+    cursor: pointer;
+}
+
+.number__pages--bind{
+    display: flex;
+}

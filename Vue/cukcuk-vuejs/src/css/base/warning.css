@@ -1,0 +1,28 @@
+.warning-email{
+    position: absolute;
+    display: none;
+    text-align: center;
+    height: 40px;
+    margin-left: 62px;
+    margin-bottom: 86px;
+}
+.warning-rotate{
+    position: absolute;
+    width: 30px;                                                                                                                                                                                                                        
+    height: 30px;
+    margin-left: 85px;
+    margin-top: 12px;
+    background-color: #FF4747;
+    z-index: 999;
+    transform: rotate(45deg);
+}
+
+.warning-box{
+    border-radius: 4px;
+    position: absolute;
+    width: 200px;
+    height: inherit;
+    background-color: #FF4747;
+    z-index: 1000;
+    color: #ffffff;
+}
