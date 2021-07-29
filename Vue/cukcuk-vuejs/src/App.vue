@@ -1,30 +1,25 @@
 <template>
   <div>
-      <TheWrap v-on:modalBoxUpdated="modalBoxUpdated()"/>
-      <ModalBox v-bind:modalBoxShow="modalBoxShow"/>
+      <TheWrap/>
+      <!-- <ModalBox v-bind:modalBoxShow="modalBoxShow" v-on:hideModalBox="hideModalBox()"/> -->
   </div>
-  
 </template>
 
 <script>
 import TheWrap from './components/layout/TheWrap.vue'
-import ModalBox from './components/layout/TheModalBox.vue'
 export default {
   name: 'App',
   components: {
     TheWrap,
-    ModalBox
+  
   },
   data() {
     return {
-      modalBoxShow: false,
+      
     }
   },
   methods: {
-    modalBoxUpdated(){
-      console.log('emited to App');
-      this.modalBoxShow = true;
-    }
+    
   },
 }
 </script>
