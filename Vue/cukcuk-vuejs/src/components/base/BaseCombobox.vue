@@ -47,7 +47,7 @@ export default {
             },
         }
     },
-    // tyoe: Department, Position
+    // type: Department, Position
     created() {
         axios.get(this.api)
         .then(res => {
@@ -61,7 +61,6 @@ export default {
                 this.items.push(element);
             });
             this.isDataLoaded = true;
-            console.log(this.items);
         })
         .catch(err => {
             console.error(err); 
