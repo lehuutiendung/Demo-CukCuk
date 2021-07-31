@@ -133,7 +133,7 @@
             </tbody>
           </table>
         </div>
-        <EmployeeDetail :mode="modeForm" :modalBoxShow="modalBoxShow" :employeeId="employeeId" v-on:hideModalBox="hideModalBox()"/>
+        <EmployeeDetail :mode="modeForm" :modalBoxShow="modalBoxShow" :employeeId="employeeId" v-on:hideModalBox="hideModalBox()" :tableUpdated="tableUpdated()"/>
     </div>
 </template>
 
@@ -183,7 +183,19 @@ export default {
         hideModalBox(){
             this.modalBoxShow = !this.modalBoxShow;
         },
-
+        tableUpdated(){
+            if(this.modalBoxShow == false){
+                let vm = this;
+                // Gọi API lấy tất cả nhân viên
+                axios.get('http://cukcuk.manhnv.net/v1/employees')
+                .then(res => {
+                    vm.employees = res.data;
+                })
+                .catch(err => {
+                    console.error(err); 
+                })
+            }
+        },
 
         //Format dd/mm/yyyy
         formatDate(date){
