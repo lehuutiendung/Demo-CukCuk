@@ -10,10 +10,11 @@
     justify-content: center;
     overflow-y: scroll;
     z-index: 10;  
-    /* Ẩn overflow-y: scroll; */
 }
 
 .box-info{
+    display: flex;
+    flex-direction: column;
     border-radius: 4px;
     margin-top: 44px;
     margin-bottom: 20px;
@@ -23,9 +24,12 @@
     border: 1px solid #bbbbbb;
     z-index: 10;
     height: 660px;
+}
+
+.content-scroll{
     overflow: hidden;
     overflow-y: scroll;
-}
+}  
 
 .title__employee {
     width: inherit;
@@ -216,7 +220,7 @@ input.calendar-format{
 input.calendar-identity{
     position: absolute;
     right: 0;
-    margin-right: 65px;
+    margin-right: 58px;
     width: 252px;
     border-right: none;
     border-top: none;
@@ -249,6 +253,8 @@ input[type="date"]{
     align-items: center;
     justify-content: flex-end;
     background-color: #E9EBEE;
+    position: sticky;
+
 }
 
 .footer-modal .button-modal{

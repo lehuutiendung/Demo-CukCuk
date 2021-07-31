@@ -25,25 +25,48 @@ import axios from "axios";
 
 export default {
     name: 'TheDropdown',
-    created() {
-        axios.get(this.api)
-        .then(res => {
-            this.dropdownData = [];
-            res.data.forEach(element => {
-                this.dropdownData.push(element);
-            });
-            console.log(this.dropdownData);
-        })
-        .catch(err => {
-            console.error(err); 
-        })
+    // props: ["api", "data", "type"],
+    props: {
+        api: {
+            type: String,
+            default: function () {
+                return '';
+            }
+        },
+        dataValue: {
+            type: Array,
+            default: function(){
+                return [];
+            }
+        },
+        type: {
+            type: String,
+            default: function(){
+                return '';
+            }
+        }
     },
-    props: ["api", "data", "type"],
     data() {
         return {
             show: false,
-            dropdownData: this.data,
+            dropdownData: this.dataValue,
             typeName: this.type + 'Name',
+        }
+    },
+    created() {
+        let vm = this;
+        if(!vm.dropdownData.length){
+            axios.get(vm.api)
+            .then(res => {
+                vm.dropdownData = [];
+                res.data.forEach(element => {
+                    vm.dropdownData.push(element);
+                });
+                console.log(vm.dropdownData);
+            })
+            .catch(err => {
+                console.error(err); 
+            })
         }
     },
     methods: {

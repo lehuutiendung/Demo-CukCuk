@@ -72,7 +72,7 @@
                 title="Nhập đúng định dạng ngày/tháng/năm"
                 v-model="employee.DateOfBirth"
               />
-              <DropDown :data='"dataGender"' :type='"Gender"'/>
+              <DropDown :dataValue='dataGender' type='Gender'/>
             </div>
             <!-- Div CMTND, ngay cap -->
             <div class="title-row">
@@ -156,12 +156,12 @@
             </div>
             <div class="input-row">
               <DropDown
-                :api="'http://cukcuk.manhnv.net/v1/Positions'"
-                :type="'Position'"
+                api="http://cukcuk.manhnv.net/v1/Positions"
+                type="Position"
               />
               <DropDown
-                :api="'http://cukcuk.manhnv.net/api/Department'"
-                :type="'Department'"
+                api="http://cukcuk.manhnv.net/api/Department"
+                type='Department'
               />
             </div>
             <!-- Ma so thue ca nhan, muc luong co ban -->
@@ -201,13 +201,13 @@
                 title="Nhập đúng định dạng ngày/tháng/năm"
                 v-model="employee.JoinDate"
               />
-              <DropDown />
+              <DropDown :dataValue="dataWorkStatus" type="WorkStatus"/>
             </div>
           </div>
         </div>
       </div>
       <div class="footer-modal">
-        <div class="button-modal delete" id="btn-delete">
+        <div class="button-modal delete" id="btn-delete" @click="deleteEmployee()">
           <i class="fas fa-trash-alt"></i>
           <p>Xóa</p>
         </div>
@@ -242,7 +242,7 @@ export default {
       type: Number,
       default: 0, // 0 - Them moi, 1 - Sua
       required: true,
-    }
+    },
   },
   data() {
     return {
@@ -252,6 +252,11 @@ export default {
         { GenderName: "Nữ" },
         { GenderName: "Nam" },
         { GenderName: "Khác" },
+      ],
+      dataWorkStatus: [
+        {WorkStatusName: 'Đang làm việc'},
+        {WorkStatusName: 'Đang nghỉ phép'},
+        {WorkStatusName: 'Đã nghỉ làm'},
       ],
     };
   },
@@ -268,6 +273,8 @@ export default {
     // Thay đổi trạng thái ẩn-hiện của modalbox
     changeState() {
       this.$emit('hideModalBox');
+      this.$emit('tableUpdated');
+
     },
 
     /**
@@ -296,6 +303,23 @@ export default {
               console.error(err); 
             })
         }
+    },
+
+    /**
+     * @description Xóa nhân viên trong form chi tiết
+     * @author DUNGLHT
+     * @since 30/07/2021
+     */
+    deleteEmployee(){
+        let vm = this;
+        axios.delete(`http://cukcuk.manhnv.net/v1/employees/${vm.employeeId}`, vm.employee)
+        .then(res => {
+          console.log(res);
+          vm.changeState();
+        })
+        .catch(err => {
+          console.error(err); 
+        })
     },
   },
   watch:{

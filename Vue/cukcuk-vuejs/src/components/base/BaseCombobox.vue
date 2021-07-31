@@ -32,7 +32,13 @@ export default {
     // api: url api 
     // mode: 1 - List hiển thị có "tất cả phòng ban, nhân viên"
     // data: truyền vào data nếu có data fix cứng
-    props: ["type", "api", "data", "mode"],
+    // props: ["type", "api", "data", "mode"],
+    props: {
+        type: String,
+        api: String,
+        data: Array,
+        mode: Number,
+    },
     data() {
         return {
             isActive: false,    //biến kiểm soát show data-dropdown
