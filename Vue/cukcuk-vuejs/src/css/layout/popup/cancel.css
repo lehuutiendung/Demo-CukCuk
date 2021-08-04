@@ -181,7 +181,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    display: none;
+    display: block;
     position: fixed;
     /* align-items: center; */
     justify-content: center;

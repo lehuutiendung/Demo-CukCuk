@@ -165,6 +165,10 @@
     border: 1px solid #019160;
 }
 
+.nonevalue{
+    border: 1px solid #FF4747;
+}
+
 .wrap-salary{
     display: flex;
     align-items: center;
