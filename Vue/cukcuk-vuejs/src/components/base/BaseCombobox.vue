@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="wrap-combobox combobox-room" data-id="1" v-on:click="showDataCombobox">
-            <input type="text" class="combobox" placeholder="Chọn/Nhập phòng ban" v-bind:filter="type" v-if="mode==1">
+            <input type="text" class="combobox" :placeholder="itemComboboxName" v-bind:filter="type" v-if="mode==1">
             <div class="combobox-delete-text"><i class="far fa-times-circle"></i></div>
             <div class="combobox-btn">
                 <button>
@@ -51,6 +51,7 @@ export default {
                 Position: "vị trí",
                 Department: "phòng ban",
             },
+            itemComboboxName: '',
         }
     },
     // type: Department, Position
@@ -67,6 +68,7 @@ export default {
                 this.items.push(element);
             });
             this.isDataLoaded = true;
+            this.itemComboboxName = this.items[0][this.typeName];
         })
         .catch(err => {
             console.error(err); 

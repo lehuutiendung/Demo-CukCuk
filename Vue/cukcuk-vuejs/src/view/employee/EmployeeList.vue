@@ -78,7 +78,7 @@
           <TheCombobox :api='"http://cukcuk.manhnv.net/api/Department"' :type='"Department"' :mode="1"/>
           <TheCombobox :api='"http://cukcuk.manhnv.net/v1/Positions"' :type='"Position"' :mode="1"/>
           
-          <div class="refresh-button">
+          <div class="refresh-button" @click="refreshData()">
           </div>
         </div>
         <div class="content-table">
@@ -114,7 +114,7 @@
               <col span="1" style="width: 10%;">
               <col span="1" style="width: 10%;">
            </colgroup>
-            <tbody>
+            <tbody v-show="showTable">
               <!-- Append data here! -->
                 <tr v-for="employee in employees" :key="employee.EmployeeId" @dblclick="dbClickHandle(employee.EmployeeId)" delete-id="" delete-employcode="" class="table-checkbox--default">
                     <td class="table-checkbox"><input class="checkbox" type="checkbox" delete-id=""></td>
@@ -133,7 +133,8 @@
             </tbody>
           </table>
         </div>
-        <EmployeeDetail :mode="modeForm" :modalBoxShow="modalBoxShow" :employeeId="employeeId" v-on:hideModalBox="hideModalBox()" :tableUpdated="tableUpdated()"/>
+        <EmployeeDetail :mode="modeForm" :modalBoxShow="modalBoxShow" :employeeId="employeeId" :newEmployeeCode="newEmployeeCode" v-on:exitModalBox="exitModalBox()" v-on:hideModalBox="hideModalBox()" :tableUpdated="tableUpdated()"/>
+        <PopUp :popUpShow="popUpShow" v-on:hidePopUp="hidePopUp($event)"/>
     </div>
 </template>
 
@@ -141,18 +142,23 @@
 import axios from "axios";
 import TheCombobox from '../../components/base/BaseCombobox.vue'
 import EmployeeDetail from '../../view/employee/EmployeeDetail.vue'
+import PopUp from '../../components/base/BasePopup.vue'
 export default {
     name: 'EmployeePage',
     components: {
         TheCombobox,
         EmployeeDetail,
+        PopUp
     },
     data() {
         return {
             employees: [],
             employeeId: '',
             modalBoxShow: false,
+            popUpShow: false,
             modeForm: 0, 
+            showTable: true,
+            newEmployeeCode: '',
         }
     },
     mounted() {
@@ -160,7 +166,7 @@ export default {
         // Gọi API lấy tất cả nhân viên
         axios.get('http://cukcuk.manhnv.net/v1/employees')
         .then(res => {
-            vm.employees = res.data;
+            vm.employees = res.data
         })
         .catch(err => {
             console.error(err); 
@@ -178,11 +184,36 @@ export default {
         showModalBox(){
             this.modalBoxShow = !this.modalBoxShow;
             this.modeForm = 0;
+            axios.get("http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode")
+            .then(res => {
+                this.newEmployeeCode = res.data;
+                console.log(this.newEmployeeCode);
+            })
+            .catch(err => {
+                console.error(err); 
+            })
+        },
+
+        exitModalBox(){
+            this.popUpShow = !this.popUpShow;
         },
 
         hideModalBox(){
             this.modalBoxShow = !this.modalBoxShow;
         },
+
+        hidePopUp(value){
+            // value = 1: Đóng popup, giữ form
+            // value = 0: Đóng popup, đóng form
+            if(value == 1){
+                this.popUpShow = !this.popUpShow;
+            }else{
+                this.popUpShow = !this.popUpShow;
+                this.modalBoxShow = !this.modalBoxShow;
+            }
+            
+        },
+
         tableUpdated(){
             if(this.modalBoxShow == false){
                 let vm = this;
@@ -222,7 +253,22 @@ export default {
             }
             return result.split("").reverse().join("");
         },
-
+        
+        //Xử lý sự kiện refresh data
+        refreshData(){
+            this.showTable = !this.showTable;
+            console.log("click refresh");
+            let vm = this;
+            // Gọi API lấy tất cả nhân viên
+            axios.get('http://cukcuk.manhnv.net/v1/employees')
+            .then(res => {
+                vm.employees = res.data;
+                this.showTable = !this.showTable;
+            })
+            .catch(err => {
+                console.error(err); 
+            })
+        }
     },
 
 }
