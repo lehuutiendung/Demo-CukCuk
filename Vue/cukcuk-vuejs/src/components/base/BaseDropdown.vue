@@ -3,9 +3,9 @@
     <div class="dropdown dropdown--modal" @click="showDataDropdown()">
       <div class="dropdown-title dropdown-title2" :filter="type">
         <!-- mode: 0 - Thêm, 1 - Sửa -->
-        <p v-if="typeName == 'GenderName'">{{ itemName[0][typeName] }}</p>
-        <p v-if="typeName == 'DepartmentName'">{{ itemName[1][typeName] }}</p>
-        <p v-if="typeName == 'PositionName'">{{ itemName[2][typeName] }}</p>
+        <p v-if="typeName == 'GenderName'">{{ dataDropdown.GenderName }}</p>
+        <p v-if="typeName == 'DepartmentName'">{{ dataDropdown.DepartmentName }}</p>
+        <p v-if="typeName == 'PositionName'">{{ dataDropdown.PositionName }}</p>
       </div>
       <span class="dropdown-img">
         <i class="fas fa-angle-down"></i>
@@ -17,7 +17,7 @@
         :class="{ active: itemClicked == index ? true : false }"
         v-for="(item, index) in dropdownData"
         :key="index"
-        @click="getValueDropdown(index, item[typeName], item[typeId], typeName)"
+        @click="getValueDropdown(index, item[typeName], item[typeId])"
       >
         <div class="tick-item">
           <i
@@ -79,11 +79,7 @@ export default {
       typeName: this.type + "Name",
       typeId: this.type + "Id",
       itemClicked: 0,
-      itemName: [
-        {GenderName: this.dataDropdown.GenderName},
-        {DepartmentName: this.dataDropdown.DepartmentName},
-        {PositionName: this.dataDropdown.PositionName}
-      ],
+      itemName: [],
     };
   },
   created() {
@@ -96,17 +92,17 @@ export default {
           res.data.forEach((element) => {
             vm.dropdownData.push(element);
           });
-          vm.itemName[this.typeName] = vm.dropdownData[0][vm.typeName];
+          vm.itemName = vm.dropdownData[0][vm.typeName];
           vm.$emit("gender", vm.itemName);
         })
         .catch((err) => {
           console.error(err);
         });
     } else {
-      vm.itemName[this.typeName] = vm.dataValue[0][vm.typeName];
+      vm.itemName = vm.dataValue[0][vm.typeName];
     }
   },
-  
+
   methods: {
     /**
      * @description Hiên thị data dropdown
@@ -117,21 +113,15 @@ export default {
       this.show = !this.show;
     },
 
-    getValueDropdown(index, value, id, typeName) {
-      this.itemName[0][typeName] = value;
-      console.log(value);
+    getValueDropdown(index, value, id) {
+      this.itemName = value;
       this.itemClicked = index;
-      this.$emit("gender", id.toString());
-      this.$emit("department", id.toString());
-      this.$emit("position", id.toString());
+      this.$emit("gender", id, value);
+      this.$emit("department", id, value);
+      this.$emit("position", id, value);
       this.show = !this.show;
     },
   },
-  watch: {
-    dataDropdown: function(){
-      
-    }
-  }
 };
 </script>
 

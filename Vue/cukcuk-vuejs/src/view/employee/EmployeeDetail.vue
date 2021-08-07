@@ -26,29 +26,8 @@
               <p>Họ và tên (<span>*</span>)</p>
             </div>
             <div class="input-row">
-              <input
-                class="col-1 autofocus"
-                required=""
-                v-on:blur="handleBlur($event)"
-                v-on:focus="handleInput($event)"
-                type="text"
-                id="firstField"
-                autocomplete=""
-                title="Trường bắt buộc phải nhập!"
-                v-model="employee.EmployeeCode"
-              />
-              <input
-                class="autofocus"
-                type="text"
-                required=""
-                v-on:blur="handleBlur($event)"
-                v-on:focus="handleInput($event)"
-                value=""
-                id="fullName"
-                autocomplete=""
-                title="Trường bắt buộc phải nhập!"
-                v-model="employee.FullName"
-              />
+              <Input :required="true" :value="employee.EmployeeCode" ref="focusField" v-model="employee.EmployeeCode"/>
+              <Input :required="true" :value="employee.FullName" v-model="employee.FullName"/>
             </div>
             <!-- Div ngay sinh, gioi tinh -->
             <div class="title-row">
@@ -56,23 +35,7 @@
               <p>Giới tính</p>
             </div>
             <div class="input-row">
-              <input
-                class="calendar DOB"
-                type="date"
-                date-date=""
-                data-date-format="DD MMMM YYYY"
-                value=""
-                title="Nhập đúng định dạng ngày/tháng/năm"
-                v-model="employee.DateOfBirth"
-              />
-              <input
-                class="calendar-format calendar-salary"
-                v-on:keyup="formatSalary()"
-                type="text"
-                placeholder="_ _/_ _/_ _ _ _"
-                title="Nhập đúng định dạng ngày/tháng/năm"
-                v-model="employee.DateOfBirth"
-              />
+              <Input :isDate="true" :DOB="true" :value="employee.DateOfBirth" v-model="employee.DateOfBirth"/>
               <DropDown
                 :dataValue="dataGender"
                 :dataDropdown="dataDropdown"
@@ -87,44 +50,15 @@
               <p>Ngày cấp</p>
             </div>
             <div class="input-row">
-              <input
-                class="col-1 identityNumber autofocus"
-                required=""
-                v-on:blur="handleBlur($event)"
-                v-on:focus="handleInput($event)"
-                type="text"
-                value=""
-                autocomplete="on"
-                title="Trường bắt buộc phải nhập!"
-                v-model="employee.IdentityNumber"
-              />
-              <input
-                class="calendar identityDate"
-                type="date"
-                value=""
-                title="Nhập đúng định dạng ngày/tháng/năm"
-                v-model="employee.IdentityDate"
-              />
-              <input
-                class="calendar-identity"
-                type="text"
-                placeholder="_ _/_ _/_ _ _ _"
-                title="Nhập đúng định dạng ngày/tháng/năm"
-                v-model="employee.IdentityDate"
-              />
+              <Input :required="true" :value="employee.IdentityNumber" v-model="employee.IdentityNumber"/>
+              <Input :isDate="true" :identity="true" :value="employee.IdentityDate" v-model="employee.IdentityDate"/>
             </div>
             <!-- Noi cap -->
             <div class="title-row">
               <p class="col-1">Nơi cấp</p>
             </div>
             <div class="input-row">
-              <input
-                class="col-1 identityPlace autofocus"
-                type="text"
-                value=""
-                autocomplete="on"
-                v-model="employee.IdentityPlace"
-              />
+              <Input :normal="true" :value="employee.IdentityPlace" v-model="employee.IdentityPlace"/>
             </div>
             <!-- Email, so dien thoai -->
             <div class="title-row">
@@ -138,27 +72,8 @@
                   <p>Email sai định dạng tên miền</p>
                 </div>
               </div>
-              <input
-                class="col-1 email autofocus"
-                required=""
-                v-on:blur="handleBlur($event)"
-                v-on:focus="handleInput($event)"
-                type="text"
-                value=""
-                autocomplete="on"
-                title="Trường bắt buộc phải nhập!"
-                v-model="employee.Email"
-              />
-              <input
-                class="col-1 phoneNumber autofocus"
-                required=""
-                v-on:blur="handleBlur($event)"
-                v-on:focus="handleInput($event)"
-                type="text"
-                value=""
-                title="Trường bắt buộc phải nhập!"
-                v-model="employee.PhoneNumber"
-              />
+              <Input :required="true" :value="employee.Email" v-model="employee.Email"/>
+              <Input :required="true" :value="employee.PhoneNumber" v-model="employee.PhoneNumber"/>
             </div>
             <p class="title-a">B. THÔNG TIN CÔNG VIỆC:</p>
             <div class="hr-custom"></div>
@@ -189,12 +104,7 @@
               <p>Mức lương cơ bản</p>
             </div>
             <div class="input-row salary-box">
-              <input
-                class="col-1 personalTaxCode autofocus"
-                type="text"
-                value=""
-                v-model="employee.PersonalTaxCode"
-              />
+              <Input :normal="true" :value="employee.PersonalTaxCode" v-model="employee.PersonalTaxCode"/>
               <div class="wrap-salary">
                 <input
                   class="wrap-salary-text"
@@ -211,20 +121,7 @@
               <p>Tình trạng công việc</p>
             </div>
             <div class="input-row">
-              <input
-                class="calendar joinDate"
-                type="date"
-                value=""
-                title="Nhập đúng định dạng ngày/tháng/năm"
-                v-model="employee.JoinDate"
-              />
-              <input
-                class="calendar-format calendar-joinDate"
-                type="text"
-                placeholder="_ _/_ _/_ _ _ _"
-                title="Nhập đúng định dạng ngày/tháng/năm"
-                v-model="employee.JoinDate"
-              />
+              <Input :isDate="true" :joinDate="true" :value="employee.JoinDate" v-model="employee.JoinDate"/>
               <DropDown :dataValue="dataWorkStatus" type="WorkStatus" />
             </div>
           </div>
@@ -259,10 +156,12 @@
 <script>
 import axios from "axios";
 import DropDown from "../../components/base/BaseDropdown.vue";
+import Input from "../../components/base/BaseInputField.vue";
 export default {
   name: "EmployeeDetail",
   components: {
     DropDown,
+    Input,
   },
   props: {
     modalBoxShow: Boolean,
@@ -278,9 +177,9 @@ export default {
     },
     newEmployeeCode: {
       type: String,
-      default: '',
+      default: "",
       required: true,
-    }
+    },
   },
   data() {
     return {
@@ -302,13 +201,16 @@ export default {
       inputRequired: false,
       dataDropdown: {
         GenderId: this.gender,
-        GenderName: '',
+        GenderName: "",
         DepartmentId: this.department,
-        DepartmentName: '',
+        DepartmentName: "",
         PositionId: this.position,
-        PositionName: '',
+        PositionName: "",
       },
     };
+  },
+  mounted() {
+    this.$refs.focusField.$el.focus();    
   },
   computed: {
     modalBoxState() {
@@ -332,19 +234,22 @@ export default {
       this.$emit("tableUpdated");
     },
 
-    getGender(value) {
+    getGender(value, name) {
       console.log("Gender", value);
       this.gender = value;
+      this.dataDropdown.GenderName = name;
     },
 
-    getDepartment(value) {
+    getDepartment(value, name) {
       console.log("Department", value);
       this.department = value;
+      this.dataDropdown.DepartmentName = name;
     },
 
-    getPosition(value) {
+    getPosition(value, name) {
       console.log("Position", value);
       this.position = value;
+      this.dataDropdown.PositionName = name;
     },
     /**
      * @description Lưu dữ liệu
@@ -428,13 +333,12 @@ export default {
     /**
      * Format Salary khi nhập
      */
-    formatSalary() {
-      
-    },
+    formatSalary() {},
   },
   watch: {
     employee: function () {
-    
+      this.$refs.focusField.$el.focus();    
+      this.employee.EmployeeCode = this.newEmployeeCode;
     },
     employeeId: function (value) {
       let vm = this;
@@ -452,22 +356,28 @@ export default {
           vm.dataDropdown.PositionId = res.data.PositionId;
         })
         .then(() => {
-            axios.get(`http://cukcuk.manhnv.net/api/Department/${vm.dataDropdown.DepartmentId}`)
-            .then(res => {
-                vm.dataDropdown.DepartmentName = res.data.DepartmentName;
+          axios
+            .get(
+              `http://cukcuk.manhnv.net/api/Department/${vm.dataDropdown.DepartmentId}`
+            )
+            .then((res) => {
+              vm.dataDropdown.DepartmentName = res.data.DepartmentName;
             })
-            .catch(err => {
-              console.error(err); 
-            })
+            .catch((err) => {
+              console.error(err);
+            });
         })
         .then(() => {
-            axios.get(`http://cukcuk.manhnv.net/v1/Positions/${vm.dataDropdown.PositionId}`)
-            .then(res => {
-                vm.dataDropdown.PositionName = res.data.PositionName;
+          axios
+            .get(
+              `http://cukcuk.manhnv.net/v1/Positions/${vm.dataDropdown.PositionId}`
+            )
+            .then((res) => {
+              vm.dataDropdown.PositionName = res.data.PositionName;
             })
-            .catch(err => {
-              console.error(err); 
-            })
+            .catch((err) => {
+              console.error(err);
+            });
         })
         .catch((err) => {
           console.error(err);
