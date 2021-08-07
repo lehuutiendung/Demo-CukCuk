@@ -209,11 +209,15 @@
     margin-right: 10px;
 }
 
-input.calendar-format{
+.calendar-format{
+    left: 0;
     position: absolute;
+}
+
+input.calendar-format{
     width: 252px;
+    height: 40px;
     border-right: none;
-    border-top: none;
     border-bottom: none;
 }
 
@@ -223,7 +227,6 @@ input.calendar-identity{
     margin-right: 58px;
     width: 252px;
     border-right: none;
-    border-top: none;
     border-bottom: none;
 }
 
