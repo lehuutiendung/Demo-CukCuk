@@ -225,7 +225,7 @@ input.calendar-identity{
     position: absolute;
     right: 0;
     margin-right: 58px;
-    width: 252px;
+    width: 253px;
     border-right: none;
     border-bottom: none;
 }
@@ -310,4 +310,8 @@ input[type="date"]{
 
 .cancel:hover{
     background-color: #bbbbbb;
+}
+
+.validate-error{
+    border: 1px solid #FF4747;
 }
