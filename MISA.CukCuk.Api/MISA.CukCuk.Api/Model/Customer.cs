@@ -39,14 +39,14 @@ namespace MISA.CukCuk.Api.Model
         public int? Gender { get; set; }
 
         /// <summary>
+        /// Địa chỉ
+        /// </summary>
+        public string Address { get; set; }
+
+        /// <summary>
         /// Ngày sinh
         /// </summary>
         public DateTime? DateOfBirth { get; set; }
-
-        /// <summary>
-        /// Số điện thoại
-        /// </summary>
-        public string PhoneNumber { get; set; }
 
         /// <summary>
         /// Email
@@ -54,9 +54,9 @@ namespace MISA.CukCuk.Api.Model
         public string Email { get; set; }
 
         /// <summary>
-        /// Địa chỉ
+        /// Số điện thoại
         /// </summary>
-        public string Address { get; set; }
+        public string PhoneNumber { get; set; }
 
         #endregion
     }

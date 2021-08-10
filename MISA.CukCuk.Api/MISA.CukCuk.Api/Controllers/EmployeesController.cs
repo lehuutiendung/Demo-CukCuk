@@ -85,7 +85,7 @@ namespace MISA.CukCuk.Api.Controllers
 
             //1. Khai báo thông tin kết nối database
             var connectionString = "Host = 47.241.69.179;" +
-                "Database = MISA.CukCuk_Demo_NVMANH;" +
+                "Database = WEB07.MF928.LHTDUNG.CukCuk;" +
                 "User Id = dev;" +
                 "Password = 12345678";
 
