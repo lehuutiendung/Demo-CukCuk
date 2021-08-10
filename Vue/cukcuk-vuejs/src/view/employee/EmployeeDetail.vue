@@ -26,8 +26,24 @@
               <p>Họ và tên (<span>*</span>)</p>
             </div>
             <div class="input-row">
-              <Input :required="true" :value="employee.EmployeeCode" ref="focusField" v-model="employee.EmployeeCode"/>
-              <Input :required="true" :value="employee.FullName" v-model="employee.FullName"/>
+              <Warning :style="{ display: showWarning }" />
+              <Input
+                :required="true"
+                :value="employee.EmployeeCode"
+                :newEmployeeCode="newEmployeeCode"
+                :updateCode="updateCode()"
+                ref="focusField"
+                v-model="employee.EmployeeCode"
+                @click="hideWarning($event)" 
+              />
+              <Warning :rightWarning="true" :style="{ display: showWarning }"/> 
+              <Input
+                :required="true"
+                ref="fullName"
+                :value="employee.FullName"
+                v-model="employee.FullName"
+                @click="hideWarning($event)"
+              />
             </div>
             <!-- Div ngay sinh, gioi tinh -->
             <div class="title-row">
@@ -35,7 +51,13 @@
               <p>Giới tính</p>
             </div>
             <div class="input-row">
-              <Input :isDate="true" :DOB="true" :value="employee.DateOfBirth" v-model="employee.DateOfBirth"/>
+              <Input
+                :isDate="true"
+                :DOB="true"
+                ref="dateOfBirth"
+                :value="employee.DateOfBirth"
+                v-model="employee.DateOfBirth"
+              />
               <DropDown
                 :dataValue="dataGender"
                 :dataDropdown="dataDropdown"
@@ -50,15 +72,31 @@
               <p>Ngày cấp</p>
             </div>
             <div class="input-row">
-              <Input :required="true" :value="employee.IdentityNumber" v-model="employee.IdentityNumber"/>
-              <Input :isDate="true" :identity="true" :value="employee.IdentityDate" v-model="employee.IdentityDate"/>
+              <Warning :style="{ display: showWarning }"/>
+              <Input
+                :required="true"
+                ref="identity"
+                :value="employee.IdentityNumber"
+                v-model="employee.IdentityNumber"
+                @click="hideWarning($event)"
+              />
+              <Input
+                :isDate="true"
+                :identity="true"
+                :value="employee.IdentityDate"
+                v-model="employee.IdentityDate"
+              />
             </div>
             <!-- Noi cap -->
             <div class="title-row">
               <p class="col-1">Nơi cấp</p>
             </div>
             <div class="input-row">
-              <Input :normal="true" :value="employee.IdentityPlace" v-model="employee.IdentityPlace"/>
+              <Input
+                :normal="true"
+                :value="employee.IdentityPlace"
+                v-model="employee.IdentityPlace"
+              />
             </div>
             <!-- Email, so dien thoai -->
             <div class="title-row">
@@ -66,14 +104,28 @@
               <p>Số điện thoại (<span>*</span>)</p>
             </div>
             <div class="input-row">
-              <div class="warning-email">
+              <div class="warning" :style="{ display: showErrorBox }">
                 <div class="warning-rotate"></div>
                 <div class="warning-box">
                   <p>Email sai định dạng tên miền</p>
                 </div>
               </div>
-              <Input :required="true" :value="employee.Email" v-model="employee.Email"/>
-              <Input :required="true" :value="employee.PhoneNumber" v-model="employee.PhoneNumber"/>
+              <Warning :style="{ display: showWarning }"/>
+              <Input
+                :required="true"
+                ref="email"
+                :value="employee.Email"
+                v-model="employee.Email"
+                @blur="validateEmail($event, employee.Email)"
+              />
+              <Warning :rightWarning="true" :style="{ display: showWarning }"/>
+              <Input
+                :required="true"
+                ref="phone"
+                :value="employee.PhoneNumber"
+                v-model="employee.PhoneNumber"
+                @click="hideWarning($event)"
+              />
             </div>
             <p class="title-a">B. THÔNG TIN CÔNG VIỆC:</p>
             <div class="hr-custom"></div>
@@ -104,13 +156,18 @@
               <p>Mức lương cơ bản</p>
             </div>
             <div class="input-row salary-box">
-              <Input :normal="true" :value="employee.PersonalTaxCode" v-model="employee.PersonalTaxCode"/>
+              <Input
+                :normal="true"
+                :value="employee.PersonalTaxCode"
+                v-model="employee.PersonalTaxCode"
+              />
               <div class="wrap-salary">
                 <input
                   class="wrap-salary-text"
                   type="text"
                   value=""
-                  v-model.number="employee.Salary"
+                  v-model="employee.Salary"
+                  @keyup="inputSalary($event)"
                 />
                 <span>(VNĐ)</span>
               </div>
@@ -121,14 +178,19 @@
               <p>Tình trạng công việc</p>
             </div>
             <div class="input-row">
-              <Input :isDate="true" :joinDate="true" :value="employee.JoinDate" v-model="employee.JoinDate"/>
+              <Input
+                :isDate="true"
+                :joinDate="true"
+                :value="employee.JoinDate"
+                v-model="employee.JoinDate"
+              />
               <DropDown :dataValue="dataWorkStatus" type="WorkStatus" />
             </div>
           </div>
         </div>
       </div>
       <div class="footer-modal">
-        <div
+        <!-- <div
           class="button-modal delete"
           v-if="mode == 1"
           id="btn-delete"
@@ -136,7 +198,7 @@
         >
           <i class="fas fa-trash-alt"></i>
           <p>Xóa</p>
-        </div>
+        </div> -->
         <div class="button-modal cancel" id="btn-cancel" @click="changePopUp()">
           <p>Hủy</p>
         </div>
@@ -157,11 +219,14 @@
 import axios from "axios";
 import DropDown from "../../components/base/BaseDropdown.vue";
 import Input from "../../components/base/BaseInputField.vue";
+import Warning from "../../components/base/BaseWarning.vue";
+
 export default {
   name: "EmployeeDetail",
   components: {
     DropDown,
     Input,
+    Warning,
   },
   props: {
     modalBoxShow: Boolean,
@@ -207,10 +272,13 @@ export default {
         PositionId: this.position,
         PositionName: "",
       },
+      showError: false,      //Thay đổi trạng thái của Popup
+      validateSave: false,   //Validate khi lưu
+      warnRequired: false,   //Ẩn cảnh báo khi click vào input
     };
   },
   mounted() {
-    this.$refs.focusField.$el.focus();    
+    
   },
   computed: {
     modalBoxState() {
@@ -220,12 +288,35 @@ export default {
         return "none";
       }
     },
+    showErrorBox() {
+      if (this.showError) {
+        return "flex";
+      } else {
+        return "none";
+      }
+    },
+    showWarning() {
+      if (this.warnRequired) {
+        return "flex";
+      } else {
+        return "none";
+      }
+    },
   },
   methods: {
+    //Ẩn cảnh báo khi click vào input
+    hideWarning(e) {
+        console.log(e.target);
+        this.warnRequired = false;
+    },
+
     // Thay đổi trạng thái ẩn-hiện của popup
     changePopUp() {
       this.$emit("exitModalBox");
       // this.$emit('tableUpdated');
+      this.showError = false;
+      this.validateSave = false;
+      this.warnRequired = false;
     },
 
     // Thay đổi trạng thái ẩn-hiện của modalbox
@@ -258,35 +349,54 @@ export default {
      */
     saveEditEmployee() {
       let vm = this;
-      if (vm.mode == 0) {
-        vm.employee.Gender = vm.gender;
-        vm.employee.DepartmentId = vm.department;
-        vm.employee.PositionId = vm.position;
-        axios
-          .post(`http://cukcuk.manhnv.net/v1/employees`, vm.employee)
-          .then((res) => {
-            console.log(res);
-            vm.changeState();
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      } else {
-        vm.employee.Gender = vm.gender;
-        vm.employee.DepartmentId = vm.department;
-        vm.employee.PositionId = vm.position;
-        axios
-          .put(
-            `http://cukcuk.manhnv.net/v1/employees/${vm.employeeId}`,
-            vm.employee
-          )
-          .then((res) => {
-            console.log(res);
-            vm.changeState();
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+      let codeValue = vm.$refs.focusField.value;
+      let nameValue = vm.$refs.fullName.value;
+      let identityValue = vm.$refs.identity.value;
+      let emailValue = vm.$refs.email.value;
+      let phoneValue = vm.$refs.phone.value;
+      if( (codeValue == "" || nameValue == "" || identityValue == "" || emailValue == "" || phoneValue == "")){
+          vm.validateRequired();
+          // vm.validateSave = true;
+          // vm.warnRequired = true;
+          console.log("Không thể lưu");
+      }else{
+        if(!this.showError){
+          vm.employee.Salary = vm.convertSalary();
+          if (vm.mode == 0) {
+            
+            vm.employee.Gender = vm.gender;
+            vm.employee.DepartmentId = vm.department;
+            vm.employee.PositionId = vm.position;
+            axios
+              .post(`http://cukcuk.manhnv.net/v1/employees`, vm.employee)
+              .then((res) => {
+                console.log(res);
+                // debugger // eslint-disable-line
+                vm.changeState();
+              })
+              .catch((err) => {
+                console.error(err);
+              });
+          } else {
+            vm.employee.Gender = vm.gender;
+            vm.employee.DepartmentId = vm.department;
+            vm.employee.PositionId = vm.position;
+            axios
+              .put(
+                `http://cukcuk.manhnv.net/v1/employees/${vm.employeeId}`,
+                vm.employee
+              )
+              .then((res) => {
+                console.log(res);
+                vm.changeState();
+              })
+              .catch((err) => {
+                console.error(err);
+              });
+          }
+        }else{
+          console.log("Lỗi email, không thể lưu");
+        }
       }
     },
 
@@ -323,6 +433,25 @@ export default {
       }
     },
 
+    // Validate cho input khi click Lưu
+    validateRequired(){
+      var countRequired = 0;
+      this.$el.querySelectorAll(`input.required`).forEach(element => {
+        if(element.value == ''){
+            element.focus();
+            this.validateSave = true;
+            this.warnRequired = true;
+            return false;
+        }
+        if(element.value != ''){
+            this.validateSave = false;
+            this.warnRequired = false;
+        }
+        countRequired++;
+      });
+      if(countRequired == 5) return true;
+    },
+
     /**
      * Bắt lại sự kiện focus cho input
      */
@@ -330,16 +459,91 @@ export default {
       e.target.style.border = "1px solid #019160";
     },
 
-    /**
-     * Format Salary khi nhập
-     */
-    formatSalary() {},
+    //Format dd/mm/yyyy
+    formatDate(date){
+        var rel = "";
+        var word = date.split('-');
+        for(var i = 0; i < 2;  i++){
+            rel += word[2][i];
+        }
+        return rel+= '/' + word[1] + '/' + word[0];
+    },
+
+    //Validate Email
+    validateEmail(e, value) {
+      var patternEmail =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (!patternEmail.test(value)) {
+        e.target.style.border = "1px solid #FF4747";
+        this.showError = true;
+        console.log(this.showError);
+        return true;
+      } else {
+        this.showError = false;
+        console.log(this.showError);
+        console.log("Email OK!");
+        return false;
+      }
+    },
+
+    //Gán mã nhân viên tự sinh cho employee
+    updateCode(){
+      if(this.mode == 0){
+        this.employee.EmployeeCode = this.newEmployeeCode;
+        return this.employee.EmployeeCode;
+      }
+    },
+
+    // Format Salary khi nhập
+    inputSalary(e){
+      var selection = window.getSelection().toString();
+      if ( selection !== '' ) {
+          return;
+      }
+      let input = e.target.value;
+      // eslint-disable-next-line
+      input = input.replace(/[\D\s\._\-]+/g, "");
+      input = input ? parseInt( input, 10 ) : 0;
+      input === 0 ? "" : input.toLocaleString("id-ID");
+      this.employee.Salary = input.toLocaleString("id-ID");
+      console.log(this.employee.Salary);
+      console.log(input.toLocaleString("id-ID"));
+    },
+
+    //Format lại Lương khi thực hiện Lưu dữ liệu
+    convertSalary(){
+      let $this = this.$el.querySelector(`input.wrap-salary-text`).value;
+      let salary = "";
+      for(let i = 0; i < $this.split('.').length; i++){
+        salary += $this.split('.')[i];
+      } 
+      salary = parseInt(salary, 10);
+      return salary;
+    },
+
+    //Format Salary
+    formatSalary(salary){
+      if(salary){
+        var result = "";
+        var len = salary.length;
+        var charCount = 0;
+        for(var i = len - 1; i >= 0; i--){
+            result += salary[i];
+            charCount++;
+            if(charCount%3==0){
+                if(charCount == len) break;
+                result +=".";
+            }
+        }
+        return result.split("").reverse().join("");
+      } 
+    }
   },
   watch: {
     employee: function () {
-      this.$refs.focusField.$el.focus();    
-      this.employee.EmployeeCode = this.newEmployeeCode;
+      this.$refs.focusField.$el.focus();
     },
+    
     employeeId: function (value) {
       let vm = this;
       // Gọi API lấy thông tin chi tiết của 1 nhân viên
@@ -354,6 +558,7 @@ export default {
           vm.dataDropdown.GenderName = res.data.GenderName;
           vm.dataDropdown.DepartmentId = res.data.DepartmentId;
           vm.dataDropdown.PositionId = res.data.PositionId;
+          vm.employee.Salary = this.formatSalary(res.data.Salary.toString());
         })
         .then(() => {
           axios
@@ -387,6 +592,18 @@ export default {
       if (this.mode == 0) {
         this.employee = {};
       }
+    },
+    modalBoxShow: function(){
+      this.employee = {};
+      console.log(this.$el.querySelectorAll(`input.required`)); 
+      this.$el.querySelectorAll(`input.required`).forEach(element => {
+        element.style.border = "1px solid #bbbbbb";
+      });
+      this.$nextTick(() =>  {
+        if(this.modalBoxShow == true){
+          this.$refs.focusField.$el.children[0].focus();
+        }
+      })
     },
   },
 };

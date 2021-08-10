@@ -1,11 +1,11 @@
 <template>
   <div>
     <input
-      class="col-1 autofocus"
+      class="col-1 autofocus required"
       v-if="required"
       v-on:blur="handleBlur($event)"
       v-on:focus="handleInput($event)"
-      v-bind:value="value"
+      v-bind:value="value ? value : newEmployeeCode"
       type="text"
       autocomplete=""
       title="Trường bắt buộc phải nhập!"
@@ -29,7 +29,7 @@
       placeholder="_ _/_ _/_ _ _ _"
       title="Nhập đúng định dạng ngày/tháng/năm"
       v-if="isDate"
-      v-bind:value="value"
+      v-bind:value="[value ? formatDate(value) : '']"
       v-on="inputListeners"
     />  
     <input
@@ -47,14 +47,14 @@ export default {
     name: 'InputField',
     data() {
       return {
-        
+        borderRequired: false, //Border input required
       }
     },
     props: {
       value:{
         type: String,
         default(){
-          return '';
+          return this.newEmployeeCode;
         }
       },
       required: {
@@ -74,7 +74,17 @@ export default {
       },
       normal: {
         type: Boolean,
-      }
+      },
+      newEmployeeCode: {
+        type: String,
+        default(){
+          return '';
+        }
+      },
+      
+    },
+    mounted() {
+      this.$emit('updateCode', this.newEmployeeCode);
     },
     computed: {
       inputListeners: function () {
@@ -92,7 +102,8 @@ export default {
             }
           }
         )
-      }
+      },
+      
     },
     methods: {
       // Validate cho input
@@ -113,7 +124,22 @@ export default {
       handleInput(e) {
         e.target.style.border = "1px solid #019160";
       },
-    },  
+
+      //Format dd/mm/yyyy
+      formatDate(date){
+        try{
+          var rel = "";
+          var word = date.split('-');
+          for(var i = 0; i < 2;  i++){
+              rel += word[2][i];
+          }
+          return rel+= '/' + word[1] + '/' + word[0];
+        }catch{
+          console.log("Có lỗi xảy ra tại FormatDate!");
+        }
+      },
+    },
+     
 };
 </script>
 <style scoped>

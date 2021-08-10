@@ -2,7 +2,7 @@
     <div class="container">
         <div class="container__title">
           <p>Danh sách nhân viên</p>
-          <div class="container__title__button--delete">
+          <div class="container__title__button--delete" :style="{display: showButtonDel}" @click="deleteMultiple()">
             <i class="fas fa-trash-alt"></i>
             <p id="multiple-delete">Xóa nhân viên</p>
           </div>
@@ -72,7 +72,7 @@
             </div>
         </div>
         <div class="container__tools">
-          <input class="input-search" type="text" value="" placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
+          <input class="input-search" type="text" value="" placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại" @keyup.enter="handleInputSearch($event)">
 
           <!-- Component ComboBox -->
           <TheCombobox :api='"http://cukcuk.manhnv.net/api/Department"' :type='"Department"' :mode="1"/>
@@ -116,12 +116,13 @@
            </colgroup>
             <tbody v-show="showTable">
               <!-- Append data here! -->
-                <tr v-for="employee in employees" :key="employee.EmployeeId" @dblclick="dbClickHandle(employee.EmployeeId)" delete-id="" delete-employcode="" class="table-checkbox--default">
-                    <td class="table-checkbox"><input class="checkbox" type="checkbox" delete-id=""></td>
-                    <td>1</td>
+                <tr v-for="(employee,index) in employees" :key="employee.EmployeeId" @dblclick="dbClickHandle(employee.EmployeeId)" @click="clickHandle($event, employee.EmployeeId)" delete-employcode="" class="table-checkbox--default">
+                    <td class="table-checkbox"><input class="checkbox" type="checkbox" @click="clickCheckBox($event)"></td>
+                    <!-- <input class="checkbox" type="checkbox"> -->
+                    <td>{{ ++index }}</td>
                     <td class="employeeCode">{{employee.EmployeeCode}}</td>
                     <td class="fullName">{{employee.FullName}}</td>
-                    <td class="gender"><div class="table-gender" title="">{{employee.GenderName}}</div></td>
+                    <td class="gender" title="employee.GenderName"><div class="table-gender" title="">{{employee.GenderName}}</div></td>
                     <td class="center">{{ employee.DateOfBirth == null ? '' : formatDate(employee.DateOfBirth)}}</td>
                     <td class="">{{employee.PhoneNumber}}</td>
                     <td class="hidden-long-text"><div class="table-email" title="">{{employee.Email}}</div></td>
@@ -134,7 +135,7 @@
           </table>
         </div>
         <EmployeeDetail :mode="modeForm" :modalBoxShow="modalBoxShow" :employeeId="employeeId" :newEmployeeCode="newEmployeeCode" v-on:exitModalBox="exitModalBox()" v-on:hideModalBox="hideModalBox()" :tableUpdated="tableUpdated()"/>
-        <PopUp :popUpShow="popUpShow" v-on:hidePopUp="hidePopUp($event)"/>
+        <PopUp :popUpShow="popUpShow" v-on:hidePopUp="hidePopUp($event)" :mode="modeForm"/>
     </div>
 </template>
 
@@ -159,6 +160,10 @@ export default {
             modeForm: 0, 
             showTable: true,
             newEmployeeCode: '',
+            buttonDelShow: false,
+            queueDelete: [],
+            activeRow: false,
+            checkBox: false,
         }
     },
     mounted() {
@@ -172,12 +177,58 @@ export default {
             console.error(err); 
         })
     },
+    computed: {
+        showButtonDel(){
+            if(this.buttonDelShow){
+                return 'flex';
+            }else{
+                return 'none';
+            }
+        },
+        activeRowTable(){
+            if(this.activeRow){
+                return true;
+            }else{
+                return false;
+            }
+        },
+    },
     methods: {
         // Double Click sửa form trong table
         dbClickHandle(employeeId){
             this.modalBoxShow = !this.modalBoxShow;
-            this.employeeId = employeeId
+            this.employeeId = employeeId;
             this.modeForm = 1;
+        },
+
+        clickHandle(e,employeeId){
+            this.buttonDelShow = true;
+            e.currentTarget.classList.toggle("table-checkbox--default");
+            e.currentTarget.classList.toggle("table-checkbox--active");
+            let indexItem = this.queueDelete.indexOf(employeeId);
+            console.log("Click tr");
+            if(e.currentTarget.children[0].children[0].checked){
+                console.log(e.currentTarget.children[0].children[0].checked);
+                e.currentTarget.children[0].children[0].checked = false;
+
+            }else{
+                console.log(e.currentTarget.children[0].children[0].checked);
+                e.currentTarget.children[0].children[0].checked = true;
+            }
+            if(indexItem == -1){
+                this.queueDelete.push(employeeId);
+            }else{
+                //Tại vị trí indexItem, thực hiện remove 1 phần tử
+                this.queueDelete.splice(indexItem, 1);
+                if(this.queueDelete.length == 0){
+                    this.buttonDelShow = false;
+                }
+            }
+        },
+
+        clickCheckBox(e){
+            console.log(e.currentTarget.checked);
+            console.log("click checkbox");
         },
 
         //Mở form thêm mới nhân viên
@@ -237,7 +288,7 @@ export default {
             }
             return rel+= '/' + word[1] + '/' + word[0];
         },
-
+        
         //Format Salary
         formatSalary(salary){
             var result = "";
@@ -268,9 +319,40 @@ export default {
             .catch(err => {
                 console.error(err); 
             })
+        },
+
+        //Xóa nhiều nhân viên
+        deleteMultiple(){
+            this.queueDelete.forEach(item => {
+                axios
+                .delete(`http://cukcuk.manhnv.net/v1/employees/${item}`)
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+            });
+        },
+
+        //TODO: Bind data lên table
+        handleInputSearch(e){
+            debugger
+            console.log(e.target.value);
+            this.employees = [];
+            axios.get(`http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=1&pageNumber=10&employeeCode=${e.target.value}`)
+            .then(res => {
+                console.log(res);
+                debugger
+                this.employees = res.data;
+                debugger
+                console.log(this.employees);
+            })
+            .catch(err => {
+                console.error(err); 
+            })
         }
     },
-
 }
 </script>
 

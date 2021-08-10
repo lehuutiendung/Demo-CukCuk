@@ -1,7 +1,6 @@
 <template>
   <div>
       <TheWrap/>
-      <!-- <ModalBox v-bind:modalBoxShow="modalBoxShow" v-on:hideModalBox="hideModalBox()"/> -->
   </div>
 </template>
 

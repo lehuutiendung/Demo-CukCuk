@@ -1,11 +1,16 @@
-.warning-email{
+.warning{
     position: absolute;
     display: none;
     text-align: center;
     height: 40px;
-    margin-left: 62px;
+    margin-left: 104px;
     margin-bottom: 86px;
 }
+
+.right-warning{
+    right: 224px;
+}
+
 .warning-rotate{
     position: absolute;
     width: 30px;                                                                                                                                                                                                                        

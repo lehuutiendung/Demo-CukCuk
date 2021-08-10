@@ -114,8 +114,8 @@
 }
 
 .container__tools .refresh-button {
-  width: 46px;
-  height: 40px;
+  width: 40px;
+  height: 38px;
   border: 1px solid #bbbbbb;
   border-radius: 4px;
   background-image: url(../../assets/icon/refresh.png);
@@ -154,10 +154,6 @@
     background: #888;
 }
 
-::-webkit-scrollbar-track {
-  /* background: transparent; */
-}
-
 ::-webkit-scrollbar-track-piece:start{
   /* background: transparent; */
   margin-top: 48px;
@@ -169,7 +165,6 @@
   margin-right: 8px;
   margin-top: 10px;
   text-align: left;
-  /* font-family: GoogleSans-Medium; */
   overflow: scroll;
   height: calc(100vh - 220px);
 }
@@ -253,7 +248,7 @@
   height: 16px;
   align-items: center;
   border-radius: 4px;
-  color: 1px solid #BBBBBB;
+  border: 1px solid #BBBBBB;
   outline: none;
   margin: 0;
 }
@@ -279,3 +274,9 @@ table thead tr th:nth-child(5){
 .table-checkbox--active{
   background-color: #E3F3EE;
 }
+
+/* table .checkbox{
+  margin-top: 16px;
+  margin-left: 16px;
+  border-bottom: 1px solid #bbbbbb;
+} */

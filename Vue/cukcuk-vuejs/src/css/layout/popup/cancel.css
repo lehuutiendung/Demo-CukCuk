@@ -65,11 +65,12 @@
 .content-wrap{
     display: flex;
     width: 100%;
+    margin-left: 16px;
     margin-bottom: 24px;
     align-items: center;
 }
 
-.content-wrap .warning{
+.content-wrap .warning-popup{
     width: 40px;
     height: 40px;
     align-items: center;
@@ -77,9 +78,9 @@
     line-height: 40px;
     border-radius: 50%;
     background-color: #F4F4F4;
-    margin-left: 24px;
+    margin-left: 6px;
 }
-.warning .fa-exclamation-triangle{
+.warning-popup .fa-exclamation-triangle{
     font-size: 20px;
     color: #FFC400;
 }
