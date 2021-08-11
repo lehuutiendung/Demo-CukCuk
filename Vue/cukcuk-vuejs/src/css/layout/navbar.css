@@ -66,6 +66,10 @@
     color: var(--active-text-color);
 }
 
+.menu-active:hover{
+    background: #019160;
+}
+
 :root{
     --active-div-color: #019160;
     --active-text-color: #ffffff;

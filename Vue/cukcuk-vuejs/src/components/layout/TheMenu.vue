@@ -22,11 +22,11 @@
         </div>
         <p class="menu-left__text">Mua hàng</p>
       </div>
-      <div class="menu-left">
+      <div class="menu-left menu-active">
         <div class="menu-left__icon">
           <img src="../../assets/icon/dic-employee.png" alt="">
         </div>
-        <p class="menu-left__text">Danh mục nhân viên</p>
+        <p class="menu-left__text menu-active">Danh mục nhân viên</p>
       </div>
       <div class="menu-left">
         <div class="menu-left__icon">

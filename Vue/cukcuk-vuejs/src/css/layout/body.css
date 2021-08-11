@@ -30,6 +30,14 @@
   cursor: pointer;
 }
 
+#myDiv:hover {
+  background: #2FBE8E;
+}
+
+#myDiv:focus {
+  background-color: #01B075;
+}
+
 .container__title__button img {
   width: 24px;
   height: 24px;
@@ -101,6 +109,7 @@
   padding-bottom: 0;
   padding-left: 40px;
   float: left;
+  box-sizing: border-box;
 }
 
 .container__tools .input-search:focus {
@@ -263,11 +272,16 @@ table thead tr th:nth-child(5){
   text-align: center;
 }
 
-.gender .table-gender{
+.gender .table-gender{ 
   text-align: center;
   width: 62px;
   overflow-x: hidden;
   text-overflow: ellipsis;
+}
+
+.work .work-status{
+  text-align: center;
+  width: 60px;
 }
 
 /* table checkbox active */

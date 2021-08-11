@@ -6,6 +6,7 @@
         <p v-if="typeName == 'GenderName'">{{ dataDropdown.GenderName }}</p>
         <p v-if="typeName == 'DepartmentName'">{{ dataDropdown.DepartmentName }}</p>
         <p v-if="typeName == 'PositionName'">{{ dataDropdown.PositionName }}</p>
+        <p v-if="typeName == 'WorkStatusName'">{{ dataDropdown.WorkStatusName }}</p>
       </div>
       <span class="dropdown-img">
         <i class="fas fa-angle-down"></i>
@@ -94,6 +95,7 @@ export default {
           });
           vm.itemName = vm.dropdownData[0][vm.typeName];
           vm.$emit("gender", vm.itemName);
+          vm.$emit("workStatus", vm.itemName);
         })
         .catch((err) => {
           console.error(err);
@@ -119,6 +121,7 @@ export default {
       this.$emit("gender", id, value);
       this.$emit("department", id, value);
       this.$emit("position", id, value);
+      this.$emit("workStatus", id, value);
       this.show = !this.show;
     },
   },
