@@ -184,7 +184,13 @@
                 :value="employee.JoinDate"
                 v-model="employee.JoinDate"
               />
-              <DropDown :dataValue="dataWorkStatus" type="WorkStatus" />
+              <DropDown 
+                :dataValue="dataWorkStatus" 
+                :dataDropdown="dataDropdown"
+                :mode="mode"
+                type="WorkStatus"
+                v-on:workStatus="getWorkStatus" 
+              />
             </div>
           </div>
         </div>
@@ -245,6 +251,9 @@ export default {
       default: "",
       required: true,
     },
+    update: {
+      type: Boolean,
+    }
   },
   data() {
     return {
@@ -256,21 +265,24 @@ export default {
         { GenderName: "Khác", GenderId: 2 },
       ],
       dataWorkStatus: [
-        { WorkStatusName: "Đang làm việc" },
-        { WorkStatusName: "Đang nghỉ phép" },
-        { WorkStatusName: "Đã nghỉ làm" },
+        { WorkStatusName: "Đang làm việc", WorkStatusId: 0 },
+        { WorkStatusName: "Đang nghỉ phép", WorkStatusId: 1 },
+        { WorkStatusName: "Đã nghỉ làm", WorkStatusId: 2 },
       ],
-      gender: "",
-      department: "",
-      position: "",
+      gender: 0,
+      workStatus: 0,
+      department: "142cb08f-7c31-21fa-8e90-67245e8b283e",
+      position: "30d41e52-5e66-72bc-6c1c-b47866e0b131",
       inputRequired: false,
       dataDropdown: {
         GenderId: this.gender,
-        GenderName: "",
+        GenderName: "Nữ",
         DepartmentId: this.department,
-        DepartmentName: "",
+        DepartmentName: "Phòng Marketting",
         PositionId: this.position,
-        PositionName: "",
+        PositionName: "Giám đốc",
+        WorkStatusId: this.workStatus,
+        WorkStatusName: "Đang làm việc"
       },
       showError: false,      //Thay đổi trạng thái của Popup
       validateSave: false,   //Validate khi lưu
@@ -278,7 +290,7 @@ export default {
     };
   },
   mounted() {
-    
+      
   },
   computed: {
     modalBoxState() {
@@ -319,16 +331,30 @@ export default {
       this.warnRequired = false;
     },
 
-    // Thay đổi trạng thái ẩn-hiện của modalbox
+    // Thay đổi trạng thái ẩn-hiện của modalbox, và refresh table (Mặc định về trang đầu tiên của table)
     changeState() {
       this.$emit("hideModalBox");
       this.$emit("tableUpdated");
+      this.$emit("update");
+      this.$emit('changeMode');
     },
 
+    changeStatePut(){
+      this.$emit("hideModalBox");
+      this.$emit("tableUpdatedPut");
+      this.$emit("update");
+      this.$emit('changeMode');
+    },
     getGender(value, name) {
       console.log("Gender", value);
       this.gender = value;
       this.dataDropdown.GenderName = name;
+    },
+
+    getWorkStatus(value, name){
+      console.log("WorkStatus", value);
+      this.workStatus = value;
+      this.dataDropdown.WorkStatusName = name; 
     },
 
     getDepartment(value, name) {
@@ -367,6 +393,7 @@ export default {
             vm.employee.Gender = vm.gender;
             vm.employee.DepartmentId = vm.department;
             vm.employee.PositionId = vm.position;
+            vm.employee.workStatus = vm.workStatus;
             axios
               .post(`http://cukcuk.manhnv.net/v1/employees`, vm.employee)
               .then((res) => {
@@ -381,6 +408,7 @@ export default {
             vm.employee.Gender = vm.gender;
             vm.employee.DepartmentId = vm.department;
             vm.employee.PositionId = vm.position;
+            vm.employee.workStatus = vm.workStatus;
             axios
               .put(
                 `http://cukcuk.manhnv.net/v1/employees/${vm.employeeId}`,
@@ -388,7 +416,7 @@ export default {
               )
               .then((res) => {
                 console.log(res);
-                vm.changeState();
+                vm.changeStatePut();
               })
               .catch((err) => {
                 console.error(err);
@@ -401,25 +429,24 @@ export default {
     },
 
     /**
-     * @description Xóa nhân viên trong form chi tiết
+     * @description Xóa nhân viên trong form chi tiết, tính năng này đã bỏ
      * @author DUNGLHT
      * @since 30/07/2021
      */
-    deleteEmployee() {
-      let vm = this;
-      axios
-        .delete(
-          `http://cukcuk.manhnv.net/v1/employees/${vm.employeeId}`,
-          vm.employee
-        )
-        .then((res) => {
-          console.log(res);
-          vm.changeState();
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    },
+    // deleteEmployee() {
+    //   let vm = this;
+    //   axios
+    //     .delete(
+    //       `http://cukcuk.manhnv.net/v1/employees/${vm.employeeId}`
+    //     )
+    //     .then((res) => {
+    //       console.log(res);
+    //       vm.changeState();
+    //     })
+    //     .catch((err) => {
+    //       console.error(err);
+    //     });
+    // },
 
     // Validate cho input
     /**
@@ -436,19 +463,22 @@ export default {
     // Validate cho input khi click Lưu
     validateRequired(){
       var countRequired = 0;
-      this.$el.querySelectorAll(`input.required`).forEach(element => {
-        if(element.value == ''){
-            element.focus();
+      /*eslint no-extra-semi: "error"*/
+      var list = this.$el.querySelectorAll(`input.required`);
+      for(let i = 0; i < list.length; i++){
+      // this.$el.querySelectorAll(`input.required`).forEach(element => {
+        if(list[i].value == ''){
+            list[i].focus();
             this.validateSave = true;
             this.warnRequired = true;
             return false;
         }
-        if(element.value != ''){
+        if(list[i].value != ''){
             this.validateSave = false;
             this.warnRequired = false;
         }
         countRequired++;
-      });
+      }
       if(countRequired == 5) return true;
     },
 
@@ -544,11 +574,14 @@ export default {
       this.$refs.focusField.$el.focus();
     },
     
-    employeeId: function (value) {
+    mode: function () {
       let vm = this;
       // Gọi API lấy thông tin chi tiết của 1 nhân viên
-      axios
-        .get(`http://cukcuk.manhnv.net/v1/employees/${value}`)
+
+      // Nếu mode = 1: Form sửa => Gọi API
+      if(this.mode == 1){
+        axios
+        .get(`http://cukcuk.manhnv.net/v1/employees/${this.employeeId}`)
         .then((res) => {
           vm.employee = res.data;
           vm.gender = res.data.Gender;
@@ -558,6 +591,7 @@ export default {
           vm.dataDropdown.GenderName = res.data.GenderName;
           vm.dataDropdown.DepartmentId = res.data.DepartmentId;
           vm.dataDropdown.PositionId = res.data.PositionId;
+          vm.dataDropdown.WorkStatusId = res.data.WorkStatus;
           vm.employee.Salary = this.formatSalary(res.data.Salary.toString());
         })
         .then(() => {
@@ -587,12 +621,18 @@ export default {
         .catch((err) => {
           console.error(err);
         });
-    },
-    mode: function () {
+      }
+      // Nếu mode = 0: Form thêm mới => Clear dữ liệu cũ
       if (this.mode == 0) {
         this.employee = {};
       }
+    
     },
+    // mode: function () {
+    //   if (this.mode == 0) {
+    //     this.employee = {};
+    //   }
+    // },
     modalBoxShow: function(){
       this.employee = {};
       console.log(this.$el.querySelectorAll(`input.required`)); 

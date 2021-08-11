@@ -24,7 +24,7 @@
     display: flex;
     justify-content: center;
     margin-right: 10px;
-    
+    box-sizing: border-box;
 }
 
 .footer .number__pages .button__hide:hover{
@@ -47,7 +47,16 @@
 .footer .number__pages .focus{
     border: none;
     background-color: #019160;
-    color: #000000;
+    color: #ffffff;
+}
+.footer .number__pages .button__dot.focus:hover{
+    border: none;
+    background: #2FBE8E;
+    color: #ffffff;
+}
+
+.footer .number__pages .button__dot.focus:focus{
+    background-color: #01B075;
 }
 
 .footer .number__pages .button__dot:hover{
