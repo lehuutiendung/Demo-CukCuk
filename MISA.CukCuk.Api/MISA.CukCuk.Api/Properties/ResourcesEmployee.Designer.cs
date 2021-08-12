@@ -22,14 +22,14 @@ namespace MISA.CukCuk.Api.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Resources {
+    public class ResourcesEmployee {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources() {
+        internal ResourcesEmployee() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MISA.CukCuk.Api.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MISA.CukCuk.Api.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MISA.CukCuk.Api.Properties.ResourcesEmployee", typeof(ResourcesEmployee).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,42 +61,6 @@ namespace MISA.CukCuk.Api.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mã khách hàng này đã tồn tại. Không được phép trùng!.
-        /// </summary>
-        public static string CustomerCode_Duplicate_ErrorMsg {
-            get {
-                return ResourceManager.GetString("CustomerCode_Duplicate_ErrorMsg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Mã khách hàng không được để trống!.
-        /// </summary>
-        public static string CustomerCode_ErrorMsg {
-            get {
-                return ResourceManager.GetString("CustomerCode_ErrorMsg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Email sai định dạng!.
-        /// </summary>
-        public static string CustomerEmail_ErrorMsg {
-            get {
-                return ResourceManager.GetString("CustomerEmail_ErrorMsg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Email không được phép để trống!.
-        /// </summary>
-        public static string Email_ErrorMsg {
-            get {
-                return ResourceManager.GetString("Email_ErrorMsg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Mã nhân viên này đã tồn tại. Không được phép trùng!.
         /// </summary>
         public static string EmployeeCode_Duplicate_ErrorMsg {
@@ -111,51 +75,6 @@ namespace MISA.CukCuk.Api.Properties {
         public static string EmployeeCode_ErrorMsg {
             get {
                 return ResourceManager.GetString("EmployeeCode_ErrorMsg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Email sai định dạng!.
-        /// </summary>
-        public static string EmployeeEmail_ErrorMsg {
-            get {
-                return ResourceManager.GetString("EmployeeEmail_ErrorMsg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Có lỗi xảy ra. Vui lòng liên hệ MISA!.
-        /// </summary>
-        public static string Exception_ErrorMsg {
-            get {
-                return ResourceManager.GetString("Exception_ErrorMsg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Họ tên không được phép để trống!.
-        /// </summary>
-        public static string FullName_ErrorMsg {
-            get {
-                return ResourceManager.GetString("FullName_ErrorMsg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Không có dữ liệu..
-        /// </summary>
-        public static string NotExist {
-            get {
-                return ResourceManager.GetString("NotExist", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Số điện thoại không được phép để trống!.
-        /// </summary>
-        public static string PhoneNumber_ErrorMsg {
-            get {
-                return ResourceManager.GetString("PhoneNumber_ErrorMsg", resourceCulture);
             }
         }
     }

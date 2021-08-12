@@ -117,37 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CustomerCode_Duplicate_ErrorMsg" xml:space="preserve">
-    <value>Mã khách hàng này đã tồn tại. Không được phép trùng!</value>
-  </data>
-  <data name="CustomerCode_ErrorMsg" xml:space="preserve">
-    <value>Mã khách hàng không được để trống!</value>
-  </data>
-  <data name="CustomerEmail_ErrorMsg" xml:space="preserve">
-    <value>Email sai định dạng!</value>
-  </data>
-  <data name="Email_ErrorMsg" xml:space="preserve">
-    <value>Email không được phép để trống!</value>
-  </data>
   <data name="EmployeeCode_Duplicate_ErrorMsg" xml:space="preserve">
     <value>Mã nhân viên này đã tồn tại. Không được phép trùng!</value>
   </data>
   <data name="EmployeeCode_ErrorMsg" xml:space="preserve">
     <value>Mã nhân viên không được phép để trống!</value>
-  </data>
-  <data name="EmployeeEmail_ErrorMsg" xml:space="preserve">
-    <value>Email sai định dạng!</value>
-  </data>
-  <data name="Exception_ErrorMsg" xml:space="preserve">
-    <value>Có lỗi xảy ra. Vui lòng liên hệ MISA!</value>
-  </data>
-  <data name="FullName_ErrorMsg" xml:space="preserve">
-    <value>Họ tên không được phép để trống!</value>
-  </data>
-  <data name="NotExist" xml:space="preserve">
-    <value>Không có dữ liệu.</value>
-  </data>
-  <data name="PhoneNumber_ErrorMsg" xml:space="preserve">
-    <value>Số điện thoại không được phép để trống!</value>
   </data>
 </root>

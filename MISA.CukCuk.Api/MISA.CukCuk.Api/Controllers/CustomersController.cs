@@ -16,6 +16,8 @@ namespace MISA.CukCuk.Api.Controllers
     [ApiController]
     public class CustomersController : ControllerBase
     {
+        #region API lấy tất cả khách hàng
+
         /// <summary>
         /// Lấy tất cả khách hàng
         /// </summary>
@@ -55,7 +57,7 @@ namespace MISA.CukCuk.Api.Controllers
                 var errorObj = new
                 {
                     devMsg = ex.Message,
-                    userMsg = Properties.Resources.Exception_ErrorMsg,
+                    userMsg = Properties.ResourcesCommon.Exception_ErrorMsg,
                     errorCode = "",
                     moreInfo = "",
                     traceId = ""
@@ -63,6 +65,9 @@ namespace MISA.CukCuk.Api.Controllers
                 return StatusCode(500, errorObj);
             }         
         }
+        #endregion
+
+        #region API lấy thông tin của 1 khách hàng
 
         /// <summary>
         /// Lấy thông tin của 1 khách hàng
@@ -98,7 +103,7 @@ namespace MISA.CukCuk.Api.Controllers
                 var errorObj = new
                 {
                     devMsg = ex.Message,
-                    userMsg = Properties.Resources.Exception_ErrorMsg,
+                    userMsg = Properties.ResourcesCommon.Exception_ErrorMsg,
                     errorCode = "",
                     moreInfo = "",
                     traceId = ""
@@ -106,6 +111,9 @@ namespace MISA.CukCuk.Api.Controllers
                 return StatusCode(500, errorObj);
             }
         }
+        #endregion
+
+        #region API phân trang và bộ lọc theo tên, mã khách hàng, số điện thoại
 
         /// <summary>
         /// Bộ lọc theo Tên, Mã khách hàng, Số điện thoại
@@ -132,24 +140,13 @@ namespace MISA.CukCuk.Api.Controllers
                 IDbConnection dbConnection = new MySqlConnection(connectionString);
 
                 DynamicParameters dynamicParameters = new DynamicParameters();
-                var sqlCommand = "";
-                if(fullName == "" && customerCode == "" && phoneNumber == "")
-                {
-                    sqlCommand = $"SELECT * FROM (SELECT * FROM Customer LIMIT @PageSize OFFSET @OffSet ) paginate";
-                }
-                else
-                {
-                    sqlCommand = $"SELECT * FROM (SELECT * FROM Customer LIMIT @PageSize OFFSET @OffSet ) paginate " +
-                                                                  $"WHERE ( FullName LIKE @FullName AND " +
-                                                                  $"CustomerCode LIKE @CustomerCode AND " +
-                                                                  $"PhoneNumber LIKE @PhoneNumber )";
-                }
 
                 //Tính toán giá trị Offset
-                var offSet = pageSize * pageNumber - pageSize;
+                int offSet = pageSize * pageNumber - pageSize;
 
-                dynamicParameters.Add($"@PageSize", $"{pageSize}");
-                dynamicParameters.Add($"@OffSet", $"{offSet}");
+                //Câu lệnh truy vấn phân trang và filter theo các tiêu chí
+                var sqlCommand = $"SELECT * FROM (SELECT * FROM Customer LIMIT {pageSize} OFFSET {offSet}) paginate WHERE ( FullName LIKE @FullName AND CustomerCode LIKE @CustomerCode AND PhoneNumber LIKE @PhoneNumber )";
+                
                 dynamicParameters.Add($"@FullName", $"%{fullName}%");
                 dynamicParameters.Add($"@CustomerCode", $"%{customerCode}%");
                 dynamicParameters.Add($"@PhoneNumber", $"%{phoneNumber}%");
@@ -167,7 +164,7 @@ namespace MISA.CukCuk.Api.Controllers
                 var errorObj = new
                 {
                     devMsg = ex.Message,
-                    userMsg = Properties.Resources.Exception_ErrorMsg,
+                    userMsg = Properties.ResourcesCommon.Exception_ErrorMsg,
                     errorCode = "",
                     moreInfo = "",
                     traceId = ""
@@ -176,7 +173,9 @@ namespace MISA.CukCuk.Api.Controllers
             }
             
         }
+        #endregion
 
+        #region API thêm mới khách hàng
 
         /// <summary>
         /// Thêm mới khách hàng
@@ -193,16 +192,16 @@ namespace MISA.CukCuk.Api.Controllers
                 {
                     var errorObj = new
                     {
-                        devMsg = Properties.Resources.CustomerCode_ErrorMsg,
-                        userMsg = Properties.Resources.CustomerCode_ErrorMsg,
+                        devMsg = Properties.ResourcesCustomer.CustomerCode_ErrorMsg,
+                        userMsg = Properties.ResourcesCustomer.CustomerCode_ErrorMsg,
                         errorCode = "",
                     };
                     return BadRequest(errorObj);
                 }else if(customer.FullName == "" || customer.FullName == null){
                     var errorObj = new
                     {
-                        devMsg = Properties.Resources.FullName_ErrorMsg,
-                        userMsg = Properties.Resources.FullName_ErrorMsg,
+                        devMsg = Properties.ResourcesCommon.FullName_ErrorMsg,
+                        userMsg = Properties.ResourcesCommon.FullName_ErrorMsg,
                         errorCode = "",
                     };
                     return BadRequest(errorObj);
@@ -210,8 +209,8 @@ namespace MISA.CukCuk.Api.Controllers
                 else if(customer.Email == "" || customer.Email == null){
                     var errorObj = new
                     {
-                        devMsg = Properties.Resources.Email_ErrorMsg,
-                        userMsg = Properties.Resources.Email_ErrorMsg,
+                        devMsg = Properties.ResourcesCommon.Email_ErrorMsg,
+                        userMsg = Properties.ResourcesCommon.Email_ErrorMsg,
                         errorCode = "",
                     };
                     return BadRequest(errorObj);
@@ -220,8 +219,8 @@ namespace MISA.CukCuk.Api.Controllers
                 {
                     var errorObj = new
                     {
-                        devMsg = Properties.Resources.PhoneNumber_ErrorMsg,
-                        userMsg = Properties.Resources.PhoneNumber_ErrorMsg,
+                        devMsg = Properties.ResourcesCommon.PhoneNumber_ErrorMsg,
+                        userMsg = Properties.ResourcesCommon.PhoneNumber_ErrorMsg,
                         errorCode = "",
                     };
                     return BadRequest(errorObj);
@@ -234,8 +233,8 @@ namespace MISA.CukCuk.Api.Controllers
                 {
                     var errorObj = new
                     {
-                        devMsg = Properties.Resources.CustomerEmail_ErrorMsg,
-                        userMsg = Properties.Resources.CustomerEmail_ErrorMsg,
+                        devMsg = Properties.ResourcesCommon.ValidateEmail_ErrorMsg,
+                        userMsg = Properties.ResourcesCommon.ValidateEmail_ErrorMsg,
                         errorCode = "",
                         moreInfo = "",
                         traceId = ""
@@ -262,8 +261,8 @@ namespace MISA.CukCuk.Api.Controllers
                 {
                     var errorObj = new
                     {
-                        devMsg = Properties.Resources.CustomerCode_Duplicate_ErrorMsg,
-                        userMsg = Properties.Resources.CustomerCode_Duplicate_ErrorMsg,
+                        devMsg = Properties.ResourcesCustomer.CustomerCode_Duplicate_ErrorMsg,
+                        userMsg = Properties.ResourcesCustomer.CustomerCode_Duplicate_ErrorMsg,
                         errorCode = "",
                         moreInfo = "",
                         traceId = ""
@@ -317,8 +316,8 @@ namespace MISA.CukCuk.Api.Controllers
                 {
                     var errorObj = new
                     {
-                        devMsg = Properties.Resources.NotExist,
-                        userMsg = Properties.Resources.NotExist,
+                        devMsg = Properties.ResourcesCommon.NotExist,
+                        userMsg = Properties.ResourcesCommon.NotExist,
                         errorCode = "",
                         moreInfo = "",
                         traceId = ""
@@ -331,7 +330,7 @@ namespace MISA.CukCuk.Api.Controllers
                 var errorObj = new
                 {
                     devMsg = ex.Message,
-                    userMsg = Properties.Resources.Exception_ErrorMsg,
+                    userMsg = Properties.ResourcesCommon.Exception_ErrorMsg,
                     errorCode = "",
                     moreInfo = "",
                     traceId = ""
@@ -340,6 +339,9 @@ namespace MISA.CukCuk.Api.Controllers
             }
             
         }
+        #endregion
+
+        #region API xóa một khách hàng
 
         /// <summary>
         /// Xóa một khách hàng
@@ -375,7 +377,7 @@ namespace MISA.CukCuk.Api.Controllers
                 var errorObj = new
                 {
                     devMsg = ex.Message,
-                    userMsg = Properties.Resources.Exception_ErrorMsg,
+                    userMsg = Properties.ResourcesCommon.Exception_ErrorMsg,
                     errorCode = "",
                     moreInfo = "",
                     traceId = ""
@@ -383,6 +385,9 @@ namespace MISA.CukCuk.Api.Controllers
                 return StatusCode(500, errorObj);
             }
         }
+        #endregion
+
+        #region API sửa thông tin khách hàng
 
         /// <summary>
         /// Sửa bản ghi khách hàng
@@ -448,7 +453,7 @@ namespace MISA.CukCuk.Api.Controllers
                 var errorObj = new
                 {
                     devMsg = ex.Message,
-                    userMsg = Properties.Resources.Exception_ErrorMsg,
+                    userMsg = Properties.ResourcesCommon.Exception_ErrorMsg,
                     errorCode = "",
                     moreInfo = "",
                     traceId = ""
@@ -456,5 +461,7 @@ namespace MISA.CukCuk.Api.Controllers
                 return StatusCode(500, errorObj);
             } 
         }
+        #endregion
+
     }
 }
