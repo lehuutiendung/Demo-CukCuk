@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -26,7 +26,7 @@ namespace MISA.CukCuk.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddCors();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -47,6 +47,11 @@ namespace MISA.CukCuk.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            
+            //Thiết lập CORS
+            app.UseCors(o => o.AllowAnyMethod()
+            .AllowAnyOrigin()
+            .AllowAnyHeader());
 
             app.UseAuthorization();
 
