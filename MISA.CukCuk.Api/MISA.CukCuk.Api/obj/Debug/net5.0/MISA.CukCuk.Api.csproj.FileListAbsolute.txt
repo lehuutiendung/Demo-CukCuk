@@ -29,3 +29,5 @@ C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\
 C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\obj\Debug\net5.0\MISA.CukCuk.Api.genruntimeconfig.cache
 C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\bin\Debug\net5.0\Dapper.dll
 C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\bin\Debug\net5.0\MySqlConnector.dll
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\obj\Debug\net5.0\MISA.CukCuk.Api.Properties.Resources.resources
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\obj\Debug\net5.0\MISA.CukCuk.Api.csproj.GenerateResource.cache
