@@ -50,7 +50,6 @@ namespace MISA.CukCuk.Api.Controllers
                 {
                     return NoContent();
                 }
-                
             }
             catch (Exception ex)
             {
@@ -155,8 +154,9 @@ namespace MISA.CukCuk.Api.Controllers
 
                 var customer = dbConnection.Query<object>(sqlCommand, dynamicParameters);
                 var totalRecord = dbConnection.QueryFirstOrDefault<int>(sqltotalRecord);
+                var totalPage = (totalRecord / pageSize) + 1;
 
-                var response = StatusCode(200, new { TotalRecord = totalRecord, Data = customer });
+                var response = StatusCode(200, new { TotalPage = totalPage, TotalRecord = totalRecord, Data = customer });
                 return response;
             }
             catch (Exception ex)
@@ -172,6 +172,53 @@ namespace MISA.CukCuk.Api.Controllers
                 return StatusCode(500, errorObj);
             }
             
+        }
+        #endregion
+
+        #region API sinh mã khách hàng
+
+        [HttpGet("NewCustomerCode")]
+        public IActionResult NewCustomerCode()
+        {
+            try
+            {
+                //1. Khai báo thông tin kết nối database
+                var connectionString = "Host = 47.241.69.179;" +
+                    "Database = WEB07.MF928.LHTDUNG.CukCuk;" +
+                    "User Id = dev;" +
+                    "Password = 12345678";
+
+                //2. Khởi tạo đối tượng kết nối với database
+                IDbConnection dbConnection = new MySqlConnection(connectionString);
+
+                //3. Lấy dữ liệu
+                var sqlCommand = "SELECT CAST(SUBSTRING(CustomerCode, 3, LENGTH(CustomerCode)-1) AS int) AS c FROM Customer ORDER BY c DESC LIMIT 1";
+                var customerCode = dbConnection.QueryFirstOrDefault<int>(sqlCommand);
+
+                //4. Trả về cho client
+                if (customerCode != null)
+                {
+                    customerCode++;
+                    var response = StatusCode(200, new { CustomerCode = string.Concat("KH", customerCode) });
+                    return response;
+                }
+                else
+                {
+                    return NoContent();
+                }
+            }
+            catch (Exception ex)
+            {
+                var errorObj = new
+                {
+                    devMsg = ex.Message,
+                    userMsg = Properties.ResourcesCommon.Exception_ErrorMsg,
+                    errorCode = "",
+                    moreInfo = "",
+                    traceId = ""
+                };
+                return StatusCode(500, errorObj);
+            }
         }
         #endregion
 
