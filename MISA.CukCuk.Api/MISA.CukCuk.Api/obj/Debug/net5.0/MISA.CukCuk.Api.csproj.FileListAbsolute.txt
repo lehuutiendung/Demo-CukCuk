@@ -29,7 +29,7 @@ C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\
 C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\obj\Debug\net5.0\MISA.CukCuk.Api.genruntimeconfig.cache
 C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\bin\Debug\net5.0\Dapper.dll
 C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\bin\Debug\net5.0\MySqlConnector.dll
-C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\obj\Debug\net5.0\MISA.CukCuk.Api.csproj.GenerateResource.cache
-C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\obj\Debug\net5.0\MISA.CukCuk.Api.Properties.ResourcesCommon.resources
-C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\obj\Debug\net5.0\MISA.CukCuk.Api.Properties.ResourcesCustomer.resources
-C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\obj\Debug\net5.0\MISA.CukCuk.Api.Properties.ResourcesEmployee.resources
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.ApplicationCore.dll
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.Infrastructure.dll
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.ApplicationCore.pdb
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.Infrastructure.pdb

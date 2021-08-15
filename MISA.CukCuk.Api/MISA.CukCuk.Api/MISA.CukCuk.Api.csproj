@@ -11,40 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Properties\ResourcesCommon.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourcesCommon.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Properties\ResourcesEmployee.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourcesEmployee.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Properties\ResourcesCustomer.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ResourcesCustomer.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Properties\ResourcesCommon.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ResourcesCommon.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Properties\ResourcesEmployee.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ResourcesEmployee.resx</DependentUpon>
-    </Compile>
-    <Compile Update="Properties\ResourcesCustomer.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>ResourcesCustomer.resx</DependentUpon>
-    </Compile>
+    <ProjectReference Include="..\MISA.ApplicationCore\MISA.ApplicationCore.csproj" />
+    <ProjectReference Include="..\MISA.Infrastructure\MISA.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

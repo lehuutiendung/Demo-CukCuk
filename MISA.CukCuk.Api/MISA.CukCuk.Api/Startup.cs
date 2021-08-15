@@ -7,6 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MISA.ApplicationCore.Interfaces.Repository;
+using MISA.ApplicationCore.Interfaces.Services;
+using MISA.ApplicationCore.Services;
+using MISA.Infrastructure.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +31,6 @@ namespace MISA.CukCuk.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            //services.AddControllers();
             services.AddControllers().AddJsonOptions(jsonOptions =>
             {
                 jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;
@@ -36,6 +39,12 @@ namespace MISA.CukCuk.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MISA.CukCuk.Api", Version = "v1" });
             });
+
+            services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+
+            services.AddScoped<IEmployeeService, EmployeeService>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

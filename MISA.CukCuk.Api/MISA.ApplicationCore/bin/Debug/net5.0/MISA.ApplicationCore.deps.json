@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "MISA.ApplicationCore/1.0.0": {
+        "runtime": {
+          "MISA.ApplicationCore.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MISA.ApplicationCore/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

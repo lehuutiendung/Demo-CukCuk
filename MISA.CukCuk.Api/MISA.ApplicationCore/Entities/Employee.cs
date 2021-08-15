@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace MISA.CukCuk.Api.Model
+namespace MISA.ApplicationCore.Entities
 {
-    public class Customer:BaseEntity
+    public class Employee:BaseEntity
     {
         #region Property
         /// <summary>
-        /// Khóa chính
+        /// Khóa chính EmployeeId
         /// </summary>
-        public Guid CustomerId { get; set; }
+        public Guid EmployeeId { get; set; }
 
         /// <summary>
-        /// Mã khách hàng
+        /// Mã nhân viên
         /// </summary>
-        public string CustomerCode { get; set; }
+        public string EmployeeCode { get; set; }
 
         /// <summary>
         /// Tên lót
@@ -31,12 +32,18 @@ namespace MISA.CukCuk.Api.Model
         /// <summary>
         /// Họ và tên
         /// </summary>
+
         public string FullName { get; set; }
 
         /// <summary>
         /// Giới tính
         /// </summary>
         public int? Gender { get; set; }
+
+        /// <summary>
+        /// Email
+        /// </summary>
+        public string Email { get; set; }
 
         /// <summary>
         /// Địa chỉ
@@ -49,15 +56,9 @@ namespace MISA.CukCuk.Api.Model
         public DateTime? DateOfBirth { get; set; }
 
         /// <summary>
-        /// Email
-        /// </summary>
-        public string Email { get; set; }
-
-        /// <summary>
         /// Số điện thoại
         /// </summary>
         public string PhoneNumber { get; set; }
-
         #endregion
     }
 }

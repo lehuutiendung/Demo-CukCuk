@@ -90,6 +90,31 @@
         "frameworkReferences": [
           "Microsoft.AspNetCore.App"
         ]
+      },
+      "MISA.ApplicationCore/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/MISA.ApplicationCore.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MISA.ApplicationCore.dll": {}
+        }
+      },
+      "MISA.Infrastructure/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Dapper": "2.0.90",
+          "MISA.ApplicationCore": "1.0.0",
+          "MySqlConnector": "1.3.11"
+        },
+        "compile": {
+          "bin/placeholder/MISA.Infrastructure.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MISA.Infrastructure.dll": {}
+        }
       }
     }
   },
@@ -258,11 +283,23 @@
         "swashbuckle.aspnetcore.swaggerui.6.1.5.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
+    },
+    "MISA.ApplicationCore/1.0.0": {
+      "type": "project",
+      "path": "../MISA.ApplicationCore/MISA.ApplicationCore.csproj",
+      "msbuildProject": "../MISA.ApplicationCore/MISA.ApplicationCore.csproj"
+    },
+    "MISA.Infrastructure/1.0.0": {
+      "type": "project",
+      "path": "../MISA.Infrastructure/MISA.Infrastructure.csproj",
+      "msbuildProject": "../MISA.Infrastructure/MISA.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net5.0": [
       "Dapper >= 2.0.90",
+      "MISA.ApplicationCore >= 1.0.0",
+      "MISA.Infrastructure >= 1.0.0",
       "MySqlConnector >= 1.3.11",
       "Swashbuckle.AspNetCore >= 6.1.5"
     ]
@@ -298,7 +335,14 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\admins\\OneDrive\\Máy tính\\Demo-CukCuk\\MISA.CukCuk.Api\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj": {
+              "projectPath": "C:\\Users\\admins\\OneDrive\\Máy tính\\Demo-CukCuk\\MISA.CukCuk.Api\\MISA.ApplicationCore\\MISA.ApplicationCore.csproj"
+            },
+            "C:\\Users\\admins\\OneDrive\\Máy tính\\Demo-CukCuk\\MISA.CukCuk.Api\\MISA.Infrastructure\\MISA.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\admins\\OneDrive\\Máy tính\\Demo-CukCuk\\MISA.CukCuk.Api\\MISA.Infrastructure\\MISA.Infrastructure.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

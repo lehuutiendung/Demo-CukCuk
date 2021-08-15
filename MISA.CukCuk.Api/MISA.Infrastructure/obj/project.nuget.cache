@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "m4XY+ug0HkrBFGsNwEBW57uxhmHbZY0al3ps8z6f/PnJgbOvOR5UlXU0ZUcGQruNC33vQefbLun3CMCymiiwUg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\admins\\OneDrive\\Máy tính\\Demo-CukCuk\\MISA.CukCuk.Api\\MISA.Infrastructure\\MISA.Infrastructure.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\admins\\.nuget\\packages\\dapper\\2.0.90\\dapper.2.0.90.nupkg.sha512",
+    "C:\\Users\\admins\\.nuget\\packages\\mysqlconnector\\1.3.11\\mysqlconnector.1.3.11.nupkg.sha512"
+  ],
+  "logs": []
+}

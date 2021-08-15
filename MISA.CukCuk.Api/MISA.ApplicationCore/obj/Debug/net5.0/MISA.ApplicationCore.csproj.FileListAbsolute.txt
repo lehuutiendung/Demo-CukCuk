@@ -1,0 +1,16 @@
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.ApplicationCore\bin\Debug\net5.0\MISA.ApplicationCore.deps.json
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.ApplicationCore\bin\Debug\net5.0\MISA.ApplicationCore.dll
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.ApplicationCore\bin\Debug\net5.0\ref\MISA.ApplicationCore.dll
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.ApplicationCore\bin\Debug\net5.0\MISA.ApplicationCore.pdb
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.csproj.AssemblyReference.cache
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.AssemblyInfoInputs.cache
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.AssemblyInfo.cs
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.csproj.CoreCompileInputs.cache
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.dll
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.ApplicationCore\obj\Debug\net5.0\ref\MISA.ApplicationCore.dll
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.pdb
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.Resources.ResourcesCommon.resources
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.Resources.ResourcesCustomer.resources
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.Resources.ResourcesEmployee.resources
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.ApplicationCore\obj\Debug\net5.0\MISA.ApplicationCore.csproj.GenerateResource.cache
