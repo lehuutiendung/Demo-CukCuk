@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MISA.CukCuk.Api.Properties {
+namespace MISA.ApplicationCore.Resources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace MISA.CukCuk.Api.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ResourcesCustomer {
+    public class ResourcesEmployee {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ResourcesCustomer() {
+        internal ResourcesEmployee() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MISA.CukCuk.Api.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MISA.CukCuk.Api.Properties.ResourcesCustomer", typeof(ResourcesCustomer).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MISA.ApplicationCore.Resources.ResourcesEmployee", typeof(ResourcesEmployee).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,20 @@ namespace MISA.CukCuk.Api.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mã khách hàng này đã tồn tại. Không được phép trùng!.
+        ///   Looks up a localized string similar to Mã nhân viên này đã tồn tại. Không được phép trùng!.
         /// </summary>
-        public static string CustomerCode_Duplicate_ErrorMsg {
+        public static string EmployeeCode_Duplicate_ErrorMsg {
             get {
-                return ResourceManager.GetString("CustomerCode_Duplicate_ErrorMsg", resourceCulture);
+                return ResourceManager.GetString("EmployeeCode_Duplicate_ErrorMsg", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mã khách hàng không được để trống!.
+        ///   Looks up a localized string similar to Mã nhân viên không được phép để trống!.
         /// </summary>
-        public static string CustomerCode_ErrorMsg {
+        public static string EmployeeCode_ErrorMsg {
             get {
-                return ResourceManager.GetString("CustomerCode_ErrorMsg", resourceCulture);
+                return ResourceManager.GetString("EmployeeCode_ErrorMsg", resourceCulture);
             }
         }
     }
