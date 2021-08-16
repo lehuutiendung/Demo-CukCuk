@@ -35,7 +35,7 @@ namespace MISA.CukCuk.Api.Controllers
         {
             try
             {
-                var _serviceResult = _employeeService.GetEmployee();
+                var _serviceResult = _employeeService.GetAll();
                 //Trả về cho client
                 if (_serviceResult.IsValid)
                 {
@@ -74,7 +74,7 @@ namespace MISA.CukCuk.Api.Controllers
         {
             try
             {
-                var _serviceResult = _employeeService.GetEmployeeById(employeeId);
+                var _serviceResult = _employeeService.GetById(employeeId);
                 //Trả về cho client
                 var response = StatusCode(200, _serviceResult.Data);
                 return response;
@@ -111,7 +111,7 @@ namespace MISA.CukCuk.Api.Controllers
         {
             try
             {
-                var _serviceResult = _employeeService.FilterEmployee(pageSize, pageNumber, fullName, employeeCode, phoneNumber);
+                var _serviceResult = _employeeService.Filter(pageSize, pageNumber, fullName, employeeCode, phoneNumber);
                 var response = StatusCode(200, _serviceResult.Data);
                 return response;
             }
@@ -142,7 +142,7 @@ namespace MISA.CukCuk.Api.Controllers
         {
             try
             {
-                var _serviceResult = _employeeService.NewEmployeeCode();
+                var _serviceResult = _employeeService.NewCode();
                 //Trả về cho client
                 if (_serviceResult.Data != null)
                 {
@@ -181,7 +181,7 @@ namespace MISA.CukCuk.Api.Controllers
         {
             try
             {
-                var serviceResult = _employeeService.AddEmployee(employee);
+                var serviceResult = _employeeService.Add(employee);
                 #region Code cũ
                 // Validate các trường bắt buộc: EmployeeCode, FullName, Email, PhoneNumber
                 /* if (employee.EmployeeCode == "" || employee.EmployeeCode == null)
@@ -340,7 +340,7 @@ namespace MISA.CukCuk.Api.Controllers
         {
             try
             {
-                var _serviceResult = _employeeService.DeleteEmployee(employeeId);
+                var _serviceResult = _employeeService.Delete(employeeId);
 
                 // Trả về cho client
                 var response = StatusCode(200, _serviceResult.Data);
@@ -374,10 +374,26 @@ namespace MISA.CukCuk.Api.Controllers
         {
             try
             {
-                var _serviceResult = _employeeService.UpdateEmployee(employeeId, employee);
-                //4. Trả về
-                var response = StatusCode(200, _serviceResult.Data);
-                return response;
+                var _serviceResult = _employeeService.Update(employeeId, employee);
+                if(_serviceResult.IsValid == true)
+                {
+                    //4. Trả về
+                    var response = StatusCode(200, _serviceResult.Data);
+                    return response;
+                }
+                else
+                {
+                    var errorObj = new
+                    {
+                        devMsg = _serviceResult.Data,
+                        userMsg = _serviceResult.Data,
+                        errorCode = "",
+                        moreInfo = "",
+                        traceId = ""
+                    };
+                    return BadRequest(errorObj);
+                }
+                
             }
             catch (Exception ex)
             {

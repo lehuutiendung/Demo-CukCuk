@@ -61,6 +61,15 @@ namespace MISA.ApplicationCore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Trường mã không được phép để trống!.
+        /// </summary>
+        public static string Code_ErrorMsg {
+            get {
+                return ResourceManager.GetString("Code_ErrorMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email không được phép để trống!.
         /// </summary>
         public static string Email_ErrorMsg {

@@ -10,22 +10,24 @@ using System.Threading.Tasks;
 
 namespace MISA.ApplicationCore.Services
 {
-    public class EmployeeService:IEmployeeService
+    public class EmployeeService:BaseService<Employee>, IEmployeeService
     {
-        IEmployeeRepository _employeeRepository;
+        //IEmployeeRepository _employeeRepository;
         ServiceResult _serviceResult;
 
         /// <summary>
         /// Hàm khởi tạo
         /// </summary>
         /// <param name="employeeRepository"></param>
-        public EmployeeService(IEmployeeRepository employeeRepository)
+        public EmployeeService(IBaseRepository<Employee> baseRepository) :base(baseRepository)
         {
-            _employeeRepository = employeeRepository;
+            //_employeeRepository = employeeRepository;
             _serviceResult = new ServiceResult();
         }
 
-        public ServiceResult AddEmployee(Employee employee)
+        #region Code Clean Architecture
+
+        /*public ServiceResult AddEmployee(Employee employee)
         {
             //Xử lý nghiệp vụ
             // Validate các trường bắt buộc: EmployeeCode, FullName, Email, PhoneNumber
@@ -135,6 +137,9 @@ namespace MISA.ApplicationCore.Services
         {
             _serviceResult.Data = _employeeRepository.UpdateEmployee(employeeId, employee);
             return _serviceResult;
-        }
+        }*/
+
+        #endregion
+
     }
 }

@@ -10,22 +10,24 @@ using System.Threading.Tasks;
 
 namespace MISA.ApplicationCore.Services
 {
-    public class CustomerService : ICustomerService
+    public class CustomerService :BaseService<Customer>, ICustomerService
     {
-        ICustomerRepository _customerRepository;
+        //ICustomerRepository _customerRepository;
         ServiceResult _serviceResult;
 
         /// <summary>
         /// Hàm khởi tạo
         /// </summary>
         /// <param name="customerRepository"></param>
-        public CustomerService(ICustomerRepository customerRepository)
+        public CustomerService(IBaseRepository<Customer> baseRepository):base(baseRepository)
         {
-            _customerRepository = customerRepository;
+            //_customerRepository = customerRepository;
             _serviceResult = new ServiceResult();
         }
 
-        public ServiceResult AddCustomer(Customer customer)
+        #region Code Clean Architecture - Old Code
+
+        /*public ServiceResult AddCustomer(Customer customer)
         {
             //Xử lý nghiệp vụ
             // Validate các trường bắt buộc: CustomerCode, FullName, Email, PhoneNumber
@@ -135,6 +137,8 @@ namespace MISA.ApplicationCore.Services
         {
             _serviceResult.Data = _customerRepository.UpdateCustomer(customerId, customer);
             return _serviceResult;
-        }
+        }*/
+        #endregion
+
     }
 }

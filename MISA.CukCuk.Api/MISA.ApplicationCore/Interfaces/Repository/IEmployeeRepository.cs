@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace MISA.ApplicationCore.Interfaces.Repository
 {
-    public interface IEmployeeRepository
+    public interface IEmployeeRepository:IBaseRepository<Employee>
     {
-        List<object> GetEmployee();
+        /*List<object> GetEmployee();
 
         Object GetEmployeeById(Guid employeeId);
 
@@ -21,6 +21,6 @@ namespace MISA.ApplicationCore.Interfaces.Repository
 
         int DeleteEmployee(Guid employeeId);
 
-        int UpdateEmployee(Guid employeeId, Employee employee);
+        int UpdateEmployee(Guid employeeId, Employee employee);*/
     }
 }

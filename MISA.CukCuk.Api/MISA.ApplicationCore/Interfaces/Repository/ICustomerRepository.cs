@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace MISA.ApplicationCore.Interfaces.Repository
 {
-    public interface ICustomerRepository
+    public interface ICustomerRepository:IBaseRepository<Customer>
     {
-        List<object> GetCustomer();
+        /*List<object> GetCustomer();
 
         Object GetCustomerById(Guid customerId);
 
@@ -21,7 +21,7 @@ namespace MISA.ApplicationCore.Interfaces.Repository
 
         int DeleteCustomer(Guid customerId);
 
-        int UpdateCustomer(Guid customerId, Customer customer);
+        int UpdateCustomer(Guid customerId, Customer customer);*/
 
     }
 }

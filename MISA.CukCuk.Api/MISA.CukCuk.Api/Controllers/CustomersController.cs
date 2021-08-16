@@ -33,7 +33,7 @@ namespace MISA.CukCuk.Api.Controllers
         {
             try
             {
-                var _serviceResult = _customerService.GetCustomer();
+                var _serviceResult = _customerService.GetAll();
                 //Trả về cho client
                 if (_serviceResult.IsValid)
                 {
@@ -72,7 +72,7 @@ namespace MISA.CukCuk.Api.Controllers
         {
             try
             {
-                var _serviceResult = _customerService.GetCustomerById(customerId);
+                var _serviceResult = _customerService.GetById(customerId);
                 //Trả về cho client
                 var response = StatusCode(200, _serviceResult.Data);
                 return response;
@@ -109,7 +109,7 @@ namespace MISA.CukCuk.Api.Controllers
         {
             try
             {
-                var _serviceResult = _customerService.FilterCustomer(pageSize, pageNumber, fullName, customerCode, phoneNumber);
+                var _serviceResult = _customerService.Filter(pageSize, pageNumber, fullName, customerCode, phoneNumber);
                 var response = StatusCode(200, _serviceResult.Data);
                 return response;
             }
@@ -140,7 +140,7 @@ namespace MISA.CukCuk.Api.Controllers
         {
             try
             {
-                var _serviceResult = _customerService.NewCustomerCode();
+                var _serviceResult = _customerService.NewCode();
                 //Trả về cho client
                 if (_serviceResult.Data != null)
                 {
@@ -179,7 +179,7 @@ namespace MISA.CukCuk.Api.Controllers
         {
             try
             {
-                var serviceResult = _customerService.AddCustomer(customer);
+                var serviceResult = _customerService.Add(customer);
                 #region Code cũ
                 // Validate các trường bắt buộc: CustomerCode, FullName, Email, PhoneNumber
                 /* if (customer.CustomerCode == "" || customer.CustomerCode == null)
@@ -338,7 +338,7 @@ namespace MISA.CukCuk.Api.Controllers
         {
             try
             {
-                var _serviceResult = _customerService.DeleteCustomer(customerId);
+                var _serviceResult = _customerService.Delete(customerId);
 
                 // Trả về cho client
                 var response = StatusCode(200, _serviceResult.Data);
@@ -372,7 +372,7 @@ namespace MISA.CukCuk.Api.Controllers
         {
             try
             {
-                var _serviceResult = _customerService.UpdateCustomer(customerId, customer);
+                var _serviceResult = _customerService.Update(customerId, customer);
                 //4. Trả về
                 var response = StatusCode(200, _serviceResult.Data);
                 return response;

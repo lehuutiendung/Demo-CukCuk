@@ -59,6 +59,11 @@ namespace MISA.ApplicationCore.Entities
         /// Số điện thoại
         /// </summary>
         public string PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Lương
+        /// </summary>
+        public double? Salary { get; set; }
         #endregion
     }
 }
