@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace MISA.ApplicationCore.Interfaces.Services
 {
-    public interface ICustomerService
+    public interface ICustomerService:IBaseService<Customer>
     {
-        /// <summary>
+        /*/// <summary>
         /// Lấy tất cả khách hàng
         /// </summary>
         /// <returns></returns>
@@ -62,6 +62,6 @@ namespace MISA.ApplicationCore.Interfaces.Services
         /// <returns> ServiceResult : kết quả xử lý qua nghiệp vụ</returns>
         /// CreatedBy: LHTDUNG - 13/08/2021
         ServiceResult UpdateCustomer(Guid customerId, Customer customer);
-
+*/
     }
 }

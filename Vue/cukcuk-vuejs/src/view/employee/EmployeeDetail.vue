@@ -26,23 +26,21 @@
               <p>Họ và tên (<span>*</span>)</p>
             </div>
             <div class="input-row">
-              <Warning :style="{ display: showWarning }" />
+              <Warning :style="{ display: employee.EmployeeCode?'none':(warnRequired ? 'flex':'none') }" />
               <Input
                 :required="true"
-                :value="employee.EmployeeCode"
                 :newEmployeeCode="newEmployeeCode"
-                :updateCode="updateCode()"
+                :value="employee.EmployeeCode"
                 ref="focusField"
                 v-model="employee.EmployeeCode"
-                @click="hideWarning($event)" 
+                
               />
-              <Warning :rightWarning="true" :style="{ display: showWarning }"/> 
+              <Warning :rightWarning="true" :style="{ display: employee.FullName?'none':(warnRequired ? 'flex':'none')}"/> 
               <Input
                 :required="true"
                 ref="fullName"
                 :value="employee.FullName"
                 v-model="employee.FullName"
-                @click="hideWarning($event)"
               />
             </div>
             <!-- Div ngay sinh, gioi tinh -->
@@ -72,13 +70,12 @@
               <p>Ngày cấp</p>
             </div>
             <div class="input-row">
-              <Warning :style="{ display: showWarning }"/>
+              <Warning :style="{ display: employee.IdentityNumber?'none':(warnRequired ? 'flex':'none') }"/>
               <Input
                 :required="true"
                 ref="identity"
                 :value="employee.IdentityNumber"
                 v-model="employee.IdentityNumber"
-                @click="hideWarning($event)"
               />
               <Input
                 :isDate="true"
@@ -110,7 +107,7 @@
                   <p>Email sai định dạng tên miền</p>
                 </div>
               </div>
-              <Warning :style="{ display: showWarning }"/>
+              <Warning :style="{ display: employee.Email?'none':(warnRequired ? 'flex':'none') }"/>
               <Input
                 :required="true"
                 ref="email"
@@ -118,13 +115,12 @@
                 v-model="employee.Email"
                 @blur="validateEmail($event, employee.Email)"
               />
-              <Warning :rightWarning="true" :style="{ display: showWarning }"/>
+              <Warning :rightWarning="true" :style="{ display: employee.PhoneNumber?'none':(warnRequired ? 'flex':'none') }"/>
               <Input
                 :required="true"
                 ref="phone"
                 :value="employee.PhoneNumber"
                 v-model="employee.PhoneNumber"
-                @click="hideWarning($event)"
               />
             </div>
             <p class="title-a">B. THÔNG TIN CÔNG VIỆC:</p>
@@ -307,20 +303,8 @@ export default {
         return "none";
       }
     },
-    showWarning() {
-      if (this.warnRequired) {
-        return "flex";
-      } else {
-        return "none";
-      }
-    },
   },
   methods: {
-    //Ẩn cảnh báo khi click vào input
-    hideWarning(e) {
-        console.log(e.target);
-        this.warnRequired = false;
-    },
 
     // Thay đổi trạng thái ẩn-hiện của popup
     changePopUp() {
@@ -369,7 +353,7 @@ export default {
       this.dataDropdown.PositionName = name;
     },
     /**
-     * @description Lưu dữ liệu
+     * @description Lưu dữ liệu1
      * @author DUNGLHT
      * @since 29/07/2021
      */
@@ -465,6 +449,7 @@ export default {
       var countRequired = 0;
       /*eslint no-extra-semi: "error"*/
       var list = this.$el.querySelectorAll(`input.required`);
+      console.log(list);
       for(let i = 0; i < list.length; i++){
       // this.$el.querySelectorAll(`input.required`).forEach(element => {
         if(list[i].value == ''){
@@ -476,6 +461,7 @@ export default {
         if(list[i].value != ''){
             this.validateSave = false;
             this.warnRequired = false;
+            
         }
         countRequired++;
       }
@@ -517,12 +503,12 @@ export default {
     },
 
     //Gán mã nhân viên tự sinh cho employee
-    updateCode(){
-      if(this.mode == 0){
-        this.employee.EmployeeCode = this.newEmployeeCode;
-        return this.employee.EmployeeCode;
-      }
-    },
+    // updateCode(){
+    //   if(this.mode == 0){
+    //     this.employee.EmployeeCode = this.newEmployeeCode;
+    //     return this.employee.EmployeeCode;
+    //   }
+    // },
 
     // Format Salary khi nhập
     inputSalary(e){
@@ -581,7 +567,8 @@ export default {
       // Nếu mode = 1: Form sửa => Gọi API
       if(this.mode == 1){
         axios
-        .get(`http://cukcuk.manhnv.net/v1/employees/${this.employeeId}`)
+        // .get(`http://cukcuk.manhnv.net/v1/employees/${this.employeeId}`)
+        .get(`https://localhost:44338/api/v1/Employees/${this.employeeId}`)
         .then((res) => {
           vm.employee = res.data;
           vm.gender = res.data.Gender;
@@ -625,14 +612,20 @@ export default {
       // Nếu mode = 0: Form thêm mới => Clear dữ liệu cũ
       if (this.mode == 0) {
         this.employee = {};
+        axios
+        .get("http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode")
+        // .get("https://localhost:44338/api/v1/Employees/NewCode")
+        .then((res) => {
+          this.$set(this.employee, "EmployeeCode", res.data );
+          console.log(this.newEmployeeCode);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
       }
     
     },
-    // mode: function () {
-    //   if (this.mode == 0) {
-    //     this.employee = {};
-    //   }
-    // },
+    
     modalBoxShow: function(){
       this.employee = {};
       console.log(this.$el.querySelectorAll(`input.required`)); 

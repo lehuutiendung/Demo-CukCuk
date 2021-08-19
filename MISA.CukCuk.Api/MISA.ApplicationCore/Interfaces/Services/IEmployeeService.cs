@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace MISA.ApplicationCore.Interfaces.Services
 {
-    public interface IEmployeeService
+    public interface IEmployeeService:IBaseService<Employee>
     {
-        /// <summary>
+        /*/// <summary>
         /// Lấy tất cả nhân viên
         /// </summary>
         /// <returns></returns>
@@ -61,6 +61,6 @@ namespace MISA.ApplicationCore.Interfaces.Services
         /// <param name="employee">Thông tin nhân viên</param>
         /// <returns> ServiceResult : kết quả xử lý qua nghiệp vụ</returns>
         /// CreatedBy: LHTDUNG - 15/08/2021
-        ServiceResult UpdateEmployee(Guid employeeId, Employee employee);
+        ServiceResult UpdateEmployee(Guid employeeId, Employee employee);*/
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MISA.ApplicationCore.MISAAttribute;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Mã khách hàng
         /// </summary>
+        [MISARequired("Mã khách hàng")]
         public string CustomerCode { get; set; }
 
         /// <summary>
@@ -32,6 +34,7 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Họ và tên
         /// </summary>
+        [MISARequired("Họ tên")]
         public string FullName { get; set; }
 
         /// <summary>
@@ -52,11 +55,15 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Email
         /// </summary>
+        [MISARequired("Email")]
+
         public string Email { get; set; }
 
         /// <summary>
         /// Số điện thoại
         /// </summary>
+        [MISARequired("Số điện thoại")]
+
         public string PhoneNumber { get; set; }
 
         #endregion
