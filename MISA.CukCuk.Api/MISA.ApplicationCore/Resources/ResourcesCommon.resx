@@ -120,6 +120,9 @@
   <data name="Code_ErrorMsg" xml:space="preserve">
     <value>Trường mã không được phép để trống!</value>
   </data>
+  <data name="Duplicate_ErrorMsg" xml:space="preserve">
+    <value>Mã {} đã tồn tại. Không được phép trùng mã {}! </value>
+  </data>
   <data name="Email_ErrorMsg" xml:space="preserve">
     <value>Email không được phép để trống!</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="PhoneNumber_ErrorMsg" xml:space="preserve">
     <value>Số điện thoại không được phép để trống!</value>
+  </data>
+  <data name="Required_ErrorMsg" xml:space="preserve">
+    <value>{} không được phép để trống!</value>
   </data>
   <data name="ValidateEmail_ErrorMsg" xml:space="preserve">
     <value>Email sai định dạng!</value>

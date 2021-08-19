@@ -20,6 +20,8 @@ namespace MISA.ApplicationCore.Interfaces.Repository
 
         int Delete(Guid entityId);
 
+        int DeleteMultiple(List<Guid> listId);
+
         int Update(Guid entityId, Entity entity);
     }
 }

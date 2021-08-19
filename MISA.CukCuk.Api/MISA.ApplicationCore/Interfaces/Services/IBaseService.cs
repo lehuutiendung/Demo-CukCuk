@@ -52,6 +52,9 @@ namespace MISA.ApplicationCore.Interfaces.Services
         /// <param name="entity">Thông tin của entity</param>
         /// <returns> ServiceResult : kết quả xử lý qua nghiệp vụ</returns>
         /// CreatedBy: LHTDUNG - 13/08/2021
+
+        ServiceResult DeleteMultiple(List<Guid> listId);
+
         ServiceResult Add(Entity entity);
 
         /// <summary>

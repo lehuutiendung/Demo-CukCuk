@@ -70,6 +70,15 @@ namespace MISA.ApplicationCore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mã {} đã tồn tại. Không được phép trùng mã {}! .
+        /// </summary>
+        public static string Duplicate_ErrorMsg {
+            get {
+                return ResourceManager.GetString("Duplicate_ErrorMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email không được phép để trống!.
         /// </summary>
         public static string Email_ErrorMsg {
@@ -111,6 +120,15 @@ namespace MISA.ApplicationCore.Resources {
         public static string PhoneNumber_ErrorMsg {
             get {
                 return ResourceManager.GetString("PhoneNumber_ErrorMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {} không được phép để trống!.
+        /// </summary>
+        public static string Required_ErrorMsg {
+            get {
+                return ResourceManager.GetString("Required_ErrorMsg", resourceCulture);
             }
         }
         

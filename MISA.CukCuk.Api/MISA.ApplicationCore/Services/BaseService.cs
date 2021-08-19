@@ -1,6 +1,7 @@
 ﻿using MISA.ApplicationCore.Entities;
 using MISA.ApplicationCore.Interfaces.Repository;
 using MISA.ApplicationCore.Interfaces.Services;
+using MISA.ApplicationCore.MISAAttribute;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,6 +57,15 @@ namespace MISA.ApplicationCore.Services
         {
             //Xử lý kết quả trả về sau khi tương tác với Database
             _serviceResult.Data = _baseRepository.Delete(entityId);
+            return _serviceResult;
+        }
+        #endregion
+
+        #region Service xóa nhiều bản ghi
+        public ServiceResult DeleteMultiple(List<Guid> listId)
+        {
+            //Xử lý kết quả trả về sau khi tương tác với Database
+            _serviceResult.Data = _baseRepository.DeleteMultiple(listId);
             return _serviceResult;
         }
         #endregion
@@ -157,60 +167,35 @@ namespace MISA.ApplicationCore.Services
             {
                 var _serviceResult = new ServiceResult();
                 var item = typeof(Entity).GetProperties()[i];
-                if (item.Name.Equals($"{className}Code") && item.GetValue(entity).Equals(""))
-                {
-                    _serviceResult.IsValid = false;
-                    _serviceResult.Data = Resources.ResourcesCommon.Code_ErrorMsg;
-                    return _serviceResult;
-                }
 
-                if (item.Name.Equals("FullName") && item.GetValue(entity).Equals(""))
+                //Kiếm tra các trường bắt buộc nhập
+                var propMISARequired = item.GetCustomAttributes(typeof(MISARequired), true);
+                if(propMISARequired.Length > 0)
                 {
-                    _serviceResult.IsValid = false;
-                    _serviceResult.Data = Resources.ResourcesCommon.FullName_ErrorMsg;
-                    return _serviceResult;
-                };
+                    //Lấy fieldName của attribute MISARequired
+                    var fieldName = (propMISARequired[0] as MISARequired).FieldName;
+                    if ((item.GetValue(entity) == null) || item.GetValue(entity).Equals(""))
+                    {
+                        _serviceResult.IsValid = false;
+                        _serviceResult.Data = Resources.ResourcesCommon.Required_ErrorMsg.Replace("{}", fieldName);
+                        return _serviceResult;
+                    }
+                }
 
                 if (item.Name.Equals("Email"))
                 {
-                    if (item.GetValue(entity).Equals(""))
+                    // Validate định dạng Email
+                    var emailValidate = @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+                    var isMatch = Regex.IsMatch((string)item.GetValue(entity), emailValidate, RegexOptions.IgnoreCase);
+                    if (isMatch == false)
                     {
                         _serviceResult.IsValid = false;
-                        _serviceResult.Data = Resources.ResourcesCommon.Email_ErrorMsg;
+                        _serviceResult.Data = Resources.ResourcesCommon.ValidateEmail_ErrorMsg;
                         return _serviceResult;
-                    }
-                    else
-                    {
-                        // Email phải đúng định dạng
-                        var emailValidate = @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
-                        var isMatch = Regex.IsMatch((string)item.GetValue(entity), emailValidate, RegexOptions.IgnoreCase);
-                        if (isMatch == false)
-                        {
-                            var errorObj = new
-                            {
-                                devMsg = Resources.ResourcesCommon.ValidateEmail_ErrorMsg,
-                                userMsg = Resources.ResourcesCommon.ValidateEmail_ErrorMsg,
-                                errorCode = "",
-                                moreInfo = "",
-                                traceId = ""
-                            };
-                            _serviceResult.IsValid = false;
-                            _serviceResult.Data = errorObj;
-                            return _serviceResult;
-                        }
-                    }
-                }
-         
-                if (item.Name.Equals("PhoneNumber") && item.GetValue(entity).Equals(""))
-                {
-                    _serviceResult.IsValid = false;
-                    _serviceResult.Data = Resources.ResourcesCommon.PhoneNumber_ErrorMsg;
-                    return _serviceResult;
-                }
-                
+                    }   
+                }   
             }
 
-            
             return _serviceResult;
         }
         #endregion

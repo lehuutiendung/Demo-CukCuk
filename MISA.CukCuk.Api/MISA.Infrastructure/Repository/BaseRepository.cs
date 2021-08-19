@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.Extensions.Configuration;
 using MISA.ApplicationCore.Interfaces.Repository;
 using MySqlConnector;
 using System;
@@ -12,6 +13,15 @@ namespace MISA.Infrastructure.Repository
 {
     public class BaseRepository<Entity> : IBaseRepository<Entity>
     {
+        // Khai báo thông tin kết nối database
+        IDbConnection _dbConnection;
+        public readonly string _connectionString;
+
+        public BaseRepository(IConfiguration configuration)
+        {
+            _connectionString = configuration.GetConnectionString("CukCukDatabase");
+        }
+
         #region Tương tác với database thực hiện thêm mới
         /// <summary>
         /// Tương tác với database thực hiện thêm mới
@@ -21,75 +31,69 @@ namespace MISA.Infrastructure.Repository
         public int Add(Entity entity)
         {
             var className = typeof(Entity).Name;
-
-            // Khai báo thông tin kết nối database
-            var connectionString = "Host = 47.241.69.179;" +
-                "Database = WEB07.MF928.LHTDUNG.CukCuk;" +
-                "User Id = dev;" +
-                "Password = 12345678";
-
             // Khởi tạo đối tượng kết nối với database
-            IDbConnection dbConnection = new MySqlConnection(connectionString);
-
-            /*// Mã khách hàng không được trùng
-            var sqlCode = $"SELECT * FROM {className} WHERE {className}Code = @{className}Code";
-            DynamicParameters dynamicParameters = new DynamicParameters();
-            dynamicParameters.Add($"@{className}Code", employee.EmployeeCode);
-            //Truy vấn mã khách hàng trong database (kiểm tra trùng lặp)
-            var check = dbConnection.Query<int>(sqlCode, dynamicParameters);
-            if (check.Count() > 0)
+            using (_dbConnection = new MySqlConnection(_connectionString))
             {
-                var errorObj = new
+                // Thêm dữ liệu
+                var columnName = string.Empty;
+                var columnValue = string.Empty;
+
+                //Khai bao dynamic parameters
+                var dynamicParam = new DynamicParameters();
+                // Parameter cho {className}Code
+                var dynamicParameters = new DynamicParameters();
+
+                //Đọc từng property của object
+                var properties = entity.GetType().GetProperties();
+
+                //Duyệt từng property
+                foreach (var item in properties)
                 {
-                    devMsg = Properties.ResourcesEmployee.EmployeeCode_Duplicate_ErrorMsg,
-                    userMsg = Properties.ResourcesEmployee.EmployeeCode_Duplicate_ErrorMsg,
-                    errorCode = "",
-                    moreInfo = "",
-                    traceId = ""
-                };
-                return BadRequest(errorObj);
-            }*/
+                    //Lấy tên của prop
+                    var itemName = item.Name;
 
-            // Thêm dữ liệu
-            var columnName = string.Empty;
-            var columnValue = string.Empty;
+                    //Lấy value của prop
+                    var itemValue = item.GetValue(entity);
 
-            //Khai bao dynamic parameters
-            var dynamicParam = new DynamicParameters();
+                    if (itemName == $"{className}Id" && item.PropertyType == typeof(Guid))
+                    {
+                        // Sinh mã Guid cho EmployeeId
+                        itemValue = Guid.NewGuid();
+                    }
 
-            //Đọc từng property của object
-            var properties = entity.GetType().GetProperties();
+                    if (itemName == $"{className}Code")
+                    {
+                        dynamicParameters.Add($"@{className}Code", itemValue);
+                    }
 
-            //Duyệt từng property
-            foreach (var item in properties)
-            {
-                //Lấy tên của prop
-                var itemName = item.Name;
+                    //Thêm param tương ứng với mỗi property
+                    dynamicParam.Add($"@{itemName}", itemValue);
 
-                //Lấy value của prop
-                var itemValue = item.GetValue(entity);
-
-                if (itemName == $"{className}Id" && item.PropertyType == typeof(Guid))
-                {
-                    // Sinh mã Guid cho EmployeeId
-                    itemValue = Guid.NewGuid();
+                    columnName += $"{itemName},";
+                    columnValue += $"@{itemName},";
                 }
+                #region Check trùng mã
+                // Mã khách hàng không được trùng
+                var sqlCode = $"SELECT * FROM {className} WHERE {$"{className}Code"} = @{className}Code";
+                //var sqlCode = $"SELECT * FROM Customer c WHERE c.CustomerCode = 'KH123' ";
 
-                //Thêm param tương ứng với mỗi property
-                dynamicParam.Add($"@{itemName}", itemValue);
+                //Truy vấn mã khách hàng trong database (kiểm tra trùng lặp)
+                var check = _dbConnection.Query<object>(sqlCode, param: dynamicParameters);
+                if (check.Count() > 0)
+                {
+                    return (int)400;
+                }
+                #endregion
 
-                columnName += $"{itemName},";
-                columnValue += $"@{itemName},";
-            }
-
-            //Xóa dấu phẩy cuối cùng trong các dãy string columnName, columnValue
-            columnName = columnName.Remove(columnName.Length - 1, 1);
-            columnValue = columnValue.Remove(columnValue.Length - 1, 1);
+                //Xóa dấu phẩy cuối cùng trong các dãy string columnName, columnValue
+                columnName = columnName.Remove(columnName.Length - 1, 1);
+                columnValue = columnValue.Remove(columnValue.Length - 1, 1);
 
 
-            var sqlCommand = $"INSERT INTO {className}({columnName}) VALUES({columnValue})";
-            var rowEffects = dbConnection.Execute(sqlCommand, param: dynamicParam);
-            return rowEffects;
+                var sqlCommand = $"INSERT INTO {className}({columnName}) VALUES({columnValue})";
+                var rowEffects = _dbConnection.Execute(sqlCommand, param: dynamicParam);
+                return rowEffects;
+            }  
         }
         #endregion
 
@@ -101,22 +105,49 @@ namespace MISA.Infrastructure.Repository
         /// <returns></returns>
         public int Delete(Guid entityId)
         {
-            //Connect toi Database
-            var connectionString = "Host = 47.241.69.179;" +
-            "Database = WEB07.MF928.LHTDUNG.CukCuk;" +
-            "User Id = dev;" +
-            "Password = 12345678";
 
-            IDbConnection dbConnection = new MySqlConnection(connectionString);
+            using ( _dbConnection = new MySqlConnection(_connectionString))
+            {
+                //Lấy dữ liệu
+                var className = typeof(Entity).Name;
+                var sqlCommand = $"DELETE FROM {className} WHERE {className}Id = @{className}IdParam";
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add($"@{className}IdParam", entityId);
 
-            //Lấy dữ liệu
-            var className = typeof(Entity).Name;
-            var sqlCommand = $"DELETE FROM {className} WHERE {className}Id = @{className}IdParam";
-            DynamicParameters dynamicParameters = new DynamicParameters();
-            dynamicParameters.Add($"@{className}IdParam", entityId);
+                var entityEffect = _dbConnection.Execute(sqlCommand, dynamicParameters);
+                return entityEffect;
+            }
 
-            var entityEffect = dbConnection.Execute(sqlCommand, dynamicParameters);
-            return entityEffect;
+        }
+        #endregion
+
+        #region Tương tác với database thực hiện xóa nhiều bản ghi
+        public int DeleteMultiple(List<Guid> listId)
+        {
+
+            using (_dbConnection = new MySqlConnection(_connectionString))
+            {
+                //Biến kiểm soát roll back database khi có truy vấn không thành công
+                var transaction = _dbConnection.BeginTransaction();
+                //Lấy dữ liệu
+                var className = typeof(Entity).Name;
+                var arrayValue = new List<string>();
+
+                foreach (var item in listId)
+                {
+                    var formatItem = "\'" + item + "\'";
+                    //arrayValue += $"{item},";
+                    arrayValue.Add(formatItem);
+                };
+
+                //Thực hiện truy vấn xóa dữ liệu
+                var sqlCommand = $"DELETE FROM {className} WHERE {className}Id IN ({String.Join(", ", arrayValue.ToArray())})";
+                var entityEffect = _dbConnection.Execute(sqlCommand, transaction: transaction);
+                transaction.Commit();
+                return entityEffect;
+            }
+
+                
         }
         #endregion
 
@@ -132,34 +163,55 @@ namespace MISA.Infrastructure.Repository
         /// <returns></returns>
         public object Filter(int pageSize, int pageNumber, string fullName, string entityCode, string phoneNumber)
         {
-            //1. Khai báo thông tin kết nối database
-            var connectionString = "Host = 47.241.69.179;" +
-                "Database = WEB07.MF928.LHTDUNG.CukCuk;" +
-                "User Id = dev;" +
-                "Password = 12345678";
+            fullName = null;
+            entityCode = null;
+            phoneNumber = null;
+            //Khởi tạo đối tượng kết nối với database
+            using ( _dbConnection = new MySqlConnection(_connectionString))
+            {
+                DynamicParameters dynamicParameters = new DynamicParameters();
 
-            //2. Khởi tạo đối tượng kết nối với database
-            IDbConnection dbConnection = new MySqlConnection(connectionString);
+                //Tính toán giá trị Offset
+                int offSet = pageSize * (pageNumber - 1);
 
-            DynamicParameters dynamicParameters = new DynamicParameters();
+                //Câu lệnh truy vấn phân trang và filter theo các tiêu chí
+                var className = typeof(Entity).Name;
+                var sqlCommand = "";
+                if (className == "Employee")
+                {
+                    sqlCommand = $"SELECT * FROM (SELECT e.*, d.DepartmentName, p.PositionName, " +
+                                                       $"(CASE e.Gender WHEN 0 THEN 'Nữ' WHEN 1 THEN 'Nam' ELSE 'Không xác định' END) AS GenderName " +
+                                                       $"FROM {className} e " +
+                                                       $"LEFT JOIN Department d ON d.DepartmentId = e.DepartmentId " +
+                                                       $"LEFT JOIN Position p ON p.PositionId = e.PositionId " +
+                                                       $"ORDER BY e.CreatedDate DESC LIMIT {pageSize} OFFSET {offSet}) paginate " +
+                                                       $"WHERE ( FullName LIKE @FullName AND {className}Code LIKE @{className}Code AND PhoneNumber LIKE @PhoneNumber OR paginate.PhoneNumber IS NULL)";
 
-            //Tính toán giá trị Offset
-            int offSet = pageSize * pageNumber - pageSize;
+                }
+                if (className == "Customer")
+                {
+                    sqlCommand = $"SELECT * FROM (SELECT c.*, cg.CustomerGroupName, " +
+                                                        $"(CASE c.Gender WHEN 0 THEN 'Nữ' WHEN 1 THEN 'Nam' ELSE 'Không xác định' END) AS GenderName " +
+                                                        $"FROM Customer c " +
+                                                        $"LEFT JOIN CustomerGroup cg ON cg.CustomerGroupId = c.CustomerGroupId " +
+                                                        $"ORDER BY c.CreatedDate DESC LIMIT {pageSize} OFFSET {offSet}) paginate " +
+                                                        $"WHERE ( FullName LIKE @FullName AND {className}Code LIKE @{className}Code AND PhoneNumber LIKE @PhoneNumber OR paginate.PhoneNumber IS NULL)";
 
-            //Câu lệnh truy vấn phân trang và filter theo các tiêu chí
-            var className = typeof(Entity).Name;
-            var sqlCommand = $"SELECT * FROM (SELECT * FROM {className} ORDER BY CreatedDate DESC LIMIT {pageSize} OFFSET {offSet}) paginate WHERE ( FullName LIKE @FullName AND {className}Code LIKE @{className}Code AND PhoneNumber LIKE @PhoneNumber )";
 
-            dynamicParameters.Add($"@FullName", $"%{fullName}%");
-            dynamicParameters.Add($"@{className}Code", $"%{entityCode}%");
-            dynamicParameters.Add($"@PhoneNumber", $"%{phoneNumber}%");
 
-            var sqltotalRecord = $"SELECT COUNT({className}Code) AS totalRecord FROM {className}";
+                }
 
-            var entity = dbConnection.Query<object>(sqlCommand, dynamicParameters);
-            var totalRecord = dbConnection.QueryFirstOrDefault<int>(sqltotalRecord);
-            var totalPage = Math.Ceiling(((double)totalRecord / (double)pageSize));
-            return new { TotalPage = totalPage, TotalRecord = totalRecord, Data = entity };
+                dynamicParameters.Add($"@FullName", $"%{fullName}%");
+                dynamicParameters.Add($"@{className}Code", $"%{entityCode}%");
+                dynamicParameters.Add($"@PhoneNumber", $"%{phoneNumber}%");
+
+                var sqltotalRecord = $"SELECT COUNT({className}Code) AS totalRecord FROM {className}";
+
+                var entity = _dbConnection.Query<object>(sqlCommand, dynamicParameters);
+                var totalRecord = _dbConnection.QueryFirstOrDefault<int>(sqltotalRecord);
+                var totalPage = Math.Ceiling(((double)totalRecord / (double)pageSize));
+                return new { TotalPage = totalPage, TotalRecord = totalRecord, Data = entity };
+            }     
         }
         #endregion
 
@@ -171,20 +223,23 @@ namespace MISA.Infrastructure.Repository
         /// <returns></returns>
         public List<object> GetAll<Entity>()
         {
-            //1. Khai báo thông tin kết nối database
-            var connectionString = "Host = 47.241.69.179;" +
-                "Database = WEB07.MF928.LHTDUNG.CukCuk;" +
-                "User Id = dev;" +
-                "Password = 12345678";
-
-            //2. Khởi tạo đối tượng kết nối với database
-            IDbConnection dbConnection = new MySqlConnection(connectionString);
-
-            //3. Lấy dữ liệu
-            var className = typeof(Entity).Name;
-            var sqlCommand = $"SELECT * FROM {className} ORDER BY CreatedDate DESC";
-            var resultObject = dbConnection.Query<object>(sqlCommand);
-            return (List<object>)resultObject;
+            // Khởi tạo đối tượng kết nối với database
+            using ( _dbConnection = new MySqlConnection(_connectionString))
+            {
+                // Lấy dữ liệu
+                var className = typeof(Entity).Name;
+                var sqlCommand = "";
+                if (className == "Employee")
+                {
+                    sqlCommand = $"SELECT e.*, d.DepartmentName, p.PositionName, (CASE e.Gender WHEN 0 THEN 'Nữ' WHEN 1 THEN 'Nam' ELSE 'Không xác định' END) AS GenderName FROM {className} e LEFT JOIN Department d ON d.DepartmentId = e.DepartmentId LEFT JOIN Position p ON p.PositionId = e.PositionId ORDER BY e.CreatedDate DESC";
+                }
+                if (className == "Customer")
+                {
+                    sqlCommand = $"SELECT c.*, cg.CustomerGroupName, (CASE c.Gender WHEN 0 THEN 'Nữ' WHEN 1 THEN 'Nam' ELSE 'Không xác định' END) AS GenderName FROM {className} c LEFT JOIN CustomerGroup cg ON cg.CustomerGroupId = c.CustomerGroupId ORDER BY c.CreatedDate DESC";
+                }
+                var resultObject = _dbConnection.Query<object>(sqlCommand);
+                return (List<object>)resultObject;
+            }    
         }
         #endregion
 
@@ -196,23 +251,26 @@ namespace MISA.Infrastructure.Repository
         /// <returns></returns>
         public object GetById(Guid entityId)
         {
-            //Connect toi Database
-            var connectionString = "Host = 47.241.69.179;" +
-            "Database = WEB07.MF928.LHTDUNG.CukCuk;" +
-            "User Id = dev;" +
-            "Password = 12345678";
+            using (_dbConnection = new MySqlConnection(_connectionString))
+            {
+                //Lấy dữ liệu
+                var className = typeof(Entity).Name;
+                var sqlCommand = "";
+                if(className == "Employee")
+                {
+                    sqlCommand = $"SELECT e.*, d.DepartmentName, p.PositionName, (CASE e.Gender WHEN 0 THEN 'Nữ' WHEN 1 THEN 'Nam' ELSE 'Không xác định' END) AS GenderName FROM {className} e LEFT JOIN Department d ON d.DepartmentId = e.DepartmentId LEFT JOIN Position p ON p.PositionId = e.PositionId WHERE {$"{className}Id"} = @{className}IdParam ORDER BY e.CreatedDate DESC";
+                }
+                if(className == "Customer")
+                {
+                    sqlCommand = $"SELECT c.*, cg.CustomerGroupName, (CASE c.Gender WHEN 0 THEN 'Nữ' WHEN 1 THEN 'Nam' ELSE 'Không xác định' END) AS GenderName FROM {className} c LEFT JOIN CustomerGroup cg ON cg.CustomerGroupId = c.CustomerGroupId WHERE {$"{className}Id"} = @{className}IdParam ORDER BY c.CreatedDate DESC";
+                }
+                DynamicParameters dynamicParameters = new DynamicParameters();
+                dynamicParameters.Add($"@{className}IdParam", entityId);
 
-            IDbConnection dbConnection = new MySqlConnection(connectionString);
-
-            //Lấy dữ liệu
-            var className = typeof(Entity).Name;
-            var sqlCommand = $"SELECT * FROM {className} WHERE {$"{className}Id"} = @{className}IdParam";
-            DynamicParameters dynamicParameters = new DynamicParameters();
-            dynamicParameters.Add($"@{className}IdParam", entityId);
-
-            //Trả về object khách hàng (nhân viên)
-            var result = dbConnection.QueryFirstOrDefault<object>(sqlCommand, dynamicParameters);
-            return result;
+                //Trả về object khách hàng (nhân viên)
+                var result = _dbConnection.QueryFirstOrDefault<object>(sqlCommand, dynamicParameters);
+                return result;
+            }
         }
         #endregion
 
@@ -223,26 +281,22 @@ namespace MISA.Infrastructure.Repository
         /// <returns>EmployeeCode hoặc CustomerCode</returns>
         public object NewCode()
         {
-            //1. Khai báo thông tin kết nối database
-            var connectionString = "Host = 47.241.69.179;" +
-                "Database = WEB07.MF928.LHTDUNG.CukCuk;" +
-                "User Id = dev;" +
-                "Password = 12345678";
 
-            //2. Khởi tạo đối tượng kết nối với database
-            IDbConnection dbConnection = new MySqlConnection(connectionString);
-
-            //3. Lấy dữ liệu
-            var className = typeof(Entity).Name;
-            var sqlCommand = $"SELECT CAST(SUBSTRING({className}Code, 3, LENGTH({className}Code)-1) AS int) AS c FROM {className} ORDER BY c DESC LIMIT 1";
-            var resultCode = dbConnection.QueryFirstOrDefault<int>(sqlCommand);
-            resultCode++;
-            if (className.Equals("Employee"))
+            // Khởi tạo đối tượng kết nối với database
+            using ( _dbConnection = new MySqlConnection(_connectionString))
             {
-                return new { EmployeeCode = string.Concat("NV", resultCode) };
+                // Lấy dữ liệu
+                var className = typeof(Entity).Name;
+                var sqlCommand = $"SELECT CAST(SUBSTRING({className}Code, 3, LENGTH({className}Code)-1) AS int) AS c FROM {className} ORDER BY c DESC LIMIT 1";
+                var resultCode = _dbConnection.QueryFirstOrDefault<int>(sqlCommand);
+                resultCode++;
+                if (className.Equals("Employee"))
+                {
+                    return new { EmployeeCode = string.Concat("NV", resultCode) };
 
+                }
+                else return new { CustomerCode = string.Concat("KH", resultCode) };
             }
-            else return new { CustomerCode = string.Concat("KH", resultCode) };
         }
         #endregion
 
@@ -255,52 +309,47 @@ namespace MISA.Infrastructure.Repository
         /// <returns></returns>
         public int Update(Guid entityId, Entity entity)
         {
-            //1. Khai báo thông tin kết nối database
-            var connectionString = "Host = 47.241.69.179;" +
-                "Database = WEB07.MF928.LHTDUNG.CukCuk;" +
-                "User Id = dev;" +
-                "Password = 12345678";
 
-            //2. Khởi tạo đối tượng kết nối với database
-            IDbConnection dbConnection = new MySqlConnection(connectionString);
-
-            //3. Thêm dữ liệu
-            var columnName = string.Empty;
-            var columnValue = string.Empty;
-
-            //Khai bao dynamic parameters
-            var dynamicParam = new DynamicParameters();
-
-            //Lưu vào List các cặp giá trị (key,value)
-            var queryValue = new List<string>();
-
-            //Đọc từng property của object
-            var properties = entity.GetType().GetProperties();
-
-            //Duyệt từng property
-            foreach (var item in properties)
+            // Khởi tạo đối tượng kết nối với database
+            using ( _dbConnection = new MySqlConnection(_connectionString))
             {
-                //Lấy tên của prop
-                var itemName = item.Name;
+                //3. Thêm dữ liệu
+                var columnName = string.Empty;
+                var columnValue = string.Empty;
 
-                //Lấy value của prop
-                var itemValue = item.GetValue(entity);
+                //Khai bao dynamic parameters
+                var dynamicParam = new DynamicParameters();
 
-                //Thêm param tương ứng với mỗi property
-                dynamicParam.Add($"@{itemName}", itemValue);
-                queryValue.Add($"{itemName} = @{itemName}");
+                //Lưu vào List các cặp giá trị (key,value)
+                var queryValue = new List<string>();
 
-            }
-            var className = typeof(Entity).Name;
-            dynamicParam.Add($"@{className}Id", entityId);
-            // Thực hiện truy vấn, thêm mới bản ghi
-            var sqlCommand = $"UPDATE {className} SET {String.Join(", ", queryValue.ToArray())} " +
-                                $"WHERE {className}Id = @{className}Id";
+                //Đọc từng property của object
+                var properties = entity.GetType().GetProperties();
 
-            var rowEffects = dbConnection.Execute(sqlCommand, param: dynamicParam);
-            return rowEffects;
+                //Duyệt từng property
+                foreach (var item in properties)
+                {
+                    //Lấy tên của prop
+                    var itemName = item.Name;
+
+                    //Lấy value của prop
+                    var itemValue = item.GetValue(entity);
+
+                    //Thêm param tương ứng với mỗi property
+                    dynamicParam.Add($"@{itemName}", itemValue);
+                    queryValue.Add($"{itemName} = @{itemName}");
+
+                }
+                var className = typeof(Entity).Name;
+                dynamicParam.Add($"@{className}Id", entityId);
+                // Thực hiện truy vấn, thêm mới bản ghi
+                var sqlCommand = $"UPDATE {className} SET {String.Join(", ", queryValue.ToArray())} " +
+                                    $"WHERE {className}Id = @{className}Id";
+
+                var rowEffects = _dbConnection.Execute(sqlCommand, param: dynamicParam);
+                return rowEffects;
+            } 
         }
         #endregion
-
     }
 }

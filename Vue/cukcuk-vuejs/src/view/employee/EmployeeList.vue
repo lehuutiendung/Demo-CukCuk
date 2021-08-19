@@ -265,7 +265,7 @@ export default {
     //   });
 
     //Gọi API filter thực hiện phân trang
-    axios.get(`http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}&employeeCode=NV`)
+    axios.get(`https://localhost:44338/api/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}`)
     .then(res => {
       vm.employees = res.data.Data;
       this.totalPage = res.data.TotalPage;
@@ -382,15 +382,6 @@ export default {
     showModalBox() {
       this.modalBoxShow = !this.modalBoxShow;
       this.modeForm = 0;
-      axios
-        .get("http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode")
-        .then((res) => {
-          this.newEmployeeCode = res.data;
-          console.log(this.newEmployeeCode);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
     },
 
     exitModalBox() {
@@ -421,7 +412,7 @@ export default {
         let vm = this;
         debugger;
         axios
-          .get(`http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=1&employeeCode=NV`)
+          .get(`https://localhost:44338/api/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=1`)
           .then((res) => {
             vm.employees = res.data.Data;
             this.update = !this.update;
@@ -439,7 +430,7 @@ export default {
           let vm = this;
           vm.employees = [];
           axios
-            .get(`http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}&employeeCode=NV`)
+            .get(`https://localhost:44338/api/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}`)
             .then((res) => {
               vm.employees = res.data.Data;
               this.update = !this.update;
@@ -487,7 +478,7 @@ export default {
       vm.positionId = "";
       // Gọi API lấy tất cả nhân viên
       axios
-        .get(`http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=1&employeeCode=NV`)
+        .get(`https://localhost:44338/api/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=1`)
         .then((res) => {
           vm.employees = res.data.Data;
           this.showTable = !this.showTable;
@@ -508,7 +499,7 @@ export default {
           .then(() => {
               //Xóa xong thực hiện refresh table, giữ trang hiện tại.
               axios
-              .get(`http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}&employeeCode=NV`)
+              .get(`https://localhost:44338/api/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}`)
               .then((res) => {
                 this.employees = res.data.Data;
               })
@@ -614,7 +605,7 @@ export default {
     //Gọi API thực hiện phân trang, và $emit cập nhật số trang đến TheFooter
     callAPIPaging(pageSize, pageNumber){
       this.employees = [];
-      axios.get(`http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=${pageSize}&pageNumber=${pageNumber}&employeeCode=NV`)
+      axios.get(`https://localhost:44338/api/v1/Employees/Filter?pageSize=${pageSize}&pageNumber=${pageNumber}`)
       .then(res => {
         this.employees = res.data.Data;
         this.totalPage = res.data.TotalPage;
