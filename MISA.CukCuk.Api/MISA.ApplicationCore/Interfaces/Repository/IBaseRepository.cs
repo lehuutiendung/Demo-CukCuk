@@ -12,7 +12,7 @@ namespace MISA.ApplicationCore.Interfaces.Repository
 
         Object GetById(Guid entityId);
 
-        Object Filter(int pageSize, int pageNumber, String fullName, String entityCode, String phoneNumber);
+        Object Filter(int pageSize, int pageNumber, String filter);
 
         Object NewCode();
 
@@ -23,5 +23,6 @@ namespace MISA.ApplicationCore.Interfaces.Repository
         int DeleteMultiple(List<Guid> listId);
 
         int Update(Guid entityId, Entity entity);
+
     }
 }

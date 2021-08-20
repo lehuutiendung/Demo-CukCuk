@@ -72,6 +72,39 @@ namespace MISA.ApplicationCore.Entities
         /// Lương
         /// </summary>
         public double? Salary { get; set; }
+
+        /// <summary>
+        /// Số CMTND/Căn cước
+        /// </summary>
+        [MISARequired("Số căn cước")]
+
+        public string IdentityNumber { get; set; }
         #endregion
+
+        /// <summary>
+        /// Ngày cấp căn cước
+        /// </summary>
+        public DateTime? IdentityDate { get; set; }
+
+        /// <summary>
+        /// Nơi cấp
+        /// </summary>
+        public string IdentityPlace { get; set; }
+
+        /// <summary>
+        /// Id phòng ban
+        /// </summary>
+        public string DepartmentId { get; set; }
+
+        /// <summary>
+        /// Id vị trí
+        /// </summary>
+        public string PositionId { get; set; }
+
+        /// <summary>
+        /// Mã số thuế cá nhân
+        /// </summary>
+        public string PersonalTaxCode { get; set; }
+
     }
 }

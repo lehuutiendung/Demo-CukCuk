@@ -56,15 +56,24 @@ namespace MISA.ApplicationCore.Entities
         /// Email
         /// </summary>
         [MISARequired("Email")]
-
         public string Email { get; set; }
 
         /// <summary>
         /// Số điện thoại
         /// </summary>
         [MISARequired("Số điện thoại")]
-
         public string PhoneNumber { get; set; }
+
+        /// <summary>
+        /// Id nhóm khách hàng
+        /// </summary>
+        public string CustomerGroupId { get; set; }
+
+        /// <summary>
+        /// Chứa danh sách mã của từng khách hàng khi import file
+        /// </summary>
+        [MISANotMap]
+        public List<string> ImportError { get; set; } = new List<string>();
 
         #endregion
     }

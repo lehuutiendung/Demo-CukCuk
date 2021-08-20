@@ -9,6 +9,8 @@ namespace MISA.ApplicationCore.Interfaces.Services
 {
     public interface ICustomerService:IBaseService<Customer>
     {
+        #region Code cũ
+
         /*/// <summary>
         /// Lấy tất cả khách hàng
         /// </summary>
@@ -62,6 +64,46 @@ namespace MISA.ApplicationCore.Interfaces.Services
         /// <returns> ServiceResult : kết quả xử lý qua nghiệp vụ</returns>
         /// CreatedBy: LHTDUNG - 13/08/2021
         ServiceResult UpdateCustomer(Guid customerId, Customer customer);
-*/
+        */
+        #endregion
+
+        /// <summary>
+        /// Service xử lý nghiệp vụ kiểm tra trùng mã được nhập từ file
+        /// </summary>
+        /// <param name="customerCode"></param>
+        /// <returns></returns>
+        ServiceResult DuplicateCode(String customerCode);
+
+        /// <summary>
+        /// Service xử lý nghiệp vụ kiểm tra trùng số điện thoại được nhập từ file
+        /// </summary>
+        /// <param name="phoneNumber"></param>
+        /// <returns></returns>
+        ServiceResult DuplicatePhoneNumber(String phoneNumber);
+
+        /// <summary>
+        /// Service xử lý format ngày sinh từ được nhập từ file
+        /// </summary>
+        /// <param name="dateOfBirth"></param>
+        /// <returns></returns>
+        ServiceResult FormatDate(String dateOfBirth);
+
+        /// <summary>
+        /// Service xử lý nghiệp vụ validate dữ liệu cho mã, số điện thoại, tên group được nhập từ file
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <param name="customerCodeSheet"></param>
+        /// <param name="phoneNumberSheet"></param>
+        /// <param name="groupName"></param>
+        /// <param name="customersList"></param>
+        /// <returns></returns>
+        ServiceResult ImportValidateValue(Customer customer, Object customerCodeSheet, Object phoneNumberSheet, Object groupName, List<Customer> customersList);
+
+        /// <summary>
+        /// Interface xử lý nghiệp vụ đồng ý thêm mới các bản ghi 
+        /// </summary>
+        /// <param name="customersList"></param>
+        /// <returns></returns>
+        ServiceResult ImportAccept(List<Customer> customersList);
     }
 }

@@ -379,7 +379,8 @@ export default {
             vm.employee.PositionId = vm.position;
             vm.employee.workStatus = vm.workStatus;
             axios
-              .post(`http://cukcuk.manhnv.net/v1/employees`, vm.employee)
+              // .post(`http://cukcuk.manhnv.net/v1/employees`, vm.employee)
+              .post(`https://localhost:44338/api/v1/Employees`, vm.employee)
               .then((res) => {
                 console.log(res);
                 // debugger // eslint-disable-line
@@ -395,7 +396,8 @@ export default {
             vm.employee.workStatus = vm.workStatus;
             axios
               .put(
-                `http://cukcuk.manhnv.net/v1/employees/${vm.employeeId}`,
+                // `http://cukcuk.manhnv.net/v1/employees/${vm.employeeId}`,
+                `https://localhost:44338/api/v1/Employees/${vm.employeeId}`,
                 vm.employee
               )
               .then((res) => {
@@ -613,10 +615,10 @@ export default {
       if (this.mode == 0) {
         this.employee = {};
         axios
-        .get("http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode")
-        // .get("https://localhost:44338/api/v1/Employees/NewCode")
+        // .get("http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode")
+        .get("https://localhost:44338/api/v1/Employees/NewCode")
         .then((res) => {
-          this.$set(this.employee, "EmployeeCode", res.data );
+          this.$set(this.employee, "EmployeeCode", res.data.EmployeeCode );
           console.log(this.newEmployeeCode);
         })
         .catch((err) => {

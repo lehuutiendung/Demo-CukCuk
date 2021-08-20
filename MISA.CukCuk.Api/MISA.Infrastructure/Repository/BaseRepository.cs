@@ -14,7 +14,7 @@ namespace MISA.Infrastructure.Repository
     public class BaseRepository<Entity> : IBaseRepository<Entity>
     {
         // Khai báo thông tin kết nối database
-        IDbConnection _dbConnection;
+        protected IDbConnection _dbConnection;
         public readonly string _connectionString;
 
         public BaseRepository(IConfiguration configuration)
@@ -157,15 +157,10 @@ namespace MISA.Infrastructure.Repository
         /// </summary>
         /// <param name="pageSize"></param>
         /// <param name="pageNumber"></param>
-        /// <param name="fullName"></param>
-        /// <param name="entityCode"></param>
-        /// <param name="phoneNumber"></param>
+        /// <param name="filter"></param>
         /// <returns></returns>
-        public object Filter(int pageSize, int pageNumber, string fullName, string entityCode, string phoneNumber)
+        public object Filter(int pageSize, int pageNumber, string filter)
         {
-            fullName = null;
-            entityCode = null;
-            phoneNumber = null;
             //Khởi tạo đối tượng kết nối với database
             using ( _dbConnection = new MySqlConnection(_connectionString))
             {
@@ -185,7 +180,7 @@ namespace MISA.Infrastructure.Repository
                                                        $"LEFT JOIN Department d ON d.DepartmentId = e.DepartmentId " +
                                                        $"LEFT JOIN Position p ON p.PositionId = e.PositionId " +
                                                        $"ORDER BY e.CreatedDate DESC LIMIT {pageSize} OFFSET {offSet}) paginate " +
-                                                       $"WHERE ( FullName LIKE @FullName AND {className}Code LIKE @{className}Code AND PhoneNumber LIKE @PhoneNumber OR paginate.PhoneNumber IS NULL)";
+                                                       $"WHERE ( paginate.FullName LIKE @FullName OR paginate.{className}Code LIKE @{className}Code OR paginate.PhoneNumber LIKE @PhoneNumber OR paginate.PhoneNumber IS NULL)";
 
                 }
                 if (className == "Customer")
@@ -195,15 +190,15 @@ namespace MISA.Infrastructure.Repository
                                                         $"FROM Customer c " +
                                                         $"LEFT JOIN CustomerGroup cg ON cg.CustomerGroupId = c.CustomerGroupId " +
                                                         $"ORDER BY c.CreatedDate DESC LIMIT {pageSize} OFFSET {offSet}) paginate " +
-                                                        $"WHERE ( FullName LIKE @FullName AND {className}Code LIKE @{className}Code AND PhoneNumber LIKE @PhoneNumber OR paginate.PhoneNumber IS NULL)";
+                                                        $"WHERE ( FullName LIKE @FullName OR {className}Code LIKE @{className}Code OR PhoneNumber LIKE @PhoneNumber OR paginate.PhoneNumber IS NULL)";
 
 
 
                 }
 
-                dynamicParameters.Add($"@FullName", $"%{fullName}%");
-                dynamicParameters.Add($"@{className}Code", $"%{entityCode}%");
-                dynamicParameters.Add($"@PhoneNumber", $"%{phoneNumber}%");
+                dynamicParameters.Add($"@FullName", $"%{filter}%");
+                dynamicParameters.Add($"@{className}Code", $"%{filter}%");
+                dynamicParameters.Add($"@PhoneNumber", $"%{filter}%");
 
                 var sqltotalRecord = $"SELECT COUNT({className}Code) AS totalRecord FROM {className}";
 
@@ -351,5 +346,6 @@ namespace MISA.Infrastructure.Repository
             } 
         }
         #endregion
+
     }
 }

@@ -61,11 +61,20 @@ namespace MISA.ApplicationCore.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mã khách hàng này đã tồn tại. Không được phép trùng!.
+        ///   Looks up a localized string similar to Mã khách hàng đã tồn tại trong hệ thống..
         /// </summary>
         public static string CustomerCode_Duplicate_ErrorMsg {
             get {
                 return ResourceManager.GetString("CustomerCode_Duplicate_ErrorMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mã khách hàng đã trùng với khách hàng khác trong tệp nhập khẩu..
+        /// </summary>
+        public static string CustomerCode_DuplicateFile_ErrorMsg {
+            get {
+                return ResourceManager.GetString("CustomerCode_DuplicateFile_ErrorMsg", resourceCulture);
             }
         }
         
@@ -75,6 +84,33 @@ namespace MISA.ApplicationCore.Resources {
         public static string CustomerCode_ErrorMsg {
             get {
                 return ResourceManager.GetString("CustomerCode_ErrorMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nhóm khách hàng không có trong hệ thống..
+        /// </summary>
+        public static string GroupName_ErrorMsg {
+            get {
+                return ResourceManager.GetString("GroupName_ErrorMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SĐT đã có trong hệ thống..
+        /// </summary>
+        public static string PhoneNumber_Duplicate_ErrorMsg {
+            get {
+                return ResourceManager.GetString("PhoneNumber_Duplicate_ErrorMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SĐT đã trùng với SĐT của khách hàng khác trong tệp nhập khẩu..
+        /// </summary>
+        public static string PhoneNumber_DuplicateFile_ErrorMsg {
+            get {
+                return ResourceManager.GetString("PhoneNumber_DuplicateFile_ErrorMsg", resourceCulture);
             }
         }
     }

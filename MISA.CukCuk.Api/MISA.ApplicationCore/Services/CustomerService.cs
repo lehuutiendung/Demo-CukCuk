@@ -12,19 +12,180 @@ namespace MISA.ApplicationCore.Services
 {
     public class CustomerService :BaseService<Customer>, ICustomerService
     {
-        //ICustomerRepository _customerRepository;
+        ICustomerRepository _customerRepository;
         ServiceResult _serviceResult;
 
         /// <summary>
         /// Hàm khởi tạo
         /// </summary>
         /// <param name="customerRepository"></param>
-        public CustomerService(IBaseRepository<Customer> baseRepository):base(baseRepository)
+        public CustomerService(IBaseRepository<Customer> baseRepository, ICustomerRepository customerRepository):base(baseRepository)
         {
-            //_customerRepository = customerRepository;
+            _customerRepository = customerRepository;
             _serviceResult = new ServiceResult();
         }
 
+        /// <summary>
+        /// Format định dạng ngày tháng từ các bản ghi được Import file excel
+        /// </summary>
+        /// <param name="dateOfBirth"></param>
+        /// <returns></returns>
+        public ServiceResult FormatDate(string dateOfBirth)
+        {
+            //Chỉ nhập năm sinh => 01/01/yyyy
+            if(dateOfBirth.Length == 4)
+            {
+                dateOfBirth = string.Concat("01/01/", dateOfBirth); 
+            }
+            //Chỉ nhập tháng/năm sinh => 01/mm/yyyy
+            if (dateOfBirth.Length == 6)
+            {
+                dateOfBirth = string.Concat("01/0", dateOfBirth);
+            }
+            if (dateOfBirth.Length == 7)
+            {
+                dateOfBirth = string.Concat("01/", dateOfBirth);
+            }
+            
+            _serviceResult.Data = dateOfBirth;
+            return _serviceResult;
+        }
+
+        /// <summary>
+        /// Xử lý nghiệp vụ kiểm tra trùng mã được nhập từ file
+        /// </summary>
+        /// <param name="customerCode"></param>
+        /// <returns></returns>
+        public ServiceResult DuplicateCode(string customerCode)
+        {
+            _serviceResult = new ServiceResult();
+            var customerCodeCount = _customerRepository.DuplicateCode(customerCode);
+            if(customerCodeCount > 0)
+            {
+                var errorMsg = Resources.ResourcesCustomer.CustomerCode_Duplicate_ErrorMsg;
+                _serviceResult.IsValid = false;
+                _serviceResult.Messenger = errorMsg;
+                return _serviceResult;
+            }
+            _serviceResult.Data = customerCodeCount;
+            return _serviceResult;
+        }
+
+        /// <summary>
+        /// Kiểm tra trùng số điện thoại được nhập từ file
+        /// </summary>
+        /// <param name="phoneNumber"></param>
+        /// <returns></returns>
+        public ServiceResult DuplicatePhoneNumber(string phoneNumber)
+        {
+            _serviceResult = new ServiceResult();
+            var phoneNumberCount = _customerRepository.DuplicatePhoneNumber(phoneNumber);
+            if (phoneNumberCount > 0)
+            {
+                var errorMsg = Resources.ResourcesCustomer.PhoneNumber_Duplicate_ErrorMsg;
+                _serviceResult.IsValid = false;
+                _serviceResult.Messenger = errorMsg;
+                return _serviceResult;
+            }
+            _serviceResult.Data = phoneNumberCount;
+            return _serviceResult;
+        }
+
+        /// <summary>
+        /// Tổng hợp kiểm tra trùng mã, số điện thoại, tên group tồn tại
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <param name="customerCodeSheet"></param>
+        /// <param name="phoneNumberSheet"></param>
+        /// <param name="groupName"></param>
+        /// <param name="customersList"></param>
+        /// <returns></returns>
+        public ServiceResult ImportValidateValue(Customer customer, object customerCodeSheet, object phoneNumberSheet, object groupName, List<Customer> customersList)
+        {
+            //Check mã khách hàng
+            if (customerCodeSheet != null)
+            {
+                customer.CustomerCode = customerCodeSheet.ToString().Trim();
+                var serviceResult = DuplicateCode(customer.CustomerCode);
+                if (serviceResult.IsValid == false)
+                {
+                    customer.ImportError.Add(serviceResult.Messenger);
+                }
+            }
+
+            //Check số điện thoại
+            if (phoneNumberSheet != null)
+            {
+                customer.PhoneNumber = phoneNumberSheet.ToString().Trim();
+                var serviceResult = DuplicatePhoneNumber(customer.PhoneNumber);
+                if (serviceResult.IsValid == false)
+                {
+                    customer.ImportError.Add(serviceResult.Messenger);
+                }
+            }
+
+            //Check tên group
+            if (groupName != null)
+            {
+                var customerGroupName = groupName.ToString().Trim();
+                var groupNameObject = _customerRepository.NotGroup(customerGroupName);
+                if(groupNameObject.Count() <= 0)
+                {
+                    var errorMsg = Resources.ResourcesCustomer.GroupName_ErrorMsg;
+                    customer.ImportError.Add(errorMsg);
+                }
+                else
+                {
+                    //Lấy giá trị của CustomerGroupId
+                    var firstRow = groupNameObject.FirstOrDefault();
+                    var Heading = ((IDictionary<string, object>)firstRow).Keys.ToArray();
+                    var details = ((IDictionary<string, object>)firstRow);
+                    customer.CustomerGroupId = details[Heading[0]].ToString();
+                     
+                }
+            }
+
+            foreach (var item in customersList)
+            {
+                if (customer.CustomerCode == item.CustomerCode)
+                {
+                    //Mã lỗi: Trùng mã với khách hàng trong tệp nhập khẩu
+                    var duplicateCodeInFile = Resources.ResourcesCustomer.CustomerCode_DuplicateFile_ErrorMsg;
+                    //Kiểm tra và thêm mã lỗi vào cả 2 đối tượng được khi được so sánh
+                    if (!item.ImportError.Contains(duplicateCodeInFile))
+                    {
+                        item.ImportError.Add(duplicateCodeInFile);
+                    }
+                    customer.ImportError.Add(duplicateCodeInFile);
+                }
+
+                if (customer.PhoneNumber == item.PhoneNumber)
+                {
+                    //Mã lỗi: Trùng SĐT với khách hàng trong tệp nhập khẩu
+                    var duplicatePhoneInFile = Resources.ResourcesCustomer.PhoneNumber_DuplicateFile_ErrorMsg;
+                    //Kiểm tra và thêm mã lỗi vào cả 2 đối tượng được khi được so sánh
+                    if (!item.ImportError.Contains(duplicatePhoneInFile))
+                    {
+                        item.ImportError.Add(duplicatePhoneInFile);
+                    }
+                    customer.ImportError.Add(duplicatePhoneInFile);
+                }
+
+            }
+
+            return _serviceResult;
+        }
+
+        /// <summary>
+        /// Thực hiện gọi hàm của Repo => Excute, thêm mới các bản ghi vào database
+        /// </summary>
+        /// <param name="customersList"></param>
+        /// <returns></returns>
+        public ServiceResult ImportAccept(List<Customer> customersList)
+        {
+            _serviceResult.Data = _customerRepository.ImportAccept(customersList);
+            return _serviceResult;
+        }
         #region Code Clean Architecture - Old Code
 
         /*public ServiceResult AddCustomer(Customer customer)

@@ -524,7 +524,8 @@ export default {
       this.inputSearch = e.target.value;
       axios
         .get(
-          `http://cukcuk.manhnv.net/v1/Employees/employeeFilter?pageSize=10&pageNumber=1&employeeFilter=${e.target.value}`
+          // `http://cukcuk.manhnv.net/v1/Employees/employeeFilter?pageSize=10&pageNumber=1&employeeFilter=${e.target.value}`
+          `https://localhost:44338/api/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}&filter=${e.target.value}`
         )
         .then((res) => {
           console.log(res.data);

@@ -97,6 +97,15 @@ namespace MISA.ApplicationCore.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nhập file bị trống!.
+        /// </summary>
+        public static string File_ErrorMsg {
+            get {
+                return ResourceManager.GetString("File_ErrorMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Họ tên không được phép để trống!.
         /// </summary>
         public static string FullName_ErrorMsg {
@@ -111,6 +120,15 @@ namespace MISA.ApplicationCore.Resources {
         public static string NotExist {
             get {
                 return ResourceManager.GetString("NotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Không hỗ trợ định dạng file này..
+        /// </summary>
+        public static string NotSupportFile_ErrorMsg {
+            get {
+                return ResourceManager.GetString("NotSupportFile_ErrorMsg", resourceCulture);
             }
         }
         
