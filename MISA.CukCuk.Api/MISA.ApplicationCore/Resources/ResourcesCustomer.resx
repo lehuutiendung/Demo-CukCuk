@@ -117,10 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CustomerCode_DuplicateFile_ErrorMsg" xml:space="preserve">
+    <value>Mã khách hàng đã trùng với khách hàng khác trong tệp nhập khẩu.</value>
+  </data>
   <data name="CustomerCode_Duplicate_ErrorMsg" xml:space="preserve">
-    <value>Mã khách hàng này đã tồn tại. Không được phép trùng!</value>
+    <value>Mã khách hàng đã tồn tại trong hệ thống.</value>
   </data>
   <data name="CustomerCode_ErrorMsg" xml:space="preserve">
     <value>Mã khách hàng không được để trống!</value>
+  </data>
+  <data name="GroupName_ErrorMsg" xml:space="preserve">
+    <value>Nhóm khách hàng không có trong hệ thống.</value>
+  </data>
+  <data name="PhoneNumber_DuplicateFile_ErrorMsg" xml:space="preserve">
+    <value>SĐT đã trùng với SĐT của khách hàng khác trong tệp nhập khẩu.</value>
+  </data>
+  <data name="PhoneNumber_Duplicate_ErrorMsg" xml:space="preserve">
+    <value>SĐT đã có trong hệ thống.</value>
   </data>
 </root>

@@ -19,4 +19,12 @@ namespace MISA.ApplicationCore.MISAAttribute
             FieldName = fieldName;
         }
     }
+
+    /// <summary>
+    /// Không map với các trường có trên database
+    /// </summary>
+    public class MISANotMap : Attribute
+    {
+
+    }
 }

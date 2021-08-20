@@ -33,3 +33,7 @@ C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\
 C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.Infrastructure.dll
 C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.ApplicationCore.pdb
 C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\bin\Debug\net5.0\MISA.Infrastructure.pdb
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\bin\Debug\net5.0\EPPlus.dll
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\bin\Debug\net5.0\Microsoft.IO.RecyclableMemoryStream.dll
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\bin\Debug\net5.0\System.Xml.XPath.XmlDocument.dll
+C:\Users\admins\OneDrive\Máy tính\Demo-CukCuk\MISA.CukCuk.Api\MISA.CukCuk.Api\bin\Debug\net5.0\Newtonsoft.Json.dll

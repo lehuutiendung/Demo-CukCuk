@@ -129,11 +129,17 @@
   <data name="Exception_ErrorMsg" xml:space="preserve">
     <value>Có lỗi xảy ra. Vui lòng liên hệ MISA!</value>
   </data>
+  <data name="File_ErrorMsg" xml:space="preserve">
+    <value>Nhập file bị trống!</value>
+  </data>
   <data name="FullName_ErrorMsg" xml:space="preserve">
     <value>Họ tên không được phép để trống!</value>
   </data>
   <data name="NotExist" xml:space="preserve">
     <value>Không có dữ liệu.</value>
+  </data>
+  <data name="NotSupportFile_ErrorMsg" xml:space="preserve">
+    <value>Không hỗ trợ định dạng file này.</value>
   </data>
   <data name="PhoneNumber_ErrorMsg" xml:space="preserve">
     <value>Số điện thoại không được phép để trống!</value>

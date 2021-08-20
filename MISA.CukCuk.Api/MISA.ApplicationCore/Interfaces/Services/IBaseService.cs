@@ -32,7 +32,7 @@ namespace MISA.ApplicationCore.Interfaces.Services
         ///     totalRecord
         ///     {entity}
         /// </returns>
-        ServiceResult Filter(int pageSize, int pageNumber, String fullName, String entityCode, String phoneNumber);
+        ServiceResult Filter(int pageSize, int pageNumber, String filter);
 
         /// <summary>
         /// Lấy thông tin mã entity mới và trả về cho form nhập liệu
@@ -65,5 +65,6 @@ namespace MISA.ApplicationCore.Interfaces.Services
         /// <returns> ServiceResult : kết quả xử lý qua nghiệp vụ</returns>
         /// CreatedBy: LHTDUNG - 13/08/2021
         ServiceResult Update(Guid entityId, Entity entity);
+
     }
 }

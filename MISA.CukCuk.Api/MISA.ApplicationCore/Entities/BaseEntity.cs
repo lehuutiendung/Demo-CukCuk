@@ -12,7 +12,7 @@ namespace MISA.ApplicationCore.Entities
         /// <summary>
         /// Ngày tạo
         /// </summary>
-        public DateTime? CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; } = DateTime.Today;
 
         /// <summary>
         /// Người tạo
