@@ -132,14 +132,14 @@
             </div>
             <div class="input-row">
               <DropDown
-                api="http://cukcuk.manhnv.net/v1/Positions"
+                api="https://localhost:44338/api/Positions"
                 type="Position"
                 :dataDropdown="dataDropdown"
                 :callApi="true"
                 v-on:position="getPosition"
               />
               <DropDown
-                api="http://cukcuk.manhnv.net/api/Department"
+                api="https://localhost:44338/api/Departments"
                 type="Department"
                 :dataDropdown="dataDropdown"
                 :callApi="true"
@@ -586,7 +586,8 @@ export default {
         .then(() => {
           axios
             .get(
-              `http://cukcuk.manhnv.net/api/Department/${vm.dataDropdown.DepartmentId}`
+              // `http://cukcuk.manhnv.net/api/Department/${vm.dataDropdown.DepartmentId}`
+              `https://localhost:44338/api/Department/${vm.dataDropdown.DepartmentId}`
             )
             .then((res) => {
               vm.dataDropdown.DepartmentName = res.data.DepartmentName;
@@ -598,7 +599,8 @@ export default {
         .then(() => {
           axios
             .get(
-              `http://cukcuk.manhnv.net/v1/Positions/${vm.dataDropdown.PositionId}`
+              // `http://cukcuk.manhnv.net/v1/Positions/${vm.dataDropdown.PositionId}`
+              `https://localhost:44338/api/Position/${vm.dataDropdown.PositionId}`
             )
             .then((res) => {
               vm.dataDropdown.PositionName = res.data.PositionName;

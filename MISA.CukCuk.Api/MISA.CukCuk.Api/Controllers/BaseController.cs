@@ -99,11 +99,11 @@ namespace MISA.CukCuk.Api.Controllers
         ///     {entity}
         /// </returns>
         [HttpGet("Filter")]
-        public IActionResult Filter(int pageSize, int pageNumber, String filter)
+        public IActionResult Filter(int pageSize, int pageNumber, String filter, String departmentId, String positionId)
         {
             try
             {
-                var _serviceResult = _baseService.Filter(pageSize, pageNumber, filter);
+                var _serviceResult = _baseService.Filter(pageSize, pageNumber, filter, departmentId, positionId);
                 var response = StatusCode(200, _serviceResult.Data);
                 return response;
             }

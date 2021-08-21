@@ -86,14 +86,14 @@
 
       <!-- Component ComboBox -->
       <TheCombobox
-        :api="'http://cukcuk.manhnv.net/api/Department'"
+        :api="'https://localhost:44338/api/Departments'"
         :type="'Department'"
         :mode="1"
         :department="department"
         @DepartmentName="handleDepartment"
       />
       <TheCombobox
-        :api="'http://cukcuk.manhnv.net/v1/Positions'"
+        :api="'https://localhost:44338/api/Positions'"
         :type="'Position'"
         :mode="1"
         :position="position"
@@ -239,7 +239,7 @@ export default {
       departmentId: "",
       position: "",
       positionId: "",
-      inputSearch: "NV",  //Lưu giá trị của input để truyền vào filter search
+      inputSearch: "",  //Lưu giá trị của input để truyền vào filter search
       pageSize: 10,
       pageNumber: 1,
       totalPage: 0,
@@ -490,27 +490,25 @@ export default {
 
     //Xóa nhiều nhân viên
     deleteMultiple() {
-      this.queueDelete.forEach((item) => {
-        axios
-          .delete(`http://cukcuk.manhnv.net/v1/employees/${item}`)
+      axios.delete(`https://localhost:44338/api/v1/Employees`, {
+        data: this.queueDelete,      
+      })
+      .then(res => {
+          console.log(res)
+      }).then(() => {
+          //Xóa xong thực hiện refresh table, giữ trang hiện tại.
+          axios
+          .get(`https://localhost:44338/api/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}`)
           .then((res) => {
-              console.log(res);  
-          })
-          .then(() => {
-              //Xóa xong thực hiện refresh table, giữ trang hiện tại.
-              axios
-              .get(`https://localhost:44338/api/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}`)
-              .then((res) => {
-                this.employees = res.data.Data;
-              })
-              .catch((err) => {
-                console.error(err);
-              });
+            this.employees = res.data.Data;
           })
           .catch((err) => {
             console.error(err);
           });
-      });
+      })
+      .catch(err => {
+        console.error(err); 
+      })
       this.buttonDelShow = false;
       // this.refreshData();
     },
@@ -629,7 +627,7 @@ export default {
 
     //Gọi API thực hiện tìm kiếm theo (pageSize, pageNumber, inputSearch, departmentId, positionId)
     callAPIFilter(pageSize, pageNumber, inputValue, department, position){
-      axios.get(`http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=${pageSize}&pageNumber=${pageNumber}&employeeCode=${inputValue}&departmentId=${department}&positionId=${position}`)
+      axios.get(`https://localhost:44338/api/v1/Employees/Filter?pageSize=${pageSize}&pageNumber=${pageNumber}&filter=${inputValue}&departmentId=${department}&positionId=${position}`)
       .then(res => {
         console.log(res)
         this.employees = res.data.Data;
@@ -641,45 +639,16 @@ export default {
   },
 
   watch:{
-      departmentId: function(){
+    departmentId: function(){
         this.employees = [];
-        // this.callAPIFilter(this.pageSize, this.pageNumber, this.inputSearch, this.departmentId, this.positionId);   
+        this.callAPIFilter(this.pageSize, this.pageNumber, this.inputSearch, this.departmentId, this.positionId);   
+    },
 
-        if(this.departmentId){
-          this.callAPIFilter(this.pageSize, this.pageNumber, this.inputSearch, this.departmentId, this.positionId);   
-        }else{
-            axios
-            .get(
-                `http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}&employeeCode=${this.inputSearch}&positionId=${this.positionId}`
-            )
-            .then((res) => {
-                this.employees = res.data.Data;
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-        }
-      },
-
-      positionId: function(){
+    positionId: function(){
         this.employees = [];
-        // this.callAPIFilter(this.pageSize, this.pageNumber, this.inputSearch, this.departmentId, this.positionId);
-
-        if(this.positionId){
-            this.callAPIFilter(this.pageSize, this.pageNumber, this.inputSearch, this.departmentId, this.positionId);
-        }else{
-            axios
-            .get(
-            `http://cukcuk.manhnv.net/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}&employeeCode=${this.inputSearch}&departmentId=${this.departmentId}`
-            )
-            .then((res) => {
-            this.employees = res.data.Data;
-            })
-            .catch((err) => {
-            console.error(err);
-            });
-        }
-      },
+        this.callAPIFilter(this.pageSize, this.pageNumber, this.inputSearch, this.departmentId, this.positionId);
+      
+    },
     inputSearch: function(){
         this.employees = [];
         this.callAPIFilter(this.pageSize, this.pageNumber, this.inputSearch, this.departmentId, this.positionId);
