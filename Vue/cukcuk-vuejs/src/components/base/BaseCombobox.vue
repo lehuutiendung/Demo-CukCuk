@@ -110,6 +110,7 @@ export default {
         if (this.mode == 1) {
           this.items.push({
             [this.typeName]: "Tất cả " + this.map[this.type],
+            [this.typeId]: ""
           });
         }
         res.data.forEach((element) => {

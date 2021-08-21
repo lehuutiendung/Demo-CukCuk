@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
 using MISA.ApplicationCore.Interfaces.Repository;
+using MISA.ApplicationCore.MISAAttribute;
 using MySqlConnector;
 using System;
 using System.Collections.Generic;
@@ -49,28 +50,33 @@ namespace MISA.Infrastructure.Repository
                 //Duyệt từng property
                 foreach (var item in properties)
                 {
-                    //Lấy tên của prop
-                    var itemName = item.Name;
-
-                    //Lấy value của prop
-                    var itemValue = item.GetValue(entity);
-
-                    if (itemName == $"{className}Id" && item.PropertyType == typeof(Guid))
+                    var propertyNotMap = item.GetCustomAttributes(typeof(MISANotMap), true);
+                    if (propertyNotMap.Length == 0)
                     {
-                        // Sinh mã Guid cho EmployeeId
-                        itemValue = Guid.NewGuid();
+                        //Lấy tên của prop
+                        var itemName = item.Name;
+
+                        //Lấy value của prop
+                        var itemValue = item.GetValue(entity);
+
+                        if (itemName == $"{className}Id" && item.PropertyType == typeof(Guid))
+                        {
+                            // Sinh mã Guid cho EmployeeId
+                            itemValue = Guid.NewGuid();
+                        }
+
+                        if (itemName == $"{className}Code")
+                        {
+                            dynamicParameters.Add($"@{className}Code", itemValue);
+                        }
+
+                        //Thêm param tương ứng với mỗi property
+                        dynamicParam.Add($"@{itemName}", itemValue);
+
+                        columnName += $"{itemName},";
+                        columnValue += $"@{itemName},";
                     }
 
-                    if (itemName == $"{className}Code")
-                    {
-                        dynamicParameters.Add($"@{className}Code", itemValue);
-                    }
-
-                    //Thêm param tương ứng với mỗi property
-                    dynamicParam.Add($"@{itemName}", itemValue);
-
-                    columnName += $"{itemName},";
-                    columnValue += $"@{itemName},";
                 }
                 #region Check trùng mã
                 // Mã khách hàng không được trùng
@@ -127,6 +133,7 @@ namespace MISA.Infrastructure.Repository
 
             using (_dbConnection = new MySqlConnection(_connectionString))
             {
+                _dbConnection.Open();
                 //Biến kiểm soát roll back database khi có truy vấn không thành công
                 var transaction = _dbConnection.BeginTransaction();
                 //Lấy dữ liệu
@@ -159,7 +166,7 @@ namespace MISA.Infrastructure.Repository
         /// <param name="pageNumber"></param>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public object Filter(int pageSize, int pageNumber, string filter)
+        public object Filter(int pageSize, int pageNumber, string filter, string department, string position)
         {
             //Khởi tạo đối tượng kết nối với database
             using ( _dbConnection = new MySqlConnection(_connectionString))
@@ -176,11 +183,13 @@ namespace MISA.Infrastructure.Repository
                 {
                     sqlCommand = $"SELECT * FROM (SELECT e.*, d.DepartmentName, p.PositionName, " +
                                                        $"(CASE e.Gender WHEN 0 THEN 'Nữ' WHEN 1 THEN 'Nam' ELSE 'Không xác định' END) AS GenderName " +
-                                                       $"FROM {className} e " +
+                                                       $"FROM Employee e " +
                                                        $"LEFT JOIN Department d ON d.DepartmentId = e.DepartmentId " +
                                                        $"LEFT JOIN Position p ON p.PositionId = e.PositionId " +
                                                        $"ORDER BY e.CreatedDate DESC LIMIT {pageSize} OFFSET {offSet}) paginate " +
-                                                       $"WHERE ( paginate.FullName LIKE @FullName OR paginate.{className}Code LIKE @{className}Code OR paginate.PhoneNumber LIKE @PhoneNumber OR paginate.PhoneNumber IS NULL)";
+                                                       $"WHERE ( FullName LIKE @FullName OR {className}Code LIKE @{className}Code OR PhoneNumber LIKE @PhoneNumber OR paginate.PhoneNumber IS NULL) " +
+                                                       $"AND paginate.DepartmentId LIKE @DepartmentId AND ISNULL(NULL) " +
+                                                       $"AND paginate.PositionId LIKE @PositionId AND ISNULL(NULL)" ;
 
                 }
                 if (className == "Customer")
@@ -199,6 +208,9 @@ namespace MISA.Infrastructure.Repository
                 dynamicParameters.Add($"@FullName", $"%{filter}%");
                 dynamicParameters.Add($"@{className}Code", $"%{filter}%");
                 dynamicParameters.Add($"@PhoneNumber", $"%{filter}%");
+                dynamicParameters.Add($"@DepartmentId", $"%{department}%");
+                dynamicParameters.Add($"@PositionId", $"%{position}%");
+
 
                 var sqltotalRecord = $"SELECT COUNT({className}Code) AS totalRecord FROM {className}";
 
@@ -282,15 +294,16 @@ namespace MISA.Infrastructure.Repository
             {
                 // Lấy dữ liệu
                 var className = typeof(Entity).Name;
-                var sqlCommand = $"SELECT CAST(SUBSTRING({className}Code, 3, LENGTH({className}Code)-1) AS int) AS c FROM {className} ORDER BY c DESC LIMIT 1";
+                //Substring từ kí tự thứ 4
+                var sqlCommand = $"SELECT CAST(SUBSTRING({className}Code, 4, LENGTH({className}Code)-1) AS int) AS c FROM {className} ORDER BY c DESC LIMIT 1";
                 var resultCode = _dbConnection.QueryFirstOrDefault<int>(sqlCommand);
                 resultCode++;
                 if (className.Equals("Employee"))
                 {
-                    return new { EmployeeCode = string.Concat("NV", resultCode) };
+                    return new { EmployeeCode = string.Concat("NV-", resultCode) };
 
                 }
-                else return new { CustomerCode = string.Concat("KH", resultCode) };
+                else return new { CustomerCode = string.Concat("KH-", resultCode) };
             }
         }
         #endregion
@@ -324,16 +337,19 @@ namespace MISA.Infrastructure.Repository
                 //Duyệt từng property
                 foreach (var item in properties)
                 {
-                    //Lấy tên của prop
-                    var itemName = item.Name;
+                    var propertyNotMap = item.GetCustomAttributes(typeof(MISANotMap), true);
+                    if (propertyNotMap.Length == 0)
+                    {
+                        //Lấy tên của prop
+                        var itemName = item.Name;
 
-                    //Lấy value của prop
-                    var itemValue = item.GetValue(entity);
+                        //Lấy value của prop
+                        var itemValue = item.GetValue(entity);
 
-                    //Thêm param tương ứng với mỗi property
-                    dynamicParam.Add($"@{itemName}", itemValue);
-                    queryValue.Add($"{itemName} = @{itemName}");
-
+                        //Thêm param tương ứng với mỗi property
+                        dynamicParam.Add($"@{itemName}", itemValue);
+                        queryValue.Add($"{itemName} = @{itemName}");
+                    }
                 }
                 var className = typeof(Entity).Name;
                 dynamicParam.Add($"@{className}Id", entityId);

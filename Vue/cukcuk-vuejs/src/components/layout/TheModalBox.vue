@@ -145,11 +145,11 @@
           </div>
           <div class="input-row">
             <DropDown
-              :api="'http://cukcuk.manhnv.net/v1/Positions'"
+              :api="'https://localhost:44338/api/Positions'"
               :type="'Position'"
             />
             <DropDown
-              :api="'http://cukcuk.manhnv.net/api/Department'"
+              :api="'https://localhost:44338/api/Departments'"
               :type="'Department'"
             />
           </div>

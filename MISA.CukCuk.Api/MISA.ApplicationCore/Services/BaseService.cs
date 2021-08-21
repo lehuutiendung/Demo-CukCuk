@@ -79,9 +79,9 @@ namespace MISA.ApplicationCore.Services
         /// <param name="pageNumber"></param>
         /// <param name="filter"></param>
         /// <returns></returns>
-        public ServiceResult Filter(int pageSize, int pageNumber, string filter)
+        public ServiceResult Filter(int pageSize, int pageNumber, string filter, string departmentId, string positionId)
         {
-            _serviceResult.Data = _baseRepository.Filter(pageSize, pageNumber, filter);
+            _serviceResult.Data = _baseRepository.Filter(pageSize, pageNumber, filter, departmentId, positionId);
             return _serviceResult;
         }
         #endregion
