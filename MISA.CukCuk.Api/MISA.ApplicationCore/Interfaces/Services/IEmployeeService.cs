@@ -62,5 +62,7 @@ namespace MISA.ApplicationCore.Interfaces.Services
         /// <returns> ServiceResult : kết quả xử lý qua nghiệp vụ</returns>
         /// CreatedBy: LHTDUNG - 15/08/2021
         ServiceResult UpdateEmployee(Guid employeeId, Employee employee);*/
+
+        ServiceResult FilterEmployee(int pageSize, int pageNumber, String filter, String department, String position);
     }
 }

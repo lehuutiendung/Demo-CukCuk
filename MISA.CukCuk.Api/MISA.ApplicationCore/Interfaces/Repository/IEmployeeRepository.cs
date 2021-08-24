@@ -22,5 +22,6 @@ namespace MISA.ApplicationCore.Interfaces.Repository
         int DeleteEmployee(Guid employeeId);
 
         int UpdateEmployee(Guid employeeId, Employee employee);*/
+        Object FilterEmployee(int pageSize, int pageNumber, String filter, String department, String position);
     }
 }

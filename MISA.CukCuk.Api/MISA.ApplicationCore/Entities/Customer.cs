@@ -75,6 +75,16 @@ namespace MISA.ApplicationCore.Entities
         [MISANotMap]
         public List<string> ImportError { get; set; } = new List<string>();
 
+        /// <summary>
+        /// Mã thẻ thành viên
+        /// </summary>
+        public string MemberCardCode { get; set; }
+
+        /// <summary>
+        /// Tên công ty
+        /// </summary>
+        public string CompanyName { get; set; }
+
         #endregion
     }
 }

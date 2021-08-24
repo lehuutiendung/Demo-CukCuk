@@ -22,7 +22,7 @@ namespace MISA.CukCuk.Api.Controllers
     public class CustomersController : BaseController<Customer>
     {
         ICustomerService _customerService;
-        public CustomersController(ICustomerService customerService, IBaseService<Customer> baseService):base(baseService)
+        public CustomersController(ICustomerService customerService, IBaseService<Customer> baseService) : base(baseService)
         {
             _customerService = customerService;
         }
@@ -138,25 +138,35 @@ namespace MISA.CukCuk.Api.Controllers
                             var customerCode = workSheet.Cells[row, 1].Value;
                             var phoneNumber = workSheet.Cells[row, 5].Value;
                             var groupName = workSheet.Cells[row, 4].Value;
-                            
+
                             //Các trường chỉ cần check NULL
                             var fullName = workSheet.Cells[row, 2].Value;
+                            var memberCardCode = workSheet.Cells[row, 3].Value;
+                            var dateOfBirth = workSheet.Cells[row, 6].Value;
+                            var companyName = workSheet.Cells[row, 7].Value;
                             var email = workSheet.Cells[row, 9].Value;
                             var address = workSheet.Cells[row, 10].Value;
-                            var dateOfBirth = workSheet.Cells[row, 6].Value;
-                            if(fullName != null)
+                            if (fullName != null)
                             {
                                 customer.FullName = fullName.ToString().Trim();
                             }
-                            if(email != null)
+                            if(memberCardCode != null)
+                            {
+                                customer.MemberCardCode = memberCardCode.ToString().Trim();
+                            }
+                            if(companyName != null)
+                            {
+                                customer.CompanyName = companyName.ToString().Trim();
+                            }
+                            if (email != null)
                             {
                                 customer.Email = email.ToString().Trim();
                             }
-                            if(address != null)
+                            if (address != null)
                             {
                                 customer.Address = address.ToString().Trim();
                             }
-                            if(dateOfBirth != null)
+                            if (dateOfBirth != null)
                             {
                                 var serviceResult = _customerService.FormatDate(dateOfBirth.ToString().Trim());
                                 DateTime dateTime = DateTime.ParseExact(serviceResult.Data.ToString(), "dd/MM/yyyy", null);
@@ -193,7 +203,7 @@ namespace MISA.CukCuk.Api.Controllers
         /// <param name="customersList"></param>
         /// <returns></returns>
         [HttpPost("ImportAccept")]
-        public IActionResult ImportAccept(List<Customer> customersList) 
+        public IActionResult ImportAccept(List<Customer> customersList)
         {
             //Danh sách chứa các bản ghi có thể thêm 
             var successList = new List<Customer>();
@@ -201,7 +211,7 @@ namespace MISA.CukCuk.Api.Controllers
             var errorList = new List<Customer>();
             foreach (var customer in customersList)
             {
-                if(customer.ImportError.Count() > 0)
+                if (customer.ImportError.Count() > 0)
                 {
                     //Thêm các bản ghi có lỗi vào errorList
                     errorList.Add(customer);
@@ -235,7 +245,51 @@ namespace MISA.CukCuk.Api.Controllers
                 return StatusCode(500, errorObj);
             }
 
-            return Ok();           
+            return Ok();
+        }
+
+        [HttpPost("Export")]
+        public IActionResult Export(CancellationToken cancellationToken, List<Customer> customersErrorList)
+        {
+            var stream = new MemoryStream();
+
+            using (var package = new ExcelPackage(stream))
+            {
+                var workSheet = package.Workbook.Worksheets.Add("Sheet1");
+                workSheet.Cells[1, 1].Value = "Mã khách hàng";
+                workSheet.Cells[1, 2].Value = "Tên khách hàng";
+                workSheet.Cells[1, 3].Value = "Mã thẻ thành viên";
+                workSheet.Cells[1, 4].Value = "Nhóm khách hàng";
+                workSheet.Cells[1, 5].Value = "Số điện thoại";
+                workSheet.Cells[1, 6].Value = "Ngày sinh";
+                workSheet.Cells[1, 7].Value = "Tên công ty"; 
+                workSheet.Cells[1, 8].Value = "Mã số thuế";
+                workSheet.Cells[1, 9].Value = "Email";
+                workSheet.Cells[1, 10].Value = "Địa chỉ";
+                workSheet.Cells[1, 11].Value = "Ghi chú";
+
+                var i = 0;
+                var totalRows = customersErrorList.Count();
+                for(int row = 2; row <= totalRows + 1; row++)
+                {
+                    workSheet.Cells[row, 1].Value = customersErrorList[i].CustomerCode;
+                    workSheet.Cells[row, 2].Value = customersErrorList[i].FullName;
+                    workSheet.Cells[row, 3].Value = customersErrorList[i].MemberCardCode;
+                    workSheet.Cells[row, 5].Value = customersErrorList[i].PhoneNumber;
+                    workSheet.Cells[row, 6].Value = customersErrorList[i].DateOfBirth;
+                    workSheet.Cells[row, 7].Value = customersErrorList[i].CompanyName;
+                    workSheet.Cells[row, 9].Value = customersErrorList[i].Email;
+                    workSheet.Cells[row, 10].Value = customersErrorList[i].Address;
+                    i++;
+                }
+
+                package.Save();
+            }
+            stream.Position = 0;
+            string excelName = $"Danh sách import lỗi.xlsx";
+
+            //return File(stream, "application/octet-stream", excelName);  
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
         }
     }
 }

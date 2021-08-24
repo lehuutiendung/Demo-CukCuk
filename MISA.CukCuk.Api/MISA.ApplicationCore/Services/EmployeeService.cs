@@ -12,17 +12,23 @@ namespace MISA.ApplicationCore.Services
 {
     public class EmployeeService:BaseService<Employee>, IEmployeeService
     {
-        //IEmployeeRepository _employeeRepository;
+        IEmployeeRepository _employeeRepository;
         ServiceResult _serviceResult;
 
         /// <summary>
         /// Hàm khởi tạo
         /// </summary>
         /// <param name="employeeRepository"></param>
-        public EmployeeService(IBaseRepository<Employee> baseRepository) :base(baseRepository)
+        public EmployeeService(IBaseRepository<Employee> baseRepository, IEmployeeRepository employeeRepository) :base(baseRepository)
         {
-            //_employeeRepository = employeeRepository;
+            _employeeRepository = employeeRepository;
             _serviceResult = new ServiceResult();
+        }
+
+        public ServiceResult FilterEmployee(int pageSize, int pageNumber, string filter, string department, string position)
+        {
+            _serviceResult.Data = _employeeRepository.Filter(pageSize, pageNumber, filter, department, position);
+            return _serviceResult;
         }
 
         #region Code Clean Architecture

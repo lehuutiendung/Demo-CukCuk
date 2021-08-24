@@ -99,7 +99,7 @@
         :position="position"
         @PositionName="handlePosition"
       />
-
+      <div class="import-button"><i class="fas fa-file-import"></i></div>
       <div class="refresh-button" @click="refreshData()"></div>
     </div>
     <div class="content-table">
@@ -649,10 +649,7 @@ export default {
         this.callAPIFilter(this.pageSize, this.pageNumber, this.inputSearch, this.departmentId, this.positionId);
       
     },
-    inputSearch: function(){
-        this.employees = [];
-        this.callAPIFilter(this.pageSize, this.pageNumber, this.inputSearch, this.departmentId, this.positionId);
-    },
+    
     pageNumber: function () {
       this.callAPIPaging(this.pageSize, this.pageNumber);
     },

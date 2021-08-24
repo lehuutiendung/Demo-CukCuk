@@ -181,16 +181,16 @@ namespace MISA.Infrastructure.Repository
                 var sqlCommand = "";
                 if (className == "Employee")
                 {
-                    sqlCommand = $"SELECT * FROM (SELECT e.*, d.DepartmentName, p.PositionName, " +
-                                                       $"(CASE e.Gender WHEN 0 THEN 'Nữ' WHEN 1 THEN 'Nam' ELSE 'Không xác định' END) AS GenderName " +
-                                                       $"FROM Employee e " +
-                                                       $"LEFT JOIN Department d ON d.DepartmentId = e.DepartmentId " +
-                                                       $"LEFT JOIN Position p ON p.PositionId = e.PositionId " +
-                                                       $"ORDER BY e.CreatedDate DESC LIMIT {pageSize} OFFSET {offSet}) paginate " +
-                                                       $"WHERE ( FullName LIKE @FullName OR {className}Code LIKE @{className}Code OR PhoneNumber LIKE @PhoneNumber OR paginate.PhoneNumber IS NULL) " +
-                                                       $"AND paginate.DepartmentId LIKE @DepartmentId AND ISNULL(NULL) " +
-                                                       $"AND paginate.PositionId LIKE @PositionId AND ISNULL(NULL)" ;
-
+                    sqlCommand = $"SELECT * FROM (" +
+                                      $"SELECT e.*, d.DepartmentName, p.PositionName, " +
+                                           $"(CASE e.Gender WHEN 0 THEN 'Nữ' WHEN 1 THEN 'Nam' ELSE 'Không xác định' END) AS GenderName FROM Employee e " +
+                                           $"LEFT JOIN Department d ON d.DepartmentId = e.DepartmentId " +
+                                           $"LEFT JOIN `Position` p ON p.PositionId = e.PositionId " +
+                                           $"ORDER BY e.CreatedDate DESC LIMIT {pageSize} OFFSET {offSet}" +
+                                 $") paginate " +
+                                 $"WHERE ( FullName LIKE @FullName OR EmployeeCode LIKE @EmployeeCode OR PhoneNumber LIKE @PhoneNumber AND ISNULL(NULL)) " +
+                                 $"AND (paginate.DepartmentId = @DepartmentId OR @DepartmentId = '' OR @DepartmentId IS NULL) " +
+                                 $"AND (paginate.PositionId = @PositionId OR @PositionId = '' OR @PositionId IS NULL)";
                 }
                 if (className == "Customer")
                 {
@@ -201,19 +201,16 @@ namespace MISA.Infrastructure.Repository
                                                         $"ORDER BY c.CreatedDate DESC LIMIT {pageSize} OFFSET {offSet}) paginate " +
                                                         $"WHERE ( FullName LIKE @FullName OR {className}Code LIKE @{className}Code OR PhoneNumber LIKE @PhoneNumber OR paginate.PhoneNumber IS NULL)";
 
-
-
                 }
 
                 dynamicParameters.Add($"@FullName", $"%{filter}%");
                 dynamicParameters.Add($"@{className}Code", $"%{filter}%");
                 dynamicParameters.Add($"@PhoneNumber", $"%{filter}%");
-                dynamicParameters.Add($"@DepartmentId", $"%{department}%");
-                dynamicParameters.Add($"@PositionId", $"%{position}%");
+                dynamicParameters.Add($"@DepartmentId", $"{department}");
+                dynamicParameters.Add($"@PositionId", $"{position}");
 
 
                 var sqltotalRecord = $"SELECT COUNT({className}Code) AS totalRecord FROM {className}";
-
                 var entity = _dbConnection.Query<object>(sqlCommand, dynamicParameters);
                 var totalRecord = _dbConnection.QueryFirstOrDefault<int>(sqltotalRecord);
                 var totalPage = Math.Ceiling(((double)totalRecord / (double)pageSize));

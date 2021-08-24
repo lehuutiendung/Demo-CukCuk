@@ -128,12 +128,14 @@ export default {
       //Format dd/mm/yyyy
       formatDate(date){
         try{
-          var rel = "";
-          var word = date.split('-');
-          for(var i = 0; i < 2;  i++){
-              rel += word[2][i];
-          }
-          return rel+= '/' + word[1] + '/' + word[0];
+          
+            var rel = "";
+            var word = date.split('-');
+            for(var i = 0; i < 2;  i++){
+                rel += word[2][i];
+            }
+            return rel+= '/' + word[1] + '/' + word[0];
+          
         }catch{
           console.log("Có lỗi xảy ra tại FormatDate!");
         }

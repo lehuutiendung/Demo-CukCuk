@@ -14,7 +14,7 @@ namespace MISA.ApplicationCore.Services
     public class BaseService<Entity> : IBaseService<Entity>
     {
         IBaseRepository<Entity> _baseRepository;
-        ServiceResult _serviceResult;
+        ServiceResult _serviceResult; 
         /// <summary>
         /// Hàm khởi tạo
         /// </summary>
@@ -158,7 +158,7 @@ namespace MISA.ApplicationCore.Services
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        private ServiceResult ValidateCommon (Entity entity)
+        public ServiceResult ValidateCommon (Entity entity)
         {
             var className = typeof(Entity).Name;
             for(var i = 0; i < typeof(Entity).GetProperties().Length; i++)
