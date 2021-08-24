@@ -86,5 +86,42 @@ namespace MISA.CukCuk.Api.Controllers
 
         }
         #endregion
+
+        #region API phân trang và bộ lọc theo tên, mã nhân viên, số điện thoại
+
+        /// <summary>
+        /// Bộ lọc theo Tên, Mã, Số điện thoại
+        /// </summary>
+        /// <param name="fullName"></param>
+        /// <param name="code">Mã nhân viên/Mã khách hàng</param>
+        /// <param name="phoneNumber"></param>
+        /// <returns>
+        ///     totalRecord
+        ///     {entity}
+        /// </returns>
+        [HttpGet("FilterEmployee")]
+        public IActionResult Filter(int pageSize, int pageNumber, String filter, String departmentId, String positionId)
+        {
+            try
+            {
+                var _serviceResult = _employeeService.Filter(pageSize, pageNumber, filter, departmentId, positionId);
+                var response = StatusCode(200, _serviceResult.Data);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                var errorObj = new
+                {
+                    devMsg = ex.Message,
+                    userMsg = MISA.ApplicationCore.Resources.ResourcesCommon.Exception_ErrorMsg,
+                    errorCode = "",
+                    moreInfo = "",
+                    traceId = ""
+                };
+                return StatusCode(500, errorObj);
+            }
+
+        }
+        #endregion
     }
 }

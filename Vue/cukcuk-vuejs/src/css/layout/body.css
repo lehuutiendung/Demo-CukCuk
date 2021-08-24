@@ -135,10 +135,29 @@
   right: 16px;
 }
 
-.container__tools .refresh-button:hover{
+.container__tools .refresh-button, .import-button:hover{
   background-color: #f9f9f9;
   cursor: pointer;
 }
+
+.container__tools .import-button {
+  width: 40px;
+  height: 38px;
+  border: 1px solid #bbbbbb;
+  border-radius: 4px;
+  background-color: #f9f9f9;
+  position: absolute;
+  right: 70px;
+  text-align: center;
+}
+
+.container__tools .import-button .fa-file-import{
+  line-height: 38px;
+  font-size: 16px;
+  color: #949595;
+}
+
+/* .container__tools .customize::-webkit-calendar-picker-indicator, */
 
 /* Css for scroll */
 /* Track */

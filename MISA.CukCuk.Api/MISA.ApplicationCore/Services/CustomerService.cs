@@ -1,6 +1,7 @@
 ﻿using MISA.ApplicationCore.Entities;
 using MISA.ApplicationCore.Interfaces.Repository;
 using MISA.ApplicationCore.Interfaces.Services;
+using MISA.ApplicationCore.MISAAttribute;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -170,7 +171,6 @@ namespace MISA.ApplicationCore.Services
                     }
                     customer.ImportError.Add(duplicatePhoneInFile);
                 }
-
             }
 
             return _serviceResult;
