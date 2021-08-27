@@ -1,15 +1,13 @@
-/* Popup hủy form thông tin */
-.background-popup{
+.background-popup-contact{
     background-color: rgba(0,0,0, 0.5);
     top: 0;
     right: 0;
     left: 0;
     bottom: 0;
-    display: none;
+    display: block;
     position: fixed;
-    /* align-items: center; */
     justify-content: center;
-    z-index: 12;
+    z-index: 15;
 }
 .popup{
     display: block;
@@ -75,14 +73,14 @@
     height: 40px;
     align-items: center;
     text-align: center;
-    line-height: 40px;
+    line-height: 44px;
     border-radius: 50%;
     background-color: #F4F4F4;
     margin-left: 6px;
 }
-.warning-popup .fa-exclamation-triangle{
+.warning-popup .fa-exclamation{
     font-size: 20px;
-    color: #FFC400;
+    color: #0075FF;
 }
 
 .content-wrap .content-popup{
@@ -139,52 +137,4 @@
 .btn-close:hover{
     background-color: #01B075;
     cursor: pointer;
-}
-
-/* Popup xóa bản ghi */
-.background-popup-delete{
-    background-color: rgba(0,0,0, 0.5);
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    display: none;
-    position: fixed;
-    /* align-items: center; */
-    justify-content: center;
-    z-index: 15;
-}
-
-.background-popup-delete .fa-exclamation-triangle{
-    color: #EA2B2B;
-}
-
-.background-popup-delete .btn-delete-popup{
-    background-color: #F65454;
-    margin-right: 24px;
-    color: #ffffff;
-}
-
-.btn-delete-popup:hover{
-    cursor: pointer;
-}
-
-.btn-close-popup:hover{
-    background-color: #E5E5E5;
-    cursor: pointer;
-}
-
-
-/* Popup thêm bản ghi */
-.background-popup-add{
-    background-color: rgba(0,0,0, 0.5);
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    display: block;
-    position: fixed;
-    /* align-items: center; */
-    justify-content: center;
-    z-index: 15;
 }

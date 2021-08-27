@@ -22,12 +22,23 @@
         </div>
         <p class="menu-left__text">Mua hàng</p>
       </div>
-      <div class="menu-left menu-active">
-        <div class="menu-left__icon">
-          <img src="../../assets/icon/dic-employee.png" alt="">
+      <router-link href="" to="/dictionary/employee">
+        <div class="menu-left menu-active">
+          <div class="menu-left__icon">
+            <img src="../../assets/icon/dic-employee.png" alt="">
+          </div>
+          <p class="menu-left__text menu-active" >Danh mục nhân viên</p>
         </div>
-        <p class="menu-left__text menu-active">Danh mục nhân viên</p>
-      </div>
+      </router-link>
+      <router-link href="" to="/dictionary/customer">
+        <div class="menu-left">
+          <div class="menu-left__icon">
+            <img src="../../assets/icon/setting.png" alt="">
+          </div>
+          <p class="menu-left__text" >Danh mục khách hàng</p>
+        </div>
+      </router-link>
+      
       <div class="menu-left">
         <div class="menu-left__icon">
           <img src="../../assets/icon/setting.png" alt="">

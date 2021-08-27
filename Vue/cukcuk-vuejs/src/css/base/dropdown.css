@@ -1,12 +1,21 @@
 .wrap-dropdown{
     width: 310px;
     margin-right: 10px;
+    border-radius: 4px;
+    border: 1px solid #bbbbbb;
+    box-sizing: border-box;
+}
+
+.wrap-dropdown:focus {
+    border-radius: 4px;
+    box-sizing: border-box;
+    border-color: #019160;
+    outline: none;
 }
 
 .dropdown{
     height: 40px;
     width: 180px;
-    border: 1px solid #bbbbbb;
     border-radius: 4px;
     color: #000000;
     align-items: center;
@@ -15,9 +24,8 @@
 }
 
 .dropdown--modal{
-    width: 308px;
+    width: 310px;
     height: 40px;
-    border: 1px solid #bbbbbb;
     margin-right: 10px;
 }
 

@@ -33,7 +33,7 @@
                 :value="employee.EmployeeCode"
                 ref="focusField"
                 v-model="employee.EmployeeCode"
-                
+                :tabindex="1"
               />
               <Warning :rightWarning="true" :style="{ display: employee.FullName?'none':(warnRequired ? 'flex':'none')}"/> 
               <Input
@@ -41,6 +41,7 @@
                 ref="fullName"
                 :value="employee.FullName"
                 v-model="employee.FullName"
+                :tabindex="2"
               />
             </div>
             <!-- Div ngay sinh, gioi tinh -->
@@ -55,6 +56,7 @@
                 ref="dateOfBirth"
                 :value="employee.DateOfBirth"
                 v-model="employee.DateOfBirth"
+                :tabindex="3"
               />
               <DropDown
                 :dataValue="dataGender"
@@ -62,6 +64,7 @@
                 :mode="mode"
                 type="Gender"
                 v-on:gender="getGender"
+                :tabindex="4"
               />
             </div>
             <!-- Div CMTND, ngay cap -->
@@ -76,12 +79,14 @@
                 ref="identity"
                 :value="employee.IdentityNumber"
                 v-model="employee.IdentityNumber"
+                :tabindex="5"
               />
               <Input
                 :isDate="true"
                 :identity="true"
                 :value="employee.IdentityDate"
                 v-model="employee.IdentityDate"
+                :tabindex="6"
               />
             </div>
             <!-- Noi cap -->
@@ -93,6 +98,7 @@
                 :normal="true"
                 :value="employee.IdentityPlace"
                 v-model="employee.IdentityPlace"
+                :tabindex="7"
               />
             </div>
             <!-- Email, so dien thoai -->
@@ -114,6 +120,7 @@
                 :value="employee.Email"
                 v-model="employee.Email"
                 @blur="validateEmail($event, employee.Email)"
+                :tabindex="8"
               />
               <Warning :rightWarning="true" :style="{ display: employee.PhoneNumber?'none':(warnRequired ? 'flex':'none') }"/>
               <Input
@@ -121,6 +128,7 @@
                 ref="phone"
                 :value="employee.PhoneNumber"
                 v-model="employee.PhoneNumber"
+                :tabindex="9"
               />
             </div>
             <p class="title-a">B. THÔNG TIN CÔNG VIỆC:</p>
@@ -137,6 +145,7 @@
                 :dataDropdown="dataDropdown"
                 :callApi="true"
                 v-on:position="getPosition"
+                :tabindex="10"
               />
               <DropDown
                 api="https://localhost:44338/api/Departments"
@@ -144,6 +153,7 @@
                 :dataDropdown="dataDropdown"
                 :callApi="true"
                 v-on:department="getDepartment"
+                :tabindex="11"
               />
             </div>
             <!-- Ma so thue ca nhan, muc luong co ban -->
@@ -156,6 +166,7 @@
                 :normal="true"
                 :value="employee.PersonalTaxCode"
                 v-model="employee.PersonalTaxCode"
+                :tabindex="12"
               />
               <div class="wrap-salary">
                 <input
@@ -164,6 +175,7 @@
                   value=""
                   v-model="employee.Salary"
                   @keyup="inputSalary($event)"
+                  :tabindex="13"
                 />
                 <span>(VNĐ)</span>
               </div>
@@ -179,13 +191,15 @@
                 :joinDate="true"
                 :value="employee.JoinDate"
                 v-model="employee.JoinDate"
+                :tabindex="14"
               />
               <DropDown 
                 :dataValue="dataWorkStatus" 
                 :dataDropdown="dataDropdown"
                 :mode="mode"
                 type="WorkStatus"
-                v-on:workStatus="getWorkStatus" 
+                v-on:workStatus="getWorkStatus"
+                :tabindex="15"
               />
             </div>
           </div>
@@ -249,6 +263,12 @@ export default {
     },
     update: {
       type: Boolean,
+    },
+    hideLoading: {
+      type: Boolean,
+      default(){
+        return false;
+      }
     }
   },
   data() {
@@ -582,12 +602,13 @@ export default {
           vm.dataDropdown.PositionId = res.data.PositionId;
           vm.dataDropdown.WorkStatusId = res.data.WorkStatus;
           vm.employee.Salary = this.formatSalary(res.data.Salary.toString());
+          this.$emit('changeHideLoading');
         })
         .then(() => {
           axios
             .get(
               // `http://cukcuk.manhnv.net/api/Department/${vm.dataDropdown.DepartmentId}`
-              `https://localhost:44338/api/Department/${vm.dataDropdown.DepartmentId}`
+              `https://localhost:44338/api/Departments/${vm.dataDropdown.DepartmentId}`
             )
             .then((res) => {
               vm.dataDropdown.DepartmentName = res.data.DepartmentName;
@@ -600,7 +621,7 @@ export default {
           axios
             .get(
               // `http://cukcuk.manhnv.net/v1/Positions/${vm.dataDropdown.PositionId}`
-              `https://localhost:44338/api/Position/${vm.dataDropdown.PositionId}`
+              `https://localhost:44338/api/Positions/${vm.dataDropdown.PositionId}`
             )
             .then((res) => {
               vm.dataDropdown.PositionName = res.data.PositionName;
@@ -648,4 +669,5 @@ export default {
 
 <style scoped>
 @import "../../css/layout/employees/info.css";
+@import "../../css/base/baseinput.css"
 </style>

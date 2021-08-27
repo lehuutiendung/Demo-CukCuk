@@ -100,6 +100,7 @@
         @PositionName="handlePosition"
       />
       <div class="import-button"><i class="fas fa-file-import"></i></div>
+      <div class="export-button" @click="handleExport(queueSelected)"><i class="fas fa-file-export"></i></div>
       <div class="refresh-button" @click="refreshData()"></div>
     </div>
     <div class="content-table">
@@ -118,7 +119,7 @@
             <th>Chức vụ</th>
             <th>Phòng ban</th>
             <th class="salary">Mức lương cơ bản</th>
-            <th>Tình trạng</th>
+            <th>Chức năng</th>
           </tr>
         </thead>
         <colgroup>
@@ -141,15 +142,16 @@
             v-for="(employee, index) in employees"
             :key="employee.EmployeeId"
             @dblclick="dbClickHandle(employee.EmployeeId)"
-            @click="clickHandle($event, employee.EmployeeId)"
+            @click="clickHandle($event, employee.EmployeeId, employee)"
             delete-employcode=""
             class="table-checkbox--default"
+            :class="{'table-checkbox--active' : employee.isSelected}"
           >
             <td class="table-checkbox">
               <input
                 class="checkbox"
                 type="checkbox"
-                @click="clickCheckBox($event)"
+                v-model="employee.isSelected"
               />
             </td>
             <!-- <input class="checkbox" type="checkbox"> -->
@@ -179,7 +181,14 @@
                   : formatSalary(employee.Salary.toString())
               }}
             </td>
-            <td class="work" title=""><div class="work-status">{{ employee.WorkStatus }}</div></td>
+            <!-- <td class="work" title=""><div class="work-status">{{ employee.WorkStatus }}</div></td> -->
+            <td class="work" title="">
+              <div class="column-service" :class="{'show':employee.isSelected}">
+                <i class="fas fa-pencil-alt" @click.stop="dbClickHandle(employee.EmployeeId)"></i>
+                <i class="fas fa-trash-alt"></i>
+              </div>
+            </td>
+
           </tr>
         </tbody>
       </table>
@@ -194,15 +203,24 @@
       :modalBoxShow="modalBoxShow"
       :employeeId="employeeId"
       :newEmployeeCode="newEmployeeCode"
+      :hideLoading="hideLoading"
       v-on:exitModalBox="exitModalBox()"
       v-on:hideModalBox="hideModalBox()"
       v-on:tableUpdated="tableUpdated"
-      v-on:tableUpdatedPut="tableUpdatedPut"      
+      v-on:tableUpdatedPut="tableUpdatedPut"
+      v-on:changeHideLoading="changeHideLoading"
     />
     <PopUp
       :popUpShow="popUpShow"
       v-on:hidePopUp="hidePopUp($event)"
       :mode="modeForm"
+      :queueDelete="queueDelete"
+      v-on:executeDelete="executeDelete()"
+    />
+    <TheLoading :hideLoading="hideLoading"/>
+    <TheContactMisa
+      :contactPopUpShow="contactPopUpShow"
+      v-on:hideContactPopUp="hideContactPopUp()"
     />
   </div>
 </template>
@@ -212,6 +230,8 @@ import axios from "axios";
 import TheCombobox from "../../components/base/BaseCombobox.vue";
 import EmployeeDetail from "../../view/employee/EmployeeDetail.vue";
 import PopUp from "../../components/base/BasePopup.vue";
+import TheLoading from "../../components/base/BaseLoading.vue";
+import TheContactMisa from "../../components/base/BaseContactMisa.vue";
 import { EventBus } from '../../main';
 export default {
   name: "EmployeePage",
@@ -219,6 +239,8 @@ export default {
     TheCombobox,
     EmployeeDetail,
     PopUp,
+    TheLoading,
+    TheContactMisa
   },
 
   data() {
@@ -226,12 +248,14 @@ export default {
       employees: [],
       employeeId: "",
       modalBoxShow: false,
-      popUpShow: false,
-      modeForm: 2,
+      popUpShow: false,   
+      contactPopUpShow: false,  // Mặc định popup contact misa bị ẩn
+      modeForm: 2, // mặc định modeForm = 2, (thêm mới: 0, chỉnh sửa: 1)
       showTable: true,
       newEmployeeCode: "",
       buttonDelShow: false,
       queueDelete: [],
+      queueSelected: [],
       activeRow: false,
       checkBox: false,
       update: false,
@@ -249,20 +273,13 @@ export default {
       endIndex: 10,
       pages: [],
       eventBus: '',
+      hideLoading: false, // Khi chưa load dữ liệu -> hiển thị loading 
+      rowSelected: false,
     };
   },
   
   mounted() {
     var vm = this;
-    // Gọi API lấy tất cả nhân viên
-    // axios
-    //   .get("http://cukcuk.manhnv.net/v1/employees")
-    //   .then((res) => {
-    //     vm.employees = res.data;
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
 
     //Gọi API filter thực hiện phân trang
     axios.get(`https://localhost:44338/api/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}`)
@@ -273,12 +290,29 @@ export default {
       let obj = this.paginate(this.totalRecord, this.pageNumber, this.pageSize, this.maxPages, this.totalPage);
       this.startIndex = obj.startIndex + 1;
       this.endIndex = obj.endIndex + 1;
+      this.hideLoading = true;
+      //Thêm attribute isSelected vào mỗi object employee
+      this.employees.forEach(item => {
+        item.isSelected = false;
+      });
+      switch(res.status){
+          case 400: this.contactPopUpShow = true;
+                    break;
+          case 404: this.contactPopUpShow = true;
+                    break;
+          case 500: this.contactPopUpShow = true;
+                    break;
+      }
     })
     .then(() => {
         EventBus.$emit('updateIndex', this.startIndex, this.endIndex, this.totalRecord);
     })
     .catch(err => {
+        console.error(err); 
       console.error(err); 
+        console.error(err); 
+        this.contactPopUpShow = true;
+        this.hideLoading = true;
     })
 
     // Cập nhật lại số nhân viên/trang
@@ -347,35 +381,37 @@ export default {
       this.modalBoxShow = !this.modalBoxShow;
       this.employeeId = employeeId;
       this.modeForm = 1;
+      this.hideLoading = false;
     },
 
-    clickHandle(e, employeeId) {
+    changeHideLoading(){
+      this.hideLoading = true;
+    },
+
+    hideContactPopUp(){
+      this.contactPopUpShow = !this.contactPopUpShow;
+    },
+
+    clickHandle(e, employeeId, employee) {
+      employee.isSelected = !employee.isSelected;
       this.buttonDelShow = true;
-      e.currentTarget.classList.toggle("table-checkbox--default");
-      e.currentTarget.classList.toggle("table-checkbox--active");
+      this.rowSelected = !this.rowSelected;
+      //Hiển thị icon cột các chức năng khi click vào dòng
+      e.currentTarget.children[11].children[0].classList.toggle("show");
       let indexItem = this.queueDelete.indexOf(employeeId);
-      console.log("Click tr");
-      if (e.currentTarget.children[0].children[0].checked) {
-        console.log(e.currentTarget.children[0].children[0].checked);
-        e.currentTarget.children[0].children[0].checked = false;
-      } else {
-        console.log(e.currentTarget.children[0].children[0].checked);
-        e.currentTarget.children[0].children[0].checked = true;
-      }
       if (indexItem == -1) {
         this.queueDelete.push(employeeId);
+        this.queueSelected.push(employee);
+        console.log(this.queueSelected);
       } else {
         //Tại vị trí indexItem, thực hiện remove 1 phần tử
         this.queueDelete.splice(indexItem, 1);
+        this.queueSelected.splice(indexItem, 1);
+        console.log(this.queueSelected);
         if (this.queueDelete.length == 0) {
           this.buttonDelShow = false;
         }
       }
-    },
-
-    clickCheckBox(e) {
-      console.log(e.currentTarget.checked);
-      console.log("click checkbox");
     },
 
     //Mở form thêm mới nhân viên
@@ -393,14 +429,17 @@ export default {
     },
 
     hidePopUp(value) {
-      // value = 1: Đóng popup, giữ form
+      // value = 1: Đóng popup, giữ form (khi thêm mới, chỉnh sửa)
       // value = 0: Đóng popup, đóng form
+      // value = 2: Đóng popup, xóa danh sách trong hàng đợi xóa
       if (value == 1) {
         this.popUpShow = !this.popUpShow;
-      } else {
+      } else if (value == 0){
         this.popUpShow = !this.popUpShow;
         this.modalBoxShow = !this.modalBoxShow;
         this.modeForm = 2;
+      }else{
+        this.popUpShow = !this.popUpShow;
       }
     },
 
@@ -428,7 +467,6 @@ export default {
         this.update = !this.update;
         if (this.modalBoxShow == false && this.update == true) {
           let vm = this;
-          vm.employees = [];
           axios
             .get(`https://localhost:44338/api/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}`)
             .then((res) => {
@@ -469,27 +507,32 @@ export default {
 
     //Xử lý sự kiện refresh data (lấy tất cả bản ghi)
     refreshData() {
-      this.showTable = !this.showTable;
       let vm = this;
-      vm.employees = [];
       vm.department = "Tất cả phòng ban";
       vm.departmentId = "";
       vm.position = "Tất cả vị trí";
       vm.positionId = "";
       // Gọi API lấy tất cả nhân viên
       axios
-        .get(`https://localhost:44338/api/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=1`)
+        .get(`https://localhost:44338/api/v1/Employees/Filter?pageSize=${this.pageSize}&pageNumber=${this.pageNumber}`)
         .then((res) => {
           vm.employees = res.data.Data;
-          this.showTable = !this.showTable;
+          this.totalPage = res.data.TotalPage;
+          this.totalRecord = res.data.TotalRecord;
         })
         .catch((err) => {
           console.error(err);
         });
     },
 
-    //Xóa nhiều nhân viên
+    //Hiện popup xác nhận trước khi xóa
     deleteMultiple() {
+      this.popUpShow = !this.popUpShow;
+      
+    },
+
+    //Thực hiện xóa và ẩn popup
+    executeDelete(){
       axios.delete(`https://localhost:44338/api/v1/Employees`, {
         data: this.queueDelete,      
       })
@@ -509,15 +552,14 @@ export default {
       .catch(err => {
         console.error(err); 
       })
+      this.popUpShow = !this.popUpShow;
       this.buttonDelShow = false;
-      // this.refreshData();
     },
 
     // Tìm kiếm theo mã nhân viên
     handleInputSearch(e) {
       this.inputSearch = e.target.value;
       let vm = this;
-      vm.employees = [];
       console.log(e.target.value);
       this.inputSearch = e.target.value;
       axios
@@ -603,7 +645,8 @@ export default {
 
     //Gọi API thực hiện phân trang, và $emit cập nhật số trang đến TheFooter
     callAPIPaging(pageSize, pageNumber){
-      this.employees = [];
+      //Hiển thị loading đợi API thực hiện thành công
+      this.hideLoading = false;
       axios.get(`https://localhost:44338/api/v1/Employees/Filter?pageSize=${pageSize}&pageNumber=${pageNumber}`)
       .then(res => {
         this.employees = res.data.Data;
@@ -613,7 +656,8 @@ export default {
         this.startIndex = objPage.startIndex + 1;
         this.endIndex = objPage.endIndex + 1;
         this.pages = objPage.pages;
-        
+        //Ẩn loading
+        this.hideLoading = true;
       }).then(()=>{
         //Emit cập nhật số trang
         EventBus.$emit('updatePageNumber', this.pageNumber, this.pages);
@@ -627,10 +671,30 @@ export default {
 
     //Gọi API thực hiện tìm kiếm theo (pageSize, pageNumber, inputSearch, departmentId, positionId)
     callAPIFilter(pageSize, pageNumber, inputValue, department, position){
+      //Hiển thị loading đợi API thực hiện thành công
+      this.hideLoading = false;
       axios.get(`https://localhost:44338/api/v1/Employees/Filter?pageSize=${pageSize}&pageNumber=${pageNumber}&filter=${inputValue}&departmentId=${department}&positionId=${position}`)
       .then(res => {
         console.log(res)
         this.employees = res.data.Data;
+        //Ẩn loading
+        this.hideLoading = true;
+      })
+      .catch(err => {
+        console.error(err); 
+      })
+    },
+
+    //Export file excel
+    handleExport(exportList){
+      axios.post(`https://localhost:44338/api/v1/Customers/Export`, exportList, {
+        responseType: 'blob',
+      })
+      .then(res => {
+        console.log(res)
+        console.log(res.data.FileGuid);
+        let blob = new Blob([res.data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' } ), url = window.URL.createObjectURL(blob);
+        window.open(url)
       })
       .catch(err => {
         console.error(err); 
@@ -640,12 +704,10 @@ export default {
 
   watch:{
     departmentId: function(){
-        this.employees = [];
         this.callAPIFilter(this.pageSize, this.pageNumber, this.inputSearch, this.departmentId, this.positionId);   
     },
 
     positionId: function(){
-        this.employees = [];
         this.callAPIFilter(this.pageSize, this.pageNumber, this.inputSearch, this.departmentId, this.positionId);
       
     },

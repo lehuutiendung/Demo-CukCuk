@@ -212,22 +212,23 @@
 .calendar-format{
     left: 0;
     position: absolute;
+    top: 1px;
 }
 
 input.calendar-format{
+    margin-left: 1px;
     width: 252px;
     height: 40px;
-    border-right: none;
-    border-bottom: none;
+    border: none;
 }
 
 input.calendar-identity{
     position: absolute;
     right: 0;
     margin-right: 58px;
-    width: 253px;
-    border-right: none;
-    border-bottom: none;
+    width: 252px;
+    top: 1px;
+    border: none;
 }
 
 input[type="date"]{

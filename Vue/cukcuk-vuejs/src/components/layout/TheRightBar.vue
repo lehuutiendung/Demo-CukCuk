@@ -24,5 +24,7 @@ export default {
 </script>
 
 <style>
-    
+    .right-bar{
+        position: relative;
+    }
 </style>

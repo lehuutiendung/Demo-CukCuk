@@ -25,5 +25,4 @@ export default {
 
 <style>
   @import '../src/css/main.css';
-  @import '../src/css/layout/popup/cancel.css';
 </style>
