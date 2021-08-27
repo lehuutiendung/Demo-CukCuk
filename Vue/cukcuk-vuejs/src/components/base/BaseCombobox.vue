@@ -138,4 +138,5 @@ export default {
 </script>
 
 <style scoped>
+  @import "../../css/base/combobox.css";
 </style>

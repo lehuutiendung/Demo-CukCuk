@@ -1,0 +1,118 @@
+.input-row{
+    display: flex;
+    width: 100%;
+    margin-bottom: 14px;
+    position: relative;
+    align-items: center;
+}
+
+.input-row input{
+    flex-wrap: wrap;
+    width: 292px;
+    border: 1px solid #bbbbbb;
+    border-radius: 5px;
+    height: 40px;
+    color: #000000;
+    font-family: GoogleSans-Regular;
+    outline: none;
+    padding: 0;
+    padding-left: 16px;
+}
+
+.input-row .autofocus:focus{
+    border: 1px solid #019160;
+}
+
+.wrap-salary{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 308px;
+    border: 1px solid #bbbbbb;
+    border-radius: 4px;
+}
+
+.wrap-salary .wrap-salary-text{
+    width: 240px;
+    text-align: right;
+    border: none;
+
+}
+
+.wrap-salary .wrap-salary-text:focus{
+    border: none;
+}
+
+.salary-box span{
+    position: absolute;
+    right: 34px;
+    font-family: GoogleSans-Italic;
+}
+
+.col-1{
+    margin-right: 10px;
+}
+
+.calendar{
+    width: 308px;
+    height: 40px;
+    border: 1px solid #bbbbbb;
+    background-color: #ffffff;
+    border-radius: 5px;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.calendar-format{
+    left: 0;
+    position: absolute;
+    top: 1px;
+}
+
+input.calendar-format{
+    margin-left: 1px;
+    width: 252px;
+    height: 40px;
+    border: none;
+}
+
+input.calendar-identity{
+    position: absolute;
+    right: 0;
+    margin-right: 58px;
+    width: 252px;
+    top: 1px;
+    border: none;
+}
+
+input[type="date"]{
+    padding-right: 20px;
+    width: 272px;
+    height: 40px;
+}
+
+input[type="date"]:focus{
+    border-color: #019160;
+}
+
+input[type=date]::-webkit-datetime-edit{
+    display: none;
+}
+
+input[type=date]::-webkit-inner-spin-button { display: none; }
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    margin-left: 250px;
+}
+
+.calendar .fa-calendar{
+    float: right;
+    line-height: 40px;
+    margin-right: 20px;
+}
+
+.calendar .fa-angle-down{
+    float: right;
+    line-height: 40px;
+    margin-right: 12px;
+}

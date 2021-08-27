@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap-dropdown">
+  <div class="wrap-dropdown" :tabindex="tabindex">
     <div class="dropdown dropdown--modal" @click="showDataDropdown()">
       <div class="dropdown-title dropdown-title2" :filter="type">
         <!-- mode: 0 - Thêm, 1 - Sửa -->
@@ -72,6 +72,9 @@ export default {
         type: Number,
         default: 0,
     },
+    tabindex: {
+        type: Number,
+    }
   },
   data() {
     return {
@@ -128,6 +131,6 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
+    @import "../../css/base/dropdown.css";
 </style>

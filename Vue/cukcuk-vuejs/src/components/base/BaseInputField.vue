@@ -10,6 +10,7 @@
       autocomplete=""
       title="Trường bắt buộc phải nhập!"
       v-on="inputListeners"
+      :tabindex="tabindex"
     />    
     
     <!-- Custom calendar -->
@@ -17,11 +18,13 @@
       class="calendar"
       :class="{DOB: DOB, identityDate: identity, joinDate: joinDate}"
       type="date"
+      ref="datePicker"
       data-date-format="DD MMMM YYYY"
       title="Nhập đúng định dạng ngày/tháng/năm"
       v-if="isDate"
       v-bind:value="value"
       v-on="inputListeners"
+      :tabindex="(tabindex) + 1"
     />
     <input
       :class="{'calendar-format': DOB, 'calendar-identity': identity, 'calendar-format calendar-joinDate' : joinDate}"
@@ -39,6 +42,9 @@
       v-if="normal"
       v-bind:value="value"
       v-on="inputListeners"
+      v-on:focus="handleInput($event)"
+      v-on:blur="handleBlurNormal($event)"
+      :tabindex="tabindex"
     />
   </div>
 </template>
@@ -81,10 +87,15 @@ export default {
           return '';
         }
       },
-      
+      tabindex: {
+        type: Number,
+      }
     },
     mounted() {
       this.$emit('updateCode', this.newEmployeeCode);
+      if(this.$refs.datePicker){
+          this.$refs.datePicker.max = new Date().toISOString().split("T")[0];
+      }
     },
     computed: {
       inputListeners: function () {
@@ -119,6 +130,13 @@ export default {
       },
 
       /**
+       * Bắt sự kiện blur cho các trường input bình thường 
+       */
+      handleBlurNormal(e) {
+        e.target.style.border = "1px solid #bbbbbb";
+      },
+
+      /**
        * Bắt lại sự kiện focus cho input
        */
       handleInput(e) {
@@ -128,22 +146,20 @@ export default {
       //Format dd/mm/yyyy
       formatDate(date){
         try{
-          
             var rel = "";
             var word = date.split('-');
             for(var i = 0; i < 2;  i++){
                 rel += word[2][i];
             }
-            return rel+= '/' + word[1] + '/' + word[0];
-          
+            return rel+= '/' + word[1] + '/' + word[0];          
         }catch{
           console.log("Có lỗi xảy ra tại FormatDate!");
         }
       },
     },
-     
+  
 };
 </script>
 <style scoped>
-  @import "../../css/layout/employees/info.css";
+  @import "../../css/base/baseinput.css";
 </style>

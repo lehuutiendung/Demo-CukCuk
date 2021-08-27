@@ -1,19 +1,23 @@
 .footer{
-    display: flex;
-    padding-left: 24px;
+    display: grid;
+    grid-column-gap: 30px;
+    grid-template-columns: 240px auto 240px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     align-items: center;
-    justify-items: center;
     height: 56px;
     background-color: #E9EBEE;
 }
 
+.footer .total__employees{
+    padding-left: 24px;
+}
+
 .footer .number__pages{
     display: flex;
-    position: absolute;
-    left: 50%;
     align-items: center;
     justify-content: center;
-    transform: translate(-30%);
 }
 
 .footer .number__pages .button__hide{

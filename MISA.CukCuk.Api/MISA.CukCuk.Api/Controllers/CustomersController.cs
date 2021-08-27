@@ -287,8 +287,7 @@ namespace MISA.CukCuk.Api.Controllers
             }
             stream.Position = 0;
             string excelName = $"Danh sách import lỗi.xlsx";
-
-            //return File(stream, "application/octet-stream", excelName);  
+            string fileGuid = Guid.NewGuid().ToString();
             return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
         }
     }
